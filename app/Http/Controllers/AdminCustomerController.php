@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 
 class AdminCustomerController extends Controller
 {
@@ -16,22 +15,21 @@ class AdminCustomerController extends Controller
     {
         $this->checkAdmin();
         $search = trim($request->query('search', ''));
-        $sql = "SELECT customers.customer_id, users.name, users.email, users.user_phone,
-                customers.created_at,
-                (SELECT COUNT(*) FROM pets WHERE pets.customer_id = customers.customer_id AND pets.deleted_at IS NULL) AS pet_count
-            FROM customers
-            JOIN users ON users.id = customers.user_id
-            WHERE customers.deleted_at IS NULL AND users.deleted_at IS NULL";
-        $bindings = [];
-
+        $customersQuery = Customer::query()
+            ->with('user:id,name,email,user_phone')
+            ->withCount(['pets as pet_count'])
+            ->whereHas('user');
         if ($search !== '') {
-            $sql .= ' AND (users.name LIKE ? OR users.email LIKE ? OR users.user_phone LIKE ?)';
             $keyword = '%'.$search.'%';
-            $bindings = [$keyword, $keyword, $keyword];
+            $customersQuery->whereHas('user', function ($query) use ($keyword) {
+                $query->where(function ($userQuery) use ($keyword) {
+                    $userQuery->where('name', 'like', $keyword)
+                        ->orWhere('email', 'like', $keyword)
+                        ->orWhere('user_phone', 'like', $keyword);
+                });
+            });
         }
-
-        $sql .= ' ORDER BY customers.created_at DESC';
-        $customers = DB::select($sql, $bindings);
+        $customers = $customersQuery->orderByDesc('created_at')->get();
 
         return view('admin.customers.index', compact('customers', 'search'));
     }
@@ -68,17 +66,15 @@ class AdminCustomerController extends Controller
         $customer = Customer::whereNull('deleted_at')->with(['user', 'pets' => function ($query) {
             $query->with('breed.petType')->orderBy('pet_name');
         }])->findOrFail($customerId);
-        $bookings = DB::select(
-            "SELECT bookings.booking_id, bookings.booking_date, bookings.booking_start_time,
-                bookings.booking_status, services.service_name, pets.pet_name
-            FROM bookings
-            JOIN services ON services.service_id = bookings.service_id
-            JOIN pets ON pets.id = bookings.pet_id
-            WHERE bookings.customer_id = ? AND bookings.deleted_at IS NULL
-            ORDER BY bookings.booking_date DESC, bookings.booking_start_time DESC
-            LIMIT 10",
-            [$customerId],
-        );
+        $bookings = $customer->bookings()
+            ->with([
+                'service' => fn ($query) => $query->withTrashed(),
+                'pet' => fn ($query) => $query->withTrashed(),
+            ])
+            ->orderByDesc('booking_date')
+            ->orderByDesc('booking_start_time')
+            ->limit(10)
+            ->get();
 
         return view('admin.customers.show', compact('customer', 'bookings'));
     }
@@ -96,6 +92,7 @@ class AdminCustomerController extends Controller
         $this->checkAdmin();
         $customer = Customer::whereNull('deleted_at')->with('user')->findOrFail($customerId);
         $data = $this->validateCustomer($request, false, $customer->user_id);
+
         $customer->user->update([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -123,7 +120,7 @@ class AdminCustomerController extends Controller
     {
         $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($userId)],
+            'email' => ['required', 'email', 'max:255', 'unique:users,email'.($userId ? ','.$userId : '')],
             'user_phone' => ['nullable', 'string', 'max:20'],
         ];
         if ($includePassword) {

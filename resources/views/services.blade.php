@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="site-header">
-        <a class="site-brand" href="{{ route('home') }}"><span class="brand-icon">🐾</span> Puffly House <span>Grooming</span></a>
+        <a class="site-brand" href="{{ route('home') }}"><img class="brand-icon" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt=""> Puffly House <span>Grooming</span></a>
         @include('partials.site-nav')
         @include('partials.account-menu')
     </header>
@@ -25,8 +25,11 @@
                 @foreach ($services as $service)
                     <article class="service-item">
                         <div class="service-picture">
-                            <span class="service-picture-icon">{{ $loop->iteration % 3 === 1 ? '🛁' : ($loop->iteration % 3 === 2 ? '✂️' : '🐾') }}</span>
-                            <span class="picture-caption">Puffly Care</span>
+                            @if ($service->service_image_path)
+                                <img class="service-picture-image" src="{{ asset('storage/'.$service->service_image_path) }}" alt="รูปบริการ {{ $service->service_name }}">
+                            @else
+                                <span class="service-picture-icon" aria-hidden="true">🐾</span>
+                            @endif
                         </div>
                         <div class="service-details">
                             <div class="service-title-row">

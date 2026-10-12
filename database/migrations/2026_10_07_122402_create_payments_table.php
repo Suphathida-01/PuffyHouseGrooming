@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('payment_id');
             $table->datetime('payment_date')->useCurrent();
             $table->decimal('payment_amount', 8, 2);
-            $table->enum('payment_method', ['qrCode','creditCard']);
+            $table->enum('payment_method', ['qrCode', 'creditCard', 'bankTransfer']);
             $table->string('transaction_ref')->nullable();
             $table->enum('payment_status', ['pending', 'completed', 'failed'])->default('pending');
             

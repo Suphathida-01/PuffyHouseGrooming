@@ -16,16 +16,45 @@ class DashboardTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    public function test_authenticated_users_can_visit_the_dashboard(): void
+    public function test_admin_dashboard_uses_its_own_url(): void
     {
         $user = User::factory()->create(['user_role' => 'admin']);
         $this->actingAs($user);
 
-        $response = $this->get(route('dashboard'));
-        $response->assertOk()
-            ->assertSee('รายงานและสรุปข้อมูล')
+        $this->get(route('dashboard'))
+            ->assertRedirect(route('admin.dashboard'));
+
+        $this->get(route('admin.dashboard'))
+            ->assertOk()
+            ->assertSee('หน้าหลักผู้ดูแลระบบ')
             ->assertSee('บริการยอดนิยม')
-            ->assertSee('ชำระเงินแล้วหรือเสร็จสิ้น')
             ->assertSee('สรุปการจอง');
+    }
+
+    public function test_superadmin_dashboard_uses_its_own_url(): void
+    {
+        $user = User::factory()->create(['user_role' => 'superadmin']);
+        $this->actingAs($user);
+
+        $this->get(route('dashboard'))
+            ->assertRedirect(route('superadmin.dashboard'));
+
+        $this->get(route('superadmin.dashboard'))
+            ->assertOk()
+            ->assertSee('รายงานและสรุปข้อมูล')
+            ->assertSee('สรุปรายได้ประจำปี');
+    }
+
+    public function test_dashboard_urls_reject_the_other_role(): void
+    {
+        $admin = User::factory()->create(['user_role' => 'admin']);
+        $this->actingAs($admin)
+            ->get(route('superadmin.dashboard'))
+            ->assertForbidden();
+
+        $superadmin = User::factory()->create(['user_role' => 'superadmin']);
+        $this->actingAs($superadmin)
+            ->get(route('admin.dashboard'))
+            ->assertForbidden();
     }
 }

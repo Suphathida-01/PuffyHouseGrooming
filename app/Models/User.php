@@ -49,6 +49,11 @@ class User extends Authenticatable implements PasskeyUser
         return $this->hasOne(Admin::class, 'user_id', 'id');
     }
 
+    public function superadmin()
+    {
+        return $this->hasOne(Superadmin::class, 'user_id', 'id');
+    }
+
     /** @return array<string, string> */
     protected $casts = [
         'password' => 'hashed',

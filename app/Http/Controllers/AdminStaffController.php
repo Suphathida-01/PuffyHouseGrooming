@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\AdminSchedule;
 use App\Models\Booking;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 
 class AdminStaffController extends Controller
 {
@@ -102,6 +99,11 @@ class AdminStaffController extends Controller
             ];
         }
 
+        $hasStaffMembers = $staffMembers->isNotEmpty();
+        if (Auth::user()->user_role === 'admin') {
+            $attendanceStaff = array_values(array_filter($attendanceStaff, fn ($staff) => $staff['period'] !== 'off'));
+        }
+
         return view('staff-manage', [
             'calendarDays' => $calendarDays,
             'selectedMonth' => $selectedMonth,
@@ -109,174 +111,9 @@ class AdminStaffController extends Controller
             'nextMonth' => $monthStart->copy()->addMonth()->format('Y-m'),
             'selectedDate' => $selectedDate,
             'attendanceStaff' => $attendanceStaff,
+            'hasStaffMembers' => $hasStaffMembers,
             'dailyBookings' => $dailyBookings,
         ]);
-    }
-
-    public function saveAttendance(Request $request)
-    {
-        $this->checkAdmin();
-        $data = $request->validate([
-            'work_date' => ['required', 'date_format:Y-m-d'],
-            'attendance' => ['nullable', 'array'],
-            'attendance.*' => ['required', Rule::in(['off', 'morning', 'afternoon', 'full_day', 'custom'])],
-        ]);
-
-        $staffMembers = Admin::whereHas('user')->orderBy('admin_id')->get();
-        $periodTimes = [
-            'morning' => ['09:00:00', '13:00:00'],
-            'afternoon' => ['13:00:00', '17:00:00'],
-            'full_day' => ['09:00:00', '17:00:00'],
-        ];
-        $attendance = $data['attendance'] ?? [];
-        $changes = [];
-
-        foreach ($staffMembers as $staffMember) {
-            $period = $attendance[$staffMember->admin_id] ?? 'off';
-            if ($period === 'custom') {
-                continue;
-            }
-
-            $existingSchedules = AdminSchedule::where('admin_id', $staffMember->admin_id)
-                ->whereDate('work_date', $data['work_date'])->get();
-            $existingAvailable = $existingSchedules->where('status', 'available')
-                ->map(fn ($schedule) => [substr($schedule->start_time, 0, 8), substr($schedule->end_time, 0, 8)])
-                ->sort()->values()->all();
-            $desired = isset($periodTimes[$period]) ? [$periodTimes[$period]] : [];
-
-            if ($existingAvailable === $desired) {
-                continue;
-            }
-
-            $hasBookings = Booking::where('admin_id', $staffMember->admin_id)
-                ->whereDate('booking_date', $data['work_date'])
-                ->whereNull('deleted_at')
-                ->whereIn('booking_status', ['pending', 'confirmed', 'completed'])
-                ->exists();
-
-            if ($hasBookings) {
-                return back()->withInput()->with('staff_error', 'ไม่สามารถเปลี่ยนกะของ'.$staffMember->user->name.'ได้ เพราะมีคิวจองในวันที่เลือก');
-            }
-
-            $changes[] = [
-                'admin_id' => $staffMember->admin_id,
-                'period' => $period,
-                'times' => $periodTimes[$period] ?? null,
-            ];
-        }
-
-        DB::transaction(function () use ($changes, $data) {
-            foreach ($changes as $change) {
-                $schedules = AdminSchedule::where('admin_id', $change['admin_id'])
-                    ->whereDate('work_date', $data['work_date']);
-
-                if ($change['period'] === 'off') {
-                    $schedules->where('status', 'available')->delete();
-                    continue;
-                }
-
-                $schedules->delete();
-                AdminSchedule::create([
-                    'admin_id' => $change['admin_id'],
-                    'work_date' => $data['work_date'],
-                    'start_time' => $change['times'][0],
-                    'end_time' => $change['times'][1],
-                    'status' => 'available',
-                ]);
-            }
-        });
-
-        return redirect()->route('staff.index', [
-            'month' => substr($data['work_date'], 0, 7),
-            'date' => $data['work_date'],
-        ])->with('success', 'บันทึกกะของพนักงานในวันที่เลือกแล้ว');
-    }
-
-    public function storeStaff(Request $request)
-    {
-        $this->checkAdmin();
-        $data = $request->validate([
-            'user_name' => ['required', 'string', 'max:255'],
-            'user_email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
-            'user_phone' => ['required', 'string', 'max:20'],
-            'user_password' => ['required', 'string', 'min:8'],
-        ]);
-
-        DB::transaction(function () use ($data) {
-            $user = User::create([
-                'name' => $data['user_name'],
-                'email' => $data['user_email'],
-                'user_phone' => $data['user_phone'],
-                'password' => $data['user_password'],
-                'user_role' => 'admin',
-            ]);
-            Admin::create(['user_id' => $user->id]);
-        });
-
-        return back()->with('success', 'เพิ่มช่างแล้ว');
-    }
-
-    public function storeSchedule(Request $request)
-    {
-        $this->checkAdmin();
-        $data = $request->validate([
-            'admin_id' => ['required', 'exists:admins,admin_id'],
-            'work_date' => ['required', 'date_format:Y-m-d'],
-            'start_time' => ['required', 'date_format:H:i'],
-            'end_time' => ['required', 'date_format:H:i', 'after:start_time'],
-            'status' => ['required', 'in:available,unavailable'],
-        ]);
-        $overlap = AdminSchedule::where('admin_id', $data['admin_id'])
-            ->whereDate('work_date', $data['work_date'])
-            ->where('start_time', '<', $data['end_time'])
-            ->where('end_time', '>', $data['start_time'])->exists();
-
-        if ($overlap) {
-            return back()->withInput()->with('staff_error', 'เวลานี้ทับซ้อนกับตารางงานเดิมของช่าง');
-        }
-
-        AdminSchedule::create($data);
-
-        return back()->with('success', 'บันทึกตารางงานแล้ว');
-    }
-
-    public function toggleClosedDay(Request $request)
-    {
-        $this->checkAdmin();
-        $data = $request->validate([
-            'work_date' => ['required', 'date_format:Y-m-d'],
-            'closed' => ['required', 'in:0,1'],
-        ]);
-        $staffMembers = Admin::whereHas('user')->get();
-        if ($staffMembers->isEmpty()) {
-            return back()->with('staff_error', 'กรุณาเพิ่มช่างก่อนกำหนดวันปิดร้าน');
-        }
-
-        if ($data['closed'] === '1') {
-            foreach ($staffMembers as $staffMember) {
-                $existingSchedules = AdminSchedule::where('admin_id', $staffMember->admin_id)
-                    ->whereDate('work_date', $data['work_date'])->get();
-                if ($existingSchedules->isEmpty()) {
-                    AdminSchedule::create([
-                        'admin_id' => $staffMember->admin_id,
-                        'work_date' => $data['work_date'],
-                        'start_time' => '09:00:00',
-                        'end_time' => '17:00:00',
-                        'status' => 'unavailable',
-                    ]);
-                } else {
-                    AdminSchedule::where('admin_id', $staffMember->admin_id)
-                        ->whereDate('work_date', $data['work_date'])->update(['status' => 'unavailable']);
-                }
-            }
-            $message = 'ปิดร้านในวันที่เลือกแล้ว';
-        } else {
-            AdminSchedule::whereDate('work_date', $data['work_date'])
-                ->where('status', 'unavailable')->update(['status' => 'available']);
-            $message = 'เปิดร้านในวันที่เลือกแล้ว';
-        }
-
-        return back()->with('success', $message);
     }
 
     private function checkAdmin(): void

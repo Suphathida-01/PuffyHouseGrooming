@@ -56,7 +56,7 @@ class DemoDashboardDataSeeder extends Seeder
             'service' => $services[$index % $services->count()],
         ])->concat([
             ['key' => 'DEMO-DASHBOARD-PENDING', 'date' => today()->addDays(3), 'status' => 'pending', 'service' => $services[0]],
-            ['key' => 'DEMO-DASHBOARD-CONFIRMED', 'date' => today()->addDays(5), 'status' => 'confirmed', 'service' => $services[min(1, $services->count() - 1)]],
+            ['key' => 'DEMO-DASHBOARD-PENDING-2', 'date' => today()->addDays(5), 'status' => 'pending', 'service' => $services[min(1, $services->count() - 1)]],
             ['key' => 'DEMO-DASHBOARD-CANCELLED', 'date' => today()->subDay(), 'status' => 'cancelled', 'service' => $services[min(2, $services->count() - 1)]],
         ]);
 

@@ -14,7 +14,7 @@ class Service extends Model
 
     protected $fillable = [
         'service_name', 'service_description', 'service_duration_minutes',
-        'price_small', 'price_medium', 'price_large', 'service_status',
+        'price_small', 'price_medium', 'price_large', 'service_status', 'service_image_path',
     ];
 
     protected $casts = [

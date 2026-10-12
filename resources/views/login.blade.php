@@ -9,7 +9,7 @@
 <body class="auth-page">
     <main class="card">
         <a class="brand" href="{{ route('home') }}">
-            <span class="paw">🐾</span>
+            <img class="paw" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt="">
             Puffly House Grooming
         </a>
 

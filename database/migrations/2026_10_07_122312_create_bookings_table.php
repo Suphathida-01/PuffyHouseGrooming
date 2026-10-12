@@ -18,7 +18,7 @@ return new class extends Migration
             $table->time('booking_end_time');
             $table->decimal('booking_total_price', 8, 2);
             $table->text('booking_notes')->nullable();
-            $table->enum('booking_status', ['pending', 'confirmed', 'completed', 'cancelled'])->default('pending');
+            $table->enum('booking_status', ['pending', 'cancelled', 'completed'])->default('pending');
             
 
             $table->foreignId('customer_id')->constrained('customers', 'customer_id');

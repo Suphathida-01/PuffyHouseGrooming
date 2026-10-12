@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="site-header">
-        <a class="site-brand" href="{{ route('home') }}"><span class="brand-icon">🐾</span> Puffly House <span>Grooming</span></a>
+        <a class="site-brand" href="{{ route('home') }}"><img class="brand-icon" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt=""> Puffly House <span>Grooming</span></a>
         @include('partials.site-nav')
         @include('partials.account-menu')
     </header>
@@ -17,10 +17,11 @@
         <a class="detail-back" href="{{ route('services') }}">← กลับไปบริการทั้งหมด</a>
         <section class="service-detail-card">
             <div class="detail-art">
-                <div class="detail-art-sparkle">✦</div>
-                <div class="detail-dog">{{ str_contains($service->service_name, 'ตัด') ? '✂️🐩' : '🛁🐶' }}</div>
-                <div class="detail-tub"></div>
-                <div class="detail-thumbnails"><span>🐶</span><span>🫧</span><span>🧴</span><span>🐾</span></div>
+                @if ($service->service_image_path)
+                    <img class="service-detail-image" src="{{ asset('storage/'.$service->service_image_path) }}" alt="รูปบริการ {{ $service->service_name }}">
+                @else
+                    <span class="detail-paw-placeholder" aria-hidden="true">🐾</span>
+                @endif
             </div>
 
             <div class="detail-info">
@@ -36,9 +37,9 @@
 
                 <h2 class="detail-subheading">ราคาตามขนาด</h2>
                 <div class="size-price-list">
-                    <div><span>ขนาดเล็ก</span><strong>{{ (float) $service->price_small > 0 ? number_format((float) $service->price_small, 0).' บาท' : 'ยังไม่กำหนด' }}</strong></div>
-                    <div><span>ขนาดกลาง</span><strong>{{ (float) $service->price_medium > 0 ? number_format((float) $service->price_medium, 0).' บาท' : 'ยังไม่กำหนด' }}</strong></div>
-                    <div><span>ขนาดใหญ่</span><strong>{{ (float) $service->price_large > 0 ? number_format((float) $service->price_large, 0).' บาท' : 'ยังไม่กำหนด' }}</strong></div>
+                    <div><span>ขนาดเล็ก (ไม่เกิน 5 กก.)</span><strong>{{ (float) $service->price_small > 0 ? number_format((float) $service->price_small, 0).' บาท' : 'ยังไม่กำหนด' }}</strong></div>
+                    <div><span>ขนาดกลาง (มากกว่า 5 ถึง 15 กก.)</span><strong>{{ (float) $service->price_medium > 0 ? number_format((float) $service->price_medium, 0).' บาท' : 'ยังไม่กำหนด' }}</strong></div>
+                    <div><span>ขนาดใหญ่ (มากกว่า 15 กก.)</span><strong>{{ (float) $service->price_large > 0 ? number_format((float) $service->price_large, 0).' บาท' : 'ยังไม่กำหนด' }}</strong></div>
                 </div>
 
                 <h2 class="detail-subheading">รายละเอียดบริการ</h2>

@@ -8,12 +8,12 @@
 </head>
 <body>
 <header class="site-header">
-    <a class="site-brand" href="{{ route('home') }}"><span class="brand-icon">🐾</span> Puffly House <span>Grooming</span></a>
+    <a class="site-brand" href="{{ route('home') }}"><img class="brand-icon" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt=""> Puffly House <span>Grooming</span></a>
     @include('partials.site-nav')
     @include('partials.account-menu')
 </header>
 <main class="booking-page">
-    <div class="booking-steps"><span class="active"><b>1</b> สัตว์เลี้ยง</span><i></i><span><b>2</b> วันเวลา</span><i></i><span><b>3</b> ยืนยัน</span></div>
+    <div class="booking-steps"><span class="active"><b>1</b> สัตว์เลี้ยง</span><i></i><span><b>2</b> วันเวลา</span><i></i><span><b>3</b> ยืนยันข้อมูล</span><i></i><span><b>4</b> ชำระเงิน</span></div>
     <div class="booking-layout">
         <section class="booking-main">
             @if ($pets->isEmpty())
@@ -25,8 +25,14 @@
                     <div class="booking-pet-list">
                         @foreach ($pets as $item)
                             <a class="booking-pet-option {{ $selectedPet && $selectedPet->id === $item->id ? 'selected' : '' }}" href="{{ route('booking.show', ['serviceId' => $service->service_id, 'pet_id' => $item->id]) }}">
-                                <span class="booking-pet-emoji">{{ $item->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}</span>
-                                <span class="booking-pet-text"><strong>{{ $item->pet_name }}</strong><small>{{ $item->breed->petType->pet_type_name }} · {{ $item->breed->pet_breed_name }} · {{ $item->pet_birth->age }} ปี · น้ำหนัก {{ number_format((float) $item->pet_weight, 2) }} กก.</small></span>
+                                <span class="booking-pet-emoji">
+                                    @if ($item->pet_image)
+                                        <img class="pet-avatar-image" src="{{ asset('storage/'.$item->pet_image) }}" alt="">
+                                    @else
+                                        {{ $item->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}
+                                    @endif
+                                </span>
+                                <span class="booking-pet-text"><strong>{{ $item->pet_name }}</strong><small>{{ $item->breed->petType->pet_type_name }} · {{ $item->breed->pet_breed_name }} · {{ $item->pet_birth ? $item->pet_birth->age.' ปี' : 'ไม่ทราบวันเกิด' }} · น้ำหนัก {{ number_format((float) $item->pet_weight, 2) }} กก.</small></span>
                                 <span class="booking-check">✓</span>
                             </a>
                         @endforeach

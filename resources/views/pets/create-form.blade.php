@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>เพิ่มสัตว์เลี้ยง | Puffly House Grooming</title>
     <link rel="stylesheet" href="{{ asset('css/puffly.css') }}?v={{ filemtime(public_path('css/puffly.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/date-picker.css') }}?v={{ filemtime(public_path('css/date-picker.css')) }}">
 </head>
 <body>
     <header class="site-header">
-        <a class="site-brand" href="{{ route('home') }}"><span class="brand-icon">🐾</span> Puffly House <span>Grooming</span></a>
+        <a class="site-brand" href="{{ route('home') }}"><img class="brand-icon" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt=""> Puffly House <span>Grooming</span></a>
         @include('partials.site-nav')
         @include('partials.account-menu')
     </header>
@@ -19,7 +20,7 @@
             <p class="pet-form-intro">กรอกข้อมูลของน้องให้ครบ เพื่อใช้ประกอบการจองบริการ</p>
             <div class="selected-pet-type">ประเภทสัตว์: <strong>{{ $selectedType->pet_type_name }}</strong></div>
 
-            <form class="pet-form" method="POST" action="{{ route('pets.store') }}">
+            <form class="pet-form" method="POST" action="{{ route('pets.store') }}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="pet_type_id" value="{{ $selectedType->pet_type_id }}">
 
@@ -37,9 +38,14 @@
                 @if ($breeds->isEmpty())<p class="pet-error">ไม่พบสายพันธุ์ของประเภทที่เลือก</p>@endif
                 @error('pet_breed_id')<p class="pet-error">กรุณาเลือกสายพันธุ์</p>@enderror
 
+                <label for="pet_image">รูปสัตว์เลี้ยง <span class="optional">(ไม่บังคับ, JPG/PNG/WEBP ไม่เกิน 5 MB)</span></label>
+                <input id="pet_image" name="pet_image" type="file" accept="image/jpeg,image/png,image/webp">
+                @error('pet_image')<p class="pet-error">{{ $message }}</p>@enderror
+
                 <label for="pet_birth">วันเกิด</label>
                 <input id="pet_birth" name="pet_birth" type="date" value="{{ old('pet_birth') }}" required>
                 @error('pet_birth')<p class="pet-error">{{ $message }}</p>@enderror
+                <div class="pet-birth-unknown"><input type="checkbox" id="pet_birth_unknown" name="pet_birth_unknown" value="1" @checked(old('pet_birth_unknown'))><label for="pet_birth_unknown">ไม่ทราบวันเกิด</label></div>
 
                 <div class="pet-form-grid">
                     <div><label for="pet_gender">เพศ</label><select id="pet_gender" name="pet_gender" required><option value="">เลือกเพศ</option><option value="male" @selected(old('pet_gender') === 'male')>ตัวผู้</option><option value="female" @selected(old('pet_gender') === 'female')>ตัวเมีย</option></select>@error('pet_gender')<p class="pet-error">{{ $message }}</p>@enderror</div>
@@ -54,5 +60,17 @@
             </form>
         </section>
     </main>
+<script>
+    const birthInput = document.getElementById('pet_birth');
+    const birthUnknown = document.getElementById('pet_birth_unknown');
+    const syncBirthInput = () => {
+        birthInput.required = !birthUnknown.checked;
+        birthInput.disabled = birthUnknown.checked;
+        if (birthUnknown.checked) birthInput.value = '';
+    };
+    birthUnknown.addEventListener('change', syncBirthInput);
+    syncBirthInput();
+</script>
+<script src="{{ asset('js/date-picker.js') }}?v={{ filemtime(public_path('js/date-picker.js')) }}"></script>
 </body>
 </html>

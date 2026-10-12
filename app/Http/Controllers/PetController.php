@@ -8,6 +8,7 @@ use App\Models\PetBreed;
 use App\Models\PetType;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class PetController extends Controller
@@ -51,6 +52,9 @@ class PetController extends Controller
     public function store(Request $request)
     {
         $data = $this->validatePet($request);
+        if ($request->hasFile('pet_image')) {
+            $data['pet_image'] = $request->file('pet_image')->store('pet-images', 'public');
+        }
         $pet = $this->customer()->pets()->create($data);
         $serviceId = session()->pull('booking_return_service_id');
         if ($serviceId && Service::where('service_status', 'active')->where('service_id', $serviceId)->exists()) {
@@ -69,14 +73,29 @@ class PetController extends Controller
         $breeds = $selectedTypeId
             ? PetBreed::where('pet_type_id', $selectedTypeId)->orderBy('pet_breed_name')->get()
             : collect();
+        $allBreeds = PetBreed::orderBy('pet_breed_name')
+            ->get(['pet_breed_id', 'pet_type_id', 'pet_breed_name']);
 
-        return view('pets.form', compact('pet', 'types', 'breeds', 'selectedTypeId', 'showTypeError') + ['isEdit' => true]);
+        return view('pets.form', compact('pet', 'types', 'breeds', 'allBreeds', 'selectedTypeId', 'showTypeError') + ['isEdit' => true]);
     }
 
     public function update(Request $request, $id)
     {
         $pet = $this->customer()->pets()->findOrFail($id);
-        $pet->update($this->validatePet($request));
+        $data = $this->validatePet($request);
+        unset($data['pet_image']);
+
+        if ($request->hasFile('pet_image')) {
+            $previousImage = $pet->pet_image;
+            $data['pet_image'] = $request->file('pet_image')->store('pet-images', 'public');
+            $pet->update($data);
+
+            if ($previousImage) {
+                Storage::disk('public')->delete($previousImage);
+            }
+        } else {
+            $pet->update($data);
+        }
 
         return redirect()->route('pets.index')->with('success', 'แก้ไขข้อมูลสัตว์เลี้ยงแล้ว');
     }
@@ -101,10 +120,12 @@ class PetController extends Controller
         $data = $request->validate([
             'pet_name' => ['required', 'string', 'max:100'],
             'pet_type_id' => ['required', 'exists:pet_types,pet_type_id'],
-            'pet_birth' => ['required', 'date', 'before_or_equal:today'],
+            'pet_birth_unknown' => ['nullable', 'boolean'],
+            'pet_birth' => [Rule::requiredIf(! $request->boolean('pet_birth_unknown')), 'nullable', 'date', 'before_or_equal:today'],
             'pet_gender' => ['required', 'in:male,female'],
             'pet_weight' => ['required', 'numeric', 'gt:0', 'max:999.99'],
             'pet_notes' => ['nullable', 'string', 'max:2000'],
+            'pet_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'pet_breed_id' => [
                 'required',
                 Rule::exists('pet_breeds', 'pet_breed_id')->where(function ($query) use ($request) {
@@ -113,6 +134,8 @@ class PetController extends Controller
             ],
         ]);
 
+        $data['pet_birth'] = $request->boolean('pet_birth_unknown') ? null : $data['pet_birth'];
+        unset($data['pet_birth_unknown']);
         unset($data['pet_type_id']);
 
         return $data;

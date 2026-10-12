@@ -17,7 +17,7 @@ class BookingController extends Controller
     {
         $customer = $this->customer();
         $filter = $request->query('filter', 'all');
-        if (! in_array($filter, ['all', 'upcoming', 'completed', 'cancelled'], true)) {
+        if (! in_array($filter, ['all', 'upcoming', 'payment_pending', 'completed', 'cancelled'], true)) {
             $filter = 'all';
         }
 
@@ -27,13 +27,16 @@ class BookingController extends Controller
             ->orderByDesc('booking_start_time')
             ->get();
 
-        $upcomingStatuses = ['pending', 'confirmed'];
+        $upcomingStatuses = ['pending'];
         $upcomingCount = $allBookings->filter(fn ($booking) =>
             in_array($booking->booking_status, $upcomingStatuses, true)
             && $booking->booking_date->greaterThanOrEqualTo(today())
         )->count();
         $completedCount = $allBookings->where('booking_status', 'completed')->count();
         $bookings = match ($filter) {
+            'payment_pending' => $allBookings->filter(fn ($booking) =>
+                $booking->payments->sortByDesc('payment_id')->first()?->payment_status === 'pending'
+            )->values(),
             'upcoming' => $allBookings->filter(fn ($booking) =>
                 in_array($booking->booking_status, $upcomingStatuses, true)
                 && $booking->booking_date->greaterThanOrEqualTo(today())
@@ -50,7 +53,7 @@ class BookingController extends Controller
     {
         $booking = $this->customer()->bookings()->with('payments')->findOrFail($bookingId);
 
-        if (! in_array($booking->booking_status, ['pending', 'confirmed'], true)) {
+        if ($booking->booking_status !== 'pending') {
             return back()->with('booking_error', 'รายการนี้ไม่สามารถยกเลิกได้');
         }
 
@@ -59,17 +62,17 @@ class BookingController extends Controller
             return back()->with('booking_error', 'ยกเลิกได้ถึงวันก่อนวันนัดเท่านั้น');
         }
 
-        if ($booking->payments->contains('payment_status', 'completed')) {
-            return back()->with('booking_error', 'รายการนี้ชำระเงินแล้ว กรุณาติดต่อร้านเพื่อขอยกเลิกและตรวจสอบการคืนเงิน');
-        }
-
         DB::transaction(function () use ($booking) {
             $booking->update(['booking_status' => 'cancelled']);
             $booking->payments()->where('payment_status', 'pending')->update(['payment_status' => 'failed']);
         });
 
+        $message = $booking->payments->contains('payment_status', 'completed')
+            ? 'ยกเลิกรายการจองแล้ว หากชำระเงินแล้ว กรุณาติดต่อร้านเพื่อดำเนินการเรื่องคืนเงิน'
+            : 'ยกเลิกรายการจองแล้ว';
+
         return redirect()->route('my-bookings.index', ['filter' => 'cancelled'])
-            ->with('success', 'ยกเลิกรายการจองแล้ว');
+            ->with('success', $message);
     }
 
     public function show($serviceId)
@@ -120,7 +123,7 @@ class BookingController extends Controller
             ->whereDate('work_date', '>=', $availableFrom)
             ->whereDate('work_date', '<=', $availableUntil)
             ->orderBy('work_date')->orderBy('start_time')->get();
-        $bookings = Booking::whereIn('booking_status', ['pending', 'confirmed'])
+        $bookings = Booking::where('booking_status', 'pending')
             ->whereDate('booking_date', '>=', $availableFrom)
             ->whereDate('booking_date', '<=', $monthEnd)->get();
         $slotCandidates = [];
@@ -325,7 +328,7 @@ class BookingController extends Controller
 
         $bookingQuery = Booking::whereDate('booking_date', $workDate)
             ->whereIn('admin_id', $staffIds)
-            ->whereIn('booking_status', ['pending', 'confirmed'])
+            ->where('booking_status', 'pending')
             ->where('booking_start_time', '<', $endTime)
             ->where('booking_end_time', '>', $startTime);
 

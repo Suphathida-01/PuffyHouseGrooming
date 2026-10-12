@@ -13,6 +13,7 @@ class PaymentController extends Controller
         $booking = $this->customer()->bookings()
             ->with(['pet.breed.petType', 'service', 'payments'])
             ->findOrFail($bookingId);
+        abort_unless($booking->booking_status === 'pending', 403);
 
         return view('booking.payment', compact('booking'));
     }
@@ -20,6 +21,7 @@ class PaymentController extends Controller
     public function store(Request $request, $bookingId)
     {
         $booking = $this->customer()->bookings()->with('payments')->findOrFail($bookingId);
+        abort_unless($booking->booking_status === 'pending', 403);
         $data = $request->validate([
             'payment_method' => ['required', 'in:qrCode,creditCard,bankTransfer'],
         ]);
@@ -28,21 +30,29 @@ class PaymentController extends Controller
             return redirect()->route('my-bookings.index')->with('success', 'รายการนี้ชำระเงินแล้ว');
         }
 
+        $paymentStatus = $data['payment_method'] === 'qrCode' ? 'pending' : 'completed';
         $payment = $booking->payments()->where('payment_status', 'pending')->latest('payment_id')->first();
         if ($payment) {
             $payment->update([
                 'payment_amount' => $booking->booking_total_price,
                 'payment_method' => $data['payment_method'],
+                'payment_status' => $paymentStatus,
+                'payment_date' => now(),
             ]);
         } else {
             $booking->payments()->create([
                 'payment_amount' => $booking->booking_total_price,
                 'payment_method' => $data['payment_method'],
-                'payment_status' => 'pending',
+                'payment_status' => $paymentStatus,
+                'payment_date' => now(),
             ]);
         }
 
-        return redirect()->route('my-bookings.index')->with('success', 'บันทึกคำขอจองแล้ว สถานะการชำระเงินกำลังรอตรวจสอบ');
+        $message = $paymentStatus === 'pending'
+            ? 'บันทึกคำขอจองแล้ว สถานะการชำระเงินกำลังรอตรวจสอบ'
+            : 'บันทึกสถานะการชำระเงินเป็นชำระแล้ว';
+
+        return redirect()->route('my-bookings.index')->with('success', $message);
     }
 
     private function customer(): Customer

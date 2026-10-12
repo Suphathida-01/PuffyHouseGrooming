@@ -9,7 +9,7 @@
 <body class="auth-page">
     <main class="card">
         <a class="brand" href="{{ route('home') }}">
-            <span class="paw">🐾</span>
+            <img class="paw" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt="">
             Puffly House Grooming
         </a>
 
@@ -36,7 +36,7 @@
                 <form class="form" method="POST" action="{{ route('register.store') }}">
                     @csrf
 
-                    <label for="name">ชื่อ-นามสกุล</label>
+                    <label for="name">ชื่อ-นามสกุล <span style="color: red;">*</span></label>
                     <input
                         id="name"
                         name="name"
@@ -50,7 +50,8 @@
                         <p class="error">{{ $message }}</p>
                     @enderror
 
-                    <label for="email">อีเมล</label>
+                    <label for="email">อีเมล<span style="color: red;">*</span>
+                </label>
                     <input
                         id="email"
                         name="email"
@@ -64,8 +65,7 @@
                         <p class="error">{{ $message }}</p>
                     @enderror
 
-                    <label for="phone">
-                        เบอร์โทรศัพท์ <span class="optional">(ไม่บังคับ)</span>
+                    <label for="phone">เบอร์โทรศัพท์ <span style="color: red;">*</span>
                     </label>
                     <input
                         id="phone"
@@ -79,7 +79,8 @@
                         <p class="error">{{ $message }}</p>
                     @enderror
 
-                    <label for="password">รหัสผ่าน</label>
+                    <label for="password">รหัสผ่าน  <span style="color: red;">*</span>
+                    </label>
                     <input
                         id="password"
                         name="password"
@@ -92,7 +93,7 @@
                         <p class="error">{{ $message }}</p>
                     @enderror
 
-                    <label for="password_confirmation">ยืนยันรหัสผ่าน</label>
+                    <label for="password_confirmation">ยืนยันรหัสผ่าน <span style="color: red;">*</span></label>
                     <input
                         id="password_confirmation"
                         name="password_confirmation"

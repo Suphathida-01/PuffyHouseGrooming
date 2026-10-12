@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class AdminBookingController extends Controller
 {
@@ -15,7 +16,7 @@ class AdminBookingController extends Controller
         }
 
         $status = $request->query('status', 'all');
-        if (! in_array($status, ['all', 'pending', 'confirmed', 'completed', 'cancelled'], true)) {
+        if (! in_array($status, ['all', 'pending', 'cancelled', 'completed'], true)) {
             $status = 'all';
         }
 
@@ -24,30 +25,33 @@ class AdminBookingController extends Controller
             $date = '';
         }
 
-        $sql = "SELECT bookings.booking_id, bookings.booking_date, bookings.booking_start_time,
-                bookings.booking_status, customers_user.name AS customer_name, pets.pet_name,
-                services.service_name, admins_user.name AS admin_name
-            FROM bookings
-            JOIN customers ON customers.customer_id = bookings.customer_id
-            JOIN users AS customers_user ON customers_user.id = customers.user_id
-            JOIN pets ON pets.id = bookings.pet_id
-            JOIN services ON services.service_id = bookings.service_id
-            LEFT JOIN admins ON admins.admin_id = bookings.admin_id
-            LEFT JOIN users AS admins_user ON admins_user.id = admins.user_id
-            WHERE bookings.deleted_at IS NULL";
-        $bindings = [];
+        $sortTime = now();
+        $bookings = Booking::query()
+            ->with([
+                'customer' => fn ($query) => $query->withTrashed()->with(['user' => fn ($userQuery) => $userQuery->withTrashed()]),
+                'pet' => fn ($query) => $query->withTrashed(),
+                'service' => fn ($query) => $query->withTrashed(),
+                'admin' => fn ($query) => $query->withTrashed()->with(['user' => fn ($userQuery) => $userQuery->withTrashed()]),
+            ])
+            ->whereHas('payments', fn ($query) => $query->where('payment_status', 'completed'))
+            ->when($status !== 'all', fn ($query) => $query->where('booking_status', $status))
+            ->when($date !== '', fn ($query) => $query->whereDate('booking_date', $date))
+            ->get()
+            ->sort(function (Booking $first, Booking $second) use ($sortTime) {
+                $firstStart = Carbon::parse($first->booking_date->format('Y-m-d').' '.$first->booking_start_time);
+                $secondStart = Carbon::parse($second->booking_date->format('Y-m-d').' '.$second->booking_start_time);
+                $firstIsUpcoming = $firstStart->greaterThanOrEqualTo($sortTime);
+                $secondIsUpcoming = $secondStart->greaterThanOrEqualTo($sortTime);
 
-        if ($status !== 'all') {
-            $sql .= ' AND bookings.booking_status = ?';
-            $bindings[] = $status;
-        }
-        if ($date !== '') {
-            $sql .= ' AND DATE(bookings.booking_date) = ?';
-            $bindings[] = $date;
-        }
+                if ($firstIsUpcoming !== $secondIsUpcoming) {
+                    return $firstIsUpcoming ? -1 : 1;
+                }
 
-        $sql .= ' ORDER BY bookings.booking_date DESC, bookings.booking_start_time DESC';
-        $bookings = DB::select($sql, $bindings);
+                return $firstIsUpcoming
+                    ? $firstStart->getTimestamp() <=> $secondStart->getTimestamp()
+                    : $secondStart->getTimestamp() <=> $firstStart->getTimestamp();
+            })
+            ->values();
 
         return view('admin.bookings', compact('bookings', 'status', 'date'));
     }
@@ -59,21 +63,22 @@ class AdminBookingController extends Controller
         }
 
         $data = $request->validate([
-            'booking_status' => ['required', 'in:confirmed,completed,cancelled'],
+            'booking_status' => ['required', 'in:completed,cancelled'],
         ]);
-        $booking = DB::select('SELECT booking_status FROM bookings WHERE booking_id = ? AND deleted_at IS NULL', [$bookingId]);
-        abort_if(count($booking) === 0, 404);
+        $booking = Booking::query()
+            ->whereKey($bookingId)
+            ->whereHas('payments', fn ($query) => $query->where('payment_status', 'completed'))
+            ->firstOrFail();
 
-        $currentStatus = $booking[0]->booking_status;
+        $currentStatus = $booking->booking_status;
         $newStatus = $data['booking_status'];
-        $allowed = ($currentStatus === 'pending' && in_array($newStatus, ['confirmed', 'cancelled'], true))
-            || ($currentStatus === 'confirmed' && in_array($newStatus, ['completed', 'cancelled'], true));
+        $allowed = $currentStatus === 'pending' && in_array($newStatus, ['completed', 'cancelled'], true);
 
         if (! $allowed) {
             return back()->with('booking_error', 'ไม่สามารถเปลี่ยนสถานะรายการนี้ได้');
         }
 
-        DB::update('UPDATE bookings SET booking_status = ?, updated_at = ? WHERE booking_id = ?', [$newStatus, now(), $bookingId]);
+        $booking->update(['booking_status' => $newStatus]);
 
         return back()->with('success', 'อัปเดตสถานะการจองแล้ว');
     }

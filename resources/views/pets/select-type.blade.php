@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="site-header">
-        <a class="site-brand" href="{{ route('home') }}"><span class="brand-icon">🐾</span> Puffly House <span>Grooming</span></a>
+        <a class="site-brand" href="{{ route('home') }}"><img class="brand-icon" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt=""> Puffly House <span>Grooming</span></a>
         @include('partials.site-nav')
         @include('partials.account-menu')
     </header>

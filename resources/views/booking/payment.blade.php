@@ -8,20 +8,21 @@
 </head>
 <body>
 <header class="site-header">
-    <a class="site-brand" href="{{ route('home') }}"><span class="brand-icon">🐾</span> Puffly House <span>Grooming</span></a>
+    <a class="site-brand" href="{{ route('home') }}"><img class="brand-icon" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt=""> Puffly House <span>Grooming</span></a>
     @include('partials.site-nav')
     @include('partials.account-menu')
 </header>
 <main class="payment-page">
+    <div class="booking-steps"><span class="done"><b>✓</b> สัตว์เลี้ยง</span><i></i><span class="done"><b>✓</b> วันเวลา</span><i></i><span class="done"><b>✓</b> ยืนยันข้อมูล</span><i></i><span class="active"><b>4</b> ชำระเงิน</span></div>
     <section class="payment-card">
         <div class="payment-heading">
-            <div><h1>ชำระเงินค่าบริการ</h1><p>โปรดตรวจสอบรายละเอียดการจองและเลือกช่องทางชำระเงิน</p></div>
+            <div><h1>ชำระเงินค่าบริการ</h1><p>เลือกช่องทางชำระเงินเพื่อส่งรายการให้ร้านตรวจสอบ</p></div>
             <div class="payment-reference"><small>หมายเลขจอง</small><strong>PH-{{ $booking->booking_date->format('Ymd') }}-{{ str_pad($booking->booking_id, 3, '0', STR_PAD_LEFT) }}</strong></div>
         </div>
         <div class="payment-columns">
             <section class="payment-info-panel">
                 <h2>สรุปรายละเอียดการจอง</h2>
-                <div class="payment-pet-row"><span class="booking-pet-emoji">{{ $booking->pet->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}</span><div><small>สัตว์เลี้ยง</small><strong>{{ $booking->pet->pet_name }} ({{ $booking->pet->breed->pet_breed_name }})</strong></div></div>
+                <div class="payment-pet-row"><span class="booking-pet-emoji">@if ($booking->pet->pet_image)<img class="pet-avatar-image" src="{{ asset('storage/'.$booking->pet->pet_image) }}" alt="">@else{{ $booking->pet->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}@endif</span><div><small>สัตว์เลี้ยง</small><strong>{{ $booking->pet->pet_name }} ({{ $booking->pet->breed->pet_breed_name }})</strong></div></div>
                 <div class="payment-service-row"><small>บริการที่จอง</small><strong>{{ $booking->service->service_name }}</strong></div>
                 <div class="payment-datetime-grid">
                     <div><small>วันที่รับบริการ</small><strong>{{ $booking->booking_date->format('d/m/Y') }}</strong></div>
@@ -44,16 +45,14 @@
                         </div>
                         <div class="payment-choice">
                             <label class="payment-method-option"><input type="radio" name="payment_method" value="creditCard" @checked(old('payment_method') === 'creditCard')><span><strong>บัตรเครดิต / บัตรเดบิต</strong><small>ชำระผ่านผู้ให้บริการเมื่อเชื่อมต่อระบบแล้ว</small></span></label>
-                            <div class="payment-option-content"><div class="payment-method-message"><strong>ช่องทางบัตรยังไม่เชื่อมต่อระบบรับชำระเงินจริง</strong><span>หากเลือกช่องทางนี้ ระบบจะบันทึกรายการเป็น “รอตรวจสอบ” เท่านั้น และยังไม่มีการตัดเงินจริง</span></div></div>
                         </div>
                         <div class="payment-choice">
                             <label class="payment-method-option"><input type="radio" name="payment_method" value="bankTransfer" @checked(old('payment_method') === 'bankTransfer')><span><strong>โอนผ่านธนาคาร</strong><small>ดูข้อมูลบัญชีสำหรับโอน</small></span></label>
-                            <div class="payment-option-content"><div class="payment-method-message"><strong>ยังไม่มีข้อมูลบัญชีธนาคารสำหรับโอน</strong><span>หากเลือกช่องทางนี้ ระบบจะบันทึกรายการเป็น “รอตรวจสอบ” เท่านั้น และยังไม่มีการตัดเงินจริง</span></div></div>
                         </div>
                     </div>
                     @error('payment_method')<p class="pet-error">{{ $message }}</p>@enderror
-                    <div class="payment-notice">การยืนยันนี้จะบันทึกคำขอจองและสถานะชำระเงินเป็น “รอตรวจสอบ” ยังไม่มีการตัดเงินจริง</div>
-                    <div class="payment-actions"><a class="button button-outline" href="{{ route('pets.index') }}">ย้อนกลับ</a><button class="button" type="submit">บันทึกการจอง ({{ number_format((float) $booking->booking_total_price, 0) }}฿)</button></div>
+                    <div class="payment-notice">QR Code จะรอ superadmin ตรวจสอบและยืนยัน ส่วนบัตรเครดิต/โอนผ่านธนาคารจะเปลี่ยนเป็น “ชำระแล้ว” ทันที โดยระบบยังไม่ได้เชื่อมต่อรับเงินจริง</div>
+                    <div class="payment-actions"><a class="button button-outline" href="{{ route('pets.index') }}">ย้อนกลับ</a><button class="button" type="submit">ยืนยันช่องทางชำระเงิน</button></div>
                 </form>
             </section>
         </div>

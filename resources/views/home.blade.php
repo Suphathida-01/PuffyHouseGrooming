@@ -8,7 +8,7 @@
 </head>
 <body class="home-body">
     <header class="site-header">
-        <a class="site-brand" href="{{ route('home') }}"><span class="brand-icon">🐾</span> Puffly House <span>Grooming</span></a>
+        <a class="site-brand" href="{{ route('home') }}"><img class="brand-icon" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt=""> Puffly House <span>Grooming</span></a>
         @include('partials.site-nav')
         @include('partials.account-menu')
     </header>
@@ -20,7 +20,6 @@
                 <h1>ดูแลน้องให้สะอาด น่ารัก<br>และมีความสุข <span>🐶 🐱</span></h1>
                 <p>สัมผัสประสบการณ์การตัดแต่งขนสุดพรีเมียม สะอาด ปลอดภัย<br class="desktop-break"> ด้วยผลิตภัณฑ์อ่อนโยนและทีมงานที่ใส่ใจ</p>
                 <a class="button" href="{{ route('services') }}">จองบริการเลย　›</a>
-                <div class="hero-stats"><div><strong>10,000+</strong><small>น้อง ๆ ที่ไว้วางใจ</small></div><div><strong>5.0 ★</strong><small>รีวิวจากผู้ใช้บริการ</small></div><div><strong>100%</strong><small>ใส่ใจความปลอดภัย</small></div></div>
             </div>
             <div class="hero-art" aria-label="ภาพประกอบสุนัขที่ร้านตัดขน"><div class="art-sparkle">✦</div><div class="art-cloud"></div><div class="art-dog">🐕</div><div class="art-bubble">ฟูสะอาด<br>สดใส!</div><div class="art-caption">Puffly House Grooming</div></div>
         </section>

@@ -8,19 +8,19 @@
 </head>
 <body>
 <header class="site-header">
-    <a class="site-brand" href="{{ route('home') }}"><span class="brand-icon">🐾</span> Puffly House <span>Grooming</span></a>
+    <a class="site-brand" href="{{ route('home') }}"><img class="brand-icon" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt=""> Puffly House <span>Grooming</span></a>
     @include('partials.site-nav')
     @include('partials.account-menu')
 </header>
 <main class="booking-page">
-    <div class="booking-steps"><span class="done"><b>✓</b> สัตว์เลี้ยง</span><i></i><span class="done"><b>✓</b> วันเวลา</span><i></i><span class="active"><b>3</b> ยืนยัน</span></div>
+    <div class="booking-steps"><span class="done"><b>✓</b> สัตว์เลี้ยง</span><i></i><span class="done"><b>✓</b> วันเวลา</span><i></i><span class="active"><b>3</b> ยืนยันข้อมูล</span><i></i><span><b>4</b> ชำระเงิน</span></div>
     <div class="booking-layout">
         <section class="booking-main">
             <form id="booking-confirm-form" method="POST" action="{{ route('booking.store', $service->service_id) }}">
                 @csrf
                 <div class="booking-panel">
                     <h1>ตรวจสอบความถูกต้องของการจอง 🪄</h1>
-                    <div class="booking-review booking-review-pet"><span class="booking-pet-emoji">{{ $pet->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}</span><div><strong>{{ $pet->pet_name }}</strong><span>{{ $pet->breed->petType->pet_type_name }} · {{ $pet->breed->pet_breed_name }} · {{ number_format((float) $pet->pet_weight, 2) }} กก. · {{ $service->service_name }} (เริ่มต้น {{ number_format($price, 0) }} บาท)</span></div></div>
+                    <div class="booking-review booking-review-pet"><span class="booking-pet-emoji">@if ($pet->pet_image)<img class="pet-avatar-image" src="{{ asset('storage/'.$pet->pet_image) }}" alt="">@else{{ $pet->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}@endif</span><div><strong>{{ $pet->pet_name }}</strong><span>{{ $pet->breed->petType->pet_type_name }} · {{ $pet->breed->pet_breed_name }} · {{ number_format((float) $pet->pet_weight, 2) }} กก. · {{ $service->service_name }} (เริ่มต้น {{ number_format($price, 0) }} บาท)</span></div></div>
                     <div class="booking-review-grid">
                         <div class="booking-review"><small>📅 วันเวลาที่นัดหมาย</small><strong>{{ \Illuminate\Support\Carbon::parse($workDate)->format('d/m/Y') }}</strong><span>เวลา {{ substr($bookingStart, 0, 5) }} น.</span></div>
                         <div class="booking-review"><small>🐾 บริการที่เลือก</small><strong>{{ $service->service_name }}</strong><span>ระยะเวลา {{ $service->service_duration_minutes }} นาที</span></div>
@@ -41,13 +41,13 @@
         <div class="booking-side">
             <aside class="booking-summary">
                 <h2>สรุปรายการจอง</h2>
-                <div class="booking-summary-row"><span class="booking-icon">{{ $pet->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}</span><div><small>สัตว์เลี้ยง</small><strong>{{ $pet->pet_name }} · {{ $pet->breed->pet_breed_name }}</strong></div></div>
+                <div class="booking-summary-row"><span class="booking-icon">@if ($pet->pet_image)<img class="pet-avatar-image" src="{{ asset('storage/'.$pet->pet_image) }}" alt="">@else{{ $pet->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}@endif</span><div><small>สัตว์เลี้ยง</small><strong>{{ $pet->pet_name }} · {{ $pet->breed->pet_breed_name }}</strong></div></div>
                 <div class="booking-summary-row"><span class="booking-icon service-icon">🫧</span><div><small>บริการที่เลือก</small><strong>{{ $service->service_name }}</strong></div></div>
                 <div class="booking-summary-row"><div><small>วันเวลา</small><strong>{{ \Illuminate\Support\Carbon::parse($workDate)->format('d/m/Y') }} · {{ substr($bookingStart, 0, 5) }} น.</strong></div></div>
                 <div class="booking-total"><span>ยอดชำระโดยประมาณ</span><strong>{{ number_format($price, 0) }}฿</strong></div>
                 <p class="booking-weight">น้ำหนัก {{ number_format((float) $pet->pet_weight, 2) }} กก. · {{ $pet->pet_weight <= 5 ? 'ไซซ์ S' : ($pet->pet_weight <= 15 ? 'ไซซ์ M' : 'ไซซ์ L') }}</p>
-                <div class="booking-actions booking-summary-actions"><a class="button button-outline" href="{{ route('booking.schedule', $service->service_id) }}">ย้อนกลับ</a><button class="button" type="submit" form="booking-confirm-form">ยืนยันข้อมูล　➡️</button></div>
-                <small class="booking-help">โปรดตรวจสอบข้อมูลและเวลาให้ถูกต้องก่อนยืนยัน</small>
+                <div class="booking-actions booking-summary-actions"><a class="button button-outline" href="{{ route('booking.schedule', $service->service_id) }}">ย้อนกลับ</a><button class="button" type="submit" form="booking-confirm-form">ยืนยันข้อมูลและไปชำระเงิน　➡️</button></div>
+                <small class="booking-help">โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนยืนยันและไปขั้นตอนชำระเงิน</small>
             </aside>
         </div>
     </div>

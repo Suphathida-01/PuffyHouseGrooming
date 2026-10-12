@@ -5,14 +5,22 @@ use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminServiceController;
 use App\Http\Controllers\AdminStaffController;
-use App\Http\Controllers\AdminPaymentController;
+use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\SuperadminBookingController;
+use App\Http\Controllers\SuperadminCustomerController;
+use App\Http\Controllers\SuperadminPaymentController;
+use App\Http\Controllers\SuperadminServiceController;
+use App\Http\Controllers\SuperadminStaffController;
+use App\Http\Controllers\SuperadminProfileController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SuperadminDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -38,29 +46,56 @@ Route::post('/register', [AuthController::class, 'register'])
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/admin/bookings', [AdminBookingController::class, 'index'])->name('admin.bookings.index');
-    Route::put('/admin/bookings/{bookingId}/status', [AdminBookingController::class, 'updateStatus'])->name('admin.bookings.status');
-    Route::get('/admin/customers', [AdminCustomerController::class, 'index'])->name('admin.customers.index');
-    Route::get('/admin/customers/create', [AdminCustomerController::class, 'create'])->name('admin.customers.create');
-    Route::post('/admin/customers', [AdminCustomerController::class, 'store'])->name('admin.customers.store');
-    Route::get('/admin/customers/{customerId}', [AdminCustomerController::class, 'show'])->name('admin.customers.show');
-    Route::get('/admin/customers/{customerId}/edit', [AdminCustomerController::class, 'edit'])->name('admin.customers.edit');
-    Route::put('/admin/customers/{customerId}', [AdminCustomerController::class, 'update'])->name('admin.customers.update');
-    Route::delete('/admin/customers/{customerId}', [AdminCustomerController::class, 'destroy'])->name('admin.customers.destroy');
-    Route::get('/admin/services', [AdminServiceController::class, 'index'])->name('admin.services.index');
-    Route::get('/admin/services/create', [AdminServiceController::class, 'create'])->name('admin.services.create');
-    Route::post('/admin/services', [AdminServiceController::class, 'store'])->name('admin.services.store');
-    Route::get('/admin/services/{serviceId}/edit', [AdminServiceController::class, 'edit'])->name('admin.services.edit');
-    Route::put('/admin/services/{serviceId}', [AdminServiceController::class, 'update'])->name('admin.services.update');
-    Route::delete('/admin/services/{serviceId}', [AdminServiceController::class, 'destroy'])->name('admin.services.destroy');
-    Route::get('/admin/staff', [AdminStaffController::class, 'index'])->name('staff.index');
-    Route::post('/admin/staff', [AdminStaffController::class, 'storeStaff'])->name('staff.store');
-    Route::post('/admin/staff/attendance', [AdminStaffController::class, 'saveAttendance'])->name('staff.attendance.update');
-    Route::post('/admin/staff/schedules', [AdminStaffController::class, 'storeSchedule'])->name('staff.schedules.store');
-    Route::post('/admin/staff/closed-days', [AdminStaffController::class, 'toggleClosedDay'])->name('staff.closed-days.toggle');
-    Route::get('/admin/payments', [AdminPaymentController::class, 'index'])->name('admin.payments');
-    Route::get('/admin/payments/{paymentId}', [AdminPaymentController::class, 'show'])->name('admin.payments.show');
-    Route::post('/admin/payments/{paymentId}/confirm', [AdminPaymentController::class, 'confirm'])->name('admin.payments.confirm');
+
+    Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/bookings', [AdminBookingController::class, 'index'])->name('bookings.index');
+        Route::put('/bookings/{bookingId}/status', [AdminBookingController::class, 'updateStatus'])->name('bookings.status');
+        Route::get('/customers', [AdminCustomerController::class, 'index'])->name('customers.index');
+        Route::get('/customers/create', [AdminCustomerController::class, 'create'])->name('customers.create');
+        Route::post('/customers', [AdminCustomerController::class, 'store'])->name('customers.store');
+        Route::get('/customers/{customerId}', [AdminCustomerController::class, 'show'])->name('customers.show');
+        Route::get('/customers/{customerId}/edit', [AdminCustomerController::class, 'edit'])->name('customers.edit');
+        Route::put('/customers/{customerId}', [AdminCustomerController::class, 'update'])->name('customers.update');
+        Route::delete('/customers/{customerId}', [AdminCustomerController::class, 'destroy'])->name('customers.destroy');
+        Route::get('/services', [AdminServiceController::class, 'index'])->name('services.index');
+        Route::get('/staff', [AdminStaffController::class, 'index'])->name('staff.index');
+        Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
+        Route::put('/profile/password', [AdminProfileController::class, 'updatePassword'])->name('profile.password.update');
+    });
+
+    Route::prefix('superadmin')->name('superadmin.')->middleware('role:superadmin')->group(function () {
+        Route::get('/dashboard', [SuperadminDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/bookings', [SuperadminBookingController::class, 'index'])->name('bookings.index');
+        Route::put('/bookings/{bookingId}/status', [SuperadminBookingController::class, 'updateStatus'])->name('bookings.status');
+        Route::get('/customers', [SuperadminCustomerController::class, 'index'])->name('customers.index');
+        Route::get('/customers/create', [SuperadminCustomerController::class, 'create'])->name('customers.create');
+        Route::post('/customers', [SuperadminCustomerController::class, 'store'])->name('customers.store');
+        Route::get('/customers/{customerId}', [SuperadminCustomerController::class, 'show'])->name('customers.show');
+        Route::get('/customers/{customerId}/edit', [SuperadminCustomerController::class, 'edit'])->name('customers.edit');
+        Route::put('/customers/{customerId}', [SuperadminCustomerController::class, 'update'])->name('customers.update');
+        Route::delete('/customers/{customerId}', [SuperadminCustomerController::class, 'destroy'])->name('customers.destroy');
+        Route::get('/services', [SuperadminServiceController::class, 'index'])->name('services.index');
+        Route::get('/services/create', [SuperadminServiceController::class, 'create'])->name('services.create');
+        Route::post('/services', [SuperadminServiceController::class, 'store'])->name('services.store');
+        Route::get('/services/{serviceId}/edit', [SuperadminServiceController::class, 'edit'])->name('services.edit');
+        Route::put('/services/{serviceId}', [SuperadminServiceController::class, 'update'])->name('services.update');
+        Route::delete('/services/{serviceId}', [SuperadminServiceController::class, 'destroy'])->name('services.destroy');
+        Route::get('/staff', [SuperadminStaffController::class, 'index'])->name('staff.index');
+        Route::post('/staff', [SuperadminStaffController::class, 'storeStaff'])->name('staff.store');
+        Route::post('/staff/attendance', [SuperadminStaffController::class, 'saveAttendance'])->name('staff.attendance.update');
+        Route::post('/staff/schedules', [SuperadminStaffController::class, 'storeSchedule'])->name('staff.schedules.store');
+        Route::post('/staff/closed-days', [SuperadminStaffController::class, 'toggleClosedDay'])->name('staff.closed-days.toggle');
+        Route::get('/profile', [SuperadminProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile', [SuperadminProfileController::class, 'update'])->name('profile.update');
+        Route::put('/profile/password', [SuperadminProfileController::class, 'updatePassword'])->name('profile.password.update');
+        Route::get('/payments', [SuperadminPaymentController::class, 'index'])->name('payments');
+        Route::get('/payments/{paymentId}', [SuperadminPaymentController::class, 'show'])->name('payments.show');
+        Route::post('/payments/{paymentId}/confirm', [SuperadminPaymentController::class, 'confirm'])->name('payments.confirm');
+        Route::post('/payments/{paymentId}/reject', [SuperadminPaymentController::class, 'reject'])->name('payments.reject');
+    });
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
@@ -86,5 +121,4 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/pets/{id}', [PetController::class, 'update'])->name('pets.update');
     Route::delete('/pets/{id}', [PetController::class, 'destroy'])->name('pets.destroy');
 });
-
 require __DIR__.'/settings.php';

@@ -1,0 +1,1314 @@
+
+=== 03 - Javascript Part 01 (2).pdf ===
+PAGES 60
+
+-- Page 1 --
+ห"ก$ตรเทคโนโล-สารสนเทศ สาขา2ชา2ทยาการคอม7วเตอ9 2ทยา"ยการคอม7วเตอ9 มหา2ทยา"ยขอนแ;น ผศ.ดร.ว>ญญา วรรณศA SC362004 WEB APPLICATION PROGRAMMING  การเBยนโปรแกรมประEกFบนเHบ CP351203 WEB PROGRAMMING and APPLICATION  การเBยนโปรแกรมเHบและการประEกFใJ CP410805 WEB APPLICATION DEVELOPMENT  การKฒนาโปรแกรมประEกFบนเHบ 03 -  JavaScript Part 01
+
+-- Page 2 --
+01 Outline WARUWU@KKU ภาษา JavaScript DOM: Document Object Model JSON AJAX Asynchronous JavaScript
+
+-- Page 3 --
+02 JavaScript WARUWU@KKU
+
+-- Page 4 --
+03 JavaScript WARUWU@KKU ‣ภาษาโปรแกรมOห>บKฒนาเHบแอปพQเคRน SสามารถประมวลผลไVWงบน web browser และ web server ‣สามารถใJเYอKฒนาเHบไVWงZวน front-end และ back-end [งระบบS\กKฒนาVวย]ปแบบ^งก_าว จะ\กเAยกaา  Full Stack JavaScript หbอ Isomorphic JavaScript ‣ในราย2ชาc จะก_าวdง JavaScript ในZวนการKฒนา front-end Sประมวลผลบน web browser เeาfน [งจะเgด hนในเหiการj (event) kาง ๆ เmน •เnอoใJโหลดหpาเHบเสqจ •เnอoใJคQกSrม •เnอoใJกรอกsอtลในแบบฟอ9มเสqจ และระบบvองการตรวจสอบsอtล;อนเwอมkอไปxง web server
+
+-- Page 5 --
+04 JavaScript WARUWU@KKU ‣Internal Script: แทรกyzง JavaScript โดยส{าง tag <script> [งอ|ภายใน tag <head> เnอvองการใ}y zงโหลด หbอ~งาน;อนการแสดงผล ห"อ ส{าง tag <script> ภายใน tag <body> เnอvองการใ}yzง~งานในmวงการแสดงผล การแทรก)*ง JavaScript บนเ/บเพจ HTML <head>    <script> console.log('Hello World!!')    </script> </head> HTML <body>    <script> console.log('Call from body')    </script> </body> ** งÄRน console.log() ใJOห>บแสดงsอความÅานทาง console ของ web browser
+
+-- Page 6 --
+05 JavaScript WARUWU@KKU ‣External Script: Çyzง JavaScript มาส{างไฟÉแยก (นามสÑล *.js) จากfนÖงÜางáงdงไฟÉ^งก_าว โดยส{าง  tag <script> [งอ|ภายใน tag <head> ‣เหมาะàบyzง JavaScript Sâก\กเAยกใJจากเHบเพจหลาย ๆ หpา ‣หากไฟÉ js อ|ในเHบไซFเãยวàน ใJ relative URL ในการÜางáงdงไฟÉ การแทรก)*ง JavaScript บนเ/บเพจ HTML <head>    <script src="./js/myscript.js"></script> </head> myscript.js console.log("Hello World!! from myscript.js")
+
+-- Page 7 --
+06 JavaScript WARUWU@KKU ‣External Script: Çyzง JavaScript มาส{างไฟÉแยก (นามสÑล *.js) จากfนÖงÜางáงdงไฟÉ^งก_าว โดยส{าง  tag <script> [งอ|ภายใน tag <head> ‣หากไฟÉ js ไåไVอ|บนเHบไซFเãยวàน ใJ absolute URL ในการÜางáงdงไฟÉ  การแทรก)*ง JavaScript บนเ/บเพจ HTML <head>    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> </head>
+
+-- Page 8 --
+07 JavaScript WARUWU@KKU ‣CDN (Content Delivery Network) çอ ระบบเคbอéายของเคèอง server êนวนมากSกระจายอ|ëíภาคkาง ๆ ìว โลก [งจะ~หpาSZงsอtลใ}แ;o>บใ}เqวSîด ‣CDN จะ~หpาSเïอกเคèอง server SใกñSîด เYอZงไฟÉใ}o{องขอ การแทรก)*ง JavaScript บนเ/บเพจ IMG Source: https://www.techtarget.com/searchnetworking/deﬁnition/CDN-content-delivery-network
+
+-- Page 9 --
+08 JavaScript WARUWU@KKU การแทรก)*ง JavaScript บนเ/บเพจ HTML myscript.js <head>     <meta charset="UTF-8">     <title>Week 03</title>     <script>         console.log("Hello World!!")     </script>     <script src="./js/myscript.js"></script> </head> <body>     <script>         console.log("Call from body")     </script> </body> console.log("Hello World!! from myscript.js") ‣yzง JavaScript จะ~งานตามó^บS\กเAยก
+
+-- Page 10 --
+09 JavaScript WARUWU@KKU 1. เòดหpาเHบเพจVวย web browser 2. กดrม F12 หbอ คQกขวาSหpาเHบเพจ เïอกเมô Inspect 3. เïอก tab console การเ2ด console บน web browser 
+
+-- Page 11 --
+10 JavaScript WARUWU@KKU การเ4ยน)อ6บาย (Comment) HTML <head>     <script>         // การเขียนคําอธิบายแบบบรรทัดเดียว         /* การเขียนคําอธิบายแบบหลายบรรทัด            บรรทัดที่ 2            บรรทัดที่ 3 */     </script> </head>
+
+-- Page 12 --
+7วแปรของ JavaScript WARUWU@KKU 
+
+-- Page 13 --
+11 JavaScript Variables WARUWU@KKU ‣สามารถประกาศöวแปรVวย keyword let ‣wอöวแปรเõนแบบ case-sensitive ‣ในการเBยนโปรแกรมภาษา J a v a S c r i p t  การประกาศöวแปรไåêเõนvองระúชùดของsอtล ( W e a k l y  T y p e )  และสามารถ เปûยนแปลงชùดของsอtลไVตลอดเวลา ‣สามารถüหนด†าใ}öวแปรโดยใJเคèองหมาย = (assignment) HTML <script>     let number = 5 // integer     let number_f = 5.1 // floating point     let text = "Hello" // string     let isEmpty = false // boolean (true, false) </script>
+
+-- Page 14 --
+12 JavaScript Variables WARUWU@KKU ‣การประกาศöวแปรVวย keyword const จะไåสามารถüหนด†าใ}öวแปรใหåไV kางจากการประกาศöวแปรVวย keyword let HTML <script>     let number = 5     console.log(number)     number = 5.55     console.log(number) </script> HTML <script>     const number = 5     console.log(number)     number = 5.55     console.log(number) </script>
+
+-- Page 15 --
+13 JavaScript Variables WARUWU@KKU ‣undefined: หากตอนประกาศöวแปรไå°การüหนด†าเ¢มvน JavaScript จะüหนด†า undefined ใ}öวแปรfน ‣null: เõนการüหนด†าใ}öวแปร โดยหมายdงaา öวแปรfนไå°†าใด ๆ ;า<น ๆ ของ7วแปร JavaScript HTML <script>     let number     console.log(number)     number = null     console.log(number) </script> 
+
+-- Page 16 --
+14 JavaScript Variables WARUWU@KKU ‣NaN: £อมาจาก Not-A-Number หมายdง †าS§ดพลาดทางค•ตศาสต9 ‣Infinity: หมายdง †าSเgนขอบเขตการเ¶บ†าของöวแปร ;า<น ๆ ของ7วแปร JavaScript HTML <script>     let number = "ABC"*10     console.log(number)     number = 10/0     console.log(number) </script>
+
+-- Page 17 --
+15 Array WARUWU@KKU ‣สามารถประกาศöวแปร Array ไV 2 ]ปแบบ çอ ÅานงÄRน Array() หbอüหนด†าöวแปรÅาน [] (square brackets) HTML <script>     let age = new Array()     age[0] = 10     age[1] = 20     age[2] = 30     console.log(age)     console.log(age[0])     console.log(age.length)     let name = []     name[0] = "Mary"     name[1] = "Jane"     console.log(name) </script> 
+
+-- Page 18 --
+16 Array WARUWU@KKU ‣สามารถประกาศöวแปร Array ไV 2 ]ปแบบ çอ ÅานงÄRน Array() หbอüหนด†าöวแปรÅาน [] (square brackets) HTML <script>     let age = new Array(10, 20, 30, 40)     console.log("age[3] = " + age[3])     console.log(age.length)     let score = ["one", 2, 2.5, 10]     console.log("score[3] = " + score[3]) </script> ‣öวแปร Array สามารถ°สมาßกS°ชùดของsอtลSแตกkางàนไV
+
+-- Page 19 --
+17 Object WARUWU@KKU ‣การส{าง o b j e c t  hนvนVวย { และòด®ายVวย } โดยภายในจะประกอบ©ของ p r o p e r t y  และ v a l u e  [ง\ก™นVวย เคèองหมาย : (colon) ‣สมาßกแkละöว\ก™นVวยเคèองหมาย , (comma) HTML <script>     let person = {         id: 1,         fullname: "Mary Frost",         action: ["move","stop"]      }     console.log(person.fullname)     console.log(person.action[1])     person.fullname = "Malenia Frost"     console.log(person.fullname) </script> Array Sเõนสมาßกของ object
+
+-- Page 20 --
+18 Array of Object WARUWU@KKU ‣สามารถการส{าง array ของ object ไV และเAยกใJโดยใJห"กการเsาdง†าสมาßกของ array ปก´¨วมàบการเsาdง†า ของ object HTML <script>     let students = [       { id: "00001",         fullname: "Mary Frost",         age: 20 },       { id: "00002",         fullname: "John Terner",         age: 19 }     ]     console.log(students[1].fullname)     students[1].fullname = "Jackson Terner"     console.log(students[1].fullname) </script> 
+
+-- Page 21 --
+Operator ของ JavaScript WARUWU@KKU 
+
+-- Page 22 --
+19 Arithmetic Operators WARUWU@KKU ‣üหนด†าเ¢มvน y = 5 Operator )อ6บาย 7วอ>าง ;า x ;า y + การบวก x = y + 2 7 5 - การลบ x = y - 2 3 5 * การ≠ณ x = y * 2 10 5 / การหาร x = y / 2 2.5 5 % การหารเอาเศษ (Modulo) x = y % 2 1 5 ** ยกü"ง x = y ** 2 25 5 ++ เÆม†าใ}àบöวแปรhนêนวน 1 x = ++y 6 6 x = y++ 5 6 -- ลด†าใ}àบöวแปรhนêนวน 1 x = --y 4 4 x = y-- 5 4
+
+-- Page 23 --
+20 Operator WARUWU@KKU ‣การใJöวØเùนการ + àบ String HTML <script>     txt1 = "What a very"     txt2 = "nice day"     txt3 = txt1 + " " + txt2     console.log(txt3) </script> 
+
+-- Page 24 --
+21 Template Literals WARUWU@KKU ‣การkอsอความแบบใหåใน ES6 โดยใJ Backticks  `  แทน Single Quote ' หbอ Double Quote “ ‣∞ดเ±น: •แทรก7วแปร?าย: ใJ ${ตัวแปร} แทรกตรงไหน¶ไV ภายใน String •@นบรรAดใหCไEภายใน string: sอความจะhนบรร≤ดใหåตามจ≥ง (ไåvองใJ \n) HTML <script>     let name = "Somchai"     let score = 80     let previous_style = "User: " + name + " Score: " + score     console.log(`User: ${name} Score: ${score}`)     let menu = `รายการอาหาร: - กะเพรา - ไข่ดาว - น้ําเปล่า`     console.log(menu) </script> 
+
+-- Page 25 --
+22 JavaScript String WARUWU@KKU Method หGาH 7วอ>าง ผลKพL .length ¥บêนวนöวµกษร "Hello".length 5 .toUpperCase() แปลงเõนöว7ม∂ให∑ "user".toUpperCase() "USER" .toLowerCase() แปลงเõนöว7ม∂เ∏ก "USER".toLowerCase() "user" .includes() ตรวจสอบaา°sอความSüหนด "I love Cat".includes("Cat") true .split() πนsอความออกเõนZวน ๆ "A,B,C".split(",") ["A", "B", "C"]
+
+-- Page 26 --
+23 Assignment Operators WARUWU@KKU ‣üหนด†าเ¢มvน x = 10 และ y = 5 Operator 7วอ>าง เ4ยนแบบเMม ;า x = x = y 5 += x += y x = x + y 15 -= x -= y x = x - y 5 *= x *= y x = x * y 50 /= x /= y x = x / y 2 %= x %= y x = x % y 0
+
+-- Page 27 --
+24 Comparison Operators WARUWU@KKU ‣üหนด†าเ¢มvน x = 5 Operator )อ6บาย 7วอ>าง ผลKพL == เeาàน x==5 true x==8 false === †าเeาàน และชùดsอtลเห∫อนàน x==="5" false x===5 true != ไåเeาàน x!=5 false x!=8 true !== †าkางàน หbอชùดsอtลkางàน x!==8 true x!==5 false > มากกaา x > 5 false >= มากกaาเeาàบ x >= 5 true < pอยกaา x < 10 true <= pอยกaาเeาàบ x <= 5 true
+
+-- Page 28 --
+25 Logical Operators WARUWU@KKU ‣üหนด†าเ¢มvน x = 5  และ y = 3 Operator )อ6บาย 7วอ>าง ผลKพL && and (x<10) && (y>1) true || or (x==5) || (y==5) false ! not !(x==y) true
+
+-- Page 29 --
+26 Logical Operators WARUWU@KKU 
+
+-- Page 30 --
+JavaScript Statements WARUWU@KKU 
+
+-- Page 31 --
+27 Condition Statements WARUWU@KKU )*ง if HTML <script>     let price = 1500     if(price > 1000){         console.log("Expensive")     } </script> 
+
+-- Page 32 --
+28 Condition Statements WARUWU@KKU )*ง if .. else HTML <script>     let price = 900     if(price > 1000){         console.log("Expensive")     }     else{         console.log("Cheap")     } </script>
+
+-- Page 33 --
+29 Condition Statements WARUWU@KKU )*ง if .. else แบบ>อ HTML <script>     let age = 15     let level = (age<18) ? "Young" : "Old"     console.log(level) </script> (CONDITION) ? BLOCK1 :  BLOCK2 True False
+
+-- Page 34 --
+30 Condition Statements WARUWU@KKU HTML <script>     let r = confirm("Press a button!")     if(r == true){         console.log("OK")     }     else{         console.log("Cancel")     } </script> xTitle of Webpage 7วอ>างการใO)*ง if .. else
+
+-- Page 35 --
+31 Condition Statements WARUWU@KKU )*ง if .. else if HTML <script>     let score = 65     if(score >= 80)         console.log("Grade A")     else if(score >= 70)         console.log("Grade B")     else if(score >= 60)         console.log("Grade C")     else if(score >= 50)         console.log("Grade D")     else         console.log("Grade F") </script>
+
+-- Page 36 --
+32 Condition Statements WARUWU@KKU )*ง switch-case HTML <script>     let test = "male"     switch(test){         case 1:             console.log("Number")             break         case 3.14:             console.log("Floating Point")             break         case 'male':             console.log("String")             break         default:             console.log("Other")     } </script>
+
+-- Page 37 --
+33 Loop/Iteration Statements WARUWU@KKU )*ง while HTML <script>     let cars = [ 'Ferrari', 'Benz', 'BMW', 'Mazda', 'Toyota', 'Honda']     let i = 0, length = cars.length     while(i<length){          console.log(cars[i])         i++     } </script> while(เงื่อนไข){     statement }
+
+-- Page 38 --
+34 WARUWU@KKU )*ง for HTML <script>     let cars = [ 'Ferrari', 'Benz', 'BMW', 'Mazda', 'Toyota', 'Honda']     for(i=0;i<cars.length;i++){          console.log(cars[i])     } </script> for(กําหนดค่าเริ่มต้น ; เงื่อนไข ; เพิ่ม/ลดค่า){     statement } Loop/Iteration Statements
+
+-- Page 39 --
+35 WARUWU@KKU )*ง for..in HTML <script>     let cars = [ 'Ferrari', 'Benz', 'BMW', 'Mazda', 'Toyota', 'Honda']     for(let i in cars){          console.log(`i = ${i} = cars[${i}] = ${cars[i]}`)     } </script> for(ตัวแปรควบคุม in ตัวแปรarray){     statement } Loop/Iteration Statements 
+
+-- Page 40 --
+36 WARUWU@KKU HTML <script>     let cars = [ 'Ferrari', 'Benz', 'BMW', 'Mazda', 'Toyota', 'Honda']     for(let i of cars){          console.log(i)     } </script> for(ตัวแปรควบคุม of ตัวแปรarray){     statement } Loop/Iteration Statements )*ง for..of
+
+-- Page 41 --
+Function ใน Javascript WARUWU@KKU 
+
+-- Page 42 --
+37 Function WARUWU@KKU ‣ZวนของโปรแกรมS\กเBยนhนมาOห>บส¥บสªนการ~งานของโปรแกรม ‣เgดhนจากการแºงZวนของโปรแกรมSvอง~งานΩ ๆ หbอการ~งานS°ความæบøอน function ชื่อฟังก์ชัน ([parameter1, .., parameterN]){     statement     [return ค่า/ตัวแปรที่ส่งกลับ] } ‣โดยสามารถแºง"กษณะของงÄRนSเBยนhนเองไVเõน 2 แบบ •งÄRนS°การZง†าก"บ •งÄRนSไå°การZง†าก"บ
+
+-- Page 43 --
+38 Function WARUWU@KKU PงQRนHSการTง;ากKบ HTML // >บ†า parameter จาก∞ดSเAยกใJ // ประมวลผล // Zง†าก"บ <script>    function average3(var1, var2, var3){          let sum = var1 + var2 + var3         let avg = sum/3         return avg     } </script> ‣ใJyzง return ในการZง†าก"บไปxงใ}∞ดSเAยกใJงÄRน
+
+-- Page 44 --
+HTML 39 Function WARUWU@KKU PงQRนHไCSการTง;ากKบ // >บ†า parameter จาก∞ดSเAยกใJ // ประมวลผล // แสดงผล ‣ไå°การใJyzง return ในการZง†าก"บ ‣âกใJàบการüหนด†าkาง ๆ หbอการแสดงผล <script>    function average3(var1, var2, var3){          let sum = var1 + var2 + var3         let avg = sum/3         alert("ค่าเฉลี่ย คือ " + avg)     } </script> HTML // üหนด†าöวแปร // ไå>บ parameter <script>    let message    function welcome(){          message = "Welcome"         alert(message)     } </script>
+
+-- Page 45 --
+40 Function WARUWU@KKU ‣สามารถเAยกใJงÄRนไVจากหลายสถานการj เmน •เAยกใJเnอโหลดหpาเHบ •เAยกใJตามเหiการj HTML เUยกใOเVอโหลดหGาเ/บ // เAยกใJห"งจากประกาศงÄRน HTML // เAยกใJจาก tag script ¿น (ห"งประกาศงÄRน) <head>     <script>        function average(var1, var2, var3){             let avg = (var1 + var2 + var3) / 3            return avg         }     </script> </head> <body>     <script> alert(average(10, 20, 30)) </script> </body> <script>    let message    function welcome(){          message = "Welcome"         alert(message)     }     welcome() </script>
+
+-- Page 46 --
+เUยกใOเVอโหลดหGาเ/บ 41 Function WARUWU@KKU HTML // เAยกใJจาก tag script ¿น (ห"งประกาศงÄRน) <head>     <script>         function average3(var1, var2, var3){              let sum = var1 + var2 + var3             let avg = sum/3             return avg         }     </script> </head> <body>     <script>         let number = average3(10, 20, 30)         alert("ค่าเฉลี่ย คือ " + number)     </script> </body> xTitle of Webpage
+
+-- Page 47 --
+42 Function WARUWU@KKU เUยกใOตามเหYการZ HTML // เหiการj (Event) kาง ๆ Sเgดhน xTitle of Webpage <head>     <script>         function welcome(){              alert("Welcome")         }         function sum(var1, var2, var3){              alert("ผลรวม คือ " + (var1+var2+var3))         }     </script> </head> <body>     <h1>Hello world</h1>     <h2 onmouseover="welcome()">Hello</h2>     <a href="#" onclick="welcome()">Welcome</a><br><br>     <input type="button" onclick="sum(10, 20, 30)" value="Get Sum!"> </body>
+
+-- Page 48 --
+43 Function WARUWU@KKU เUยกใOตามเหYการZ ‣öวอ£างเหiการjSสามารถเgดhนไV Attribute เหYการZ onchange เnอoใJเปûยนแปลง†า Input ใน Form Element  onreset เnอoใJกดrม reset ใน Form Element  onsubmit เnอoใJกดrม submit ใน Form Element  onclick เnอoใJคQกเมา¡S element fน ๆ onmouseover เnอoใJเ¬อนöว√ของเมา¡ (mouse pointer) ไปอ|บน element fน ๆ onmouseout เnอoใJÇöว√ของเมา¡ออกจาก element fน ๆ Source: https://www.w3schools.com/tags/ref_eventattributes.asp 
+
+-- Page 49 --
+44 Anonymous Function WARUWU@KKU ‣สามารถùยามงÄRนเ¶บไƒในöวแปรไV โดยจะเAยกaา Anonymous Function หbอ งÄRนไåระúwอ HTML // เ¶บงÄRนไƒในöวแปร x // เAยกใJÅานöวแปร <head>     <script>         let x = function(var1, var2){             return var1 + var2         }     </script> </head> <body>     <script>         let number = x(10, 15)         console.log("ผลลัพธ์การเรียกใช้ฟังก์ชัน : " + number)     </script> </body> 
+
+-- Page 50 --
+HTML 45 Anonymous Function WARUWU@KKU ‣สามารถùยามงÄRนเ¶บไƒในöวแปรชùด Object ไV และสามารถเAยกใJไVÅานwอของöวแปร Object // ùยามงÄRนแบบไåระúwอในöวแปรชùด Object wอ person // เAยกใJงÄRนÅานöวแปร Object <head>     <script>         let person = {             id: 11,             fname: 'Mary',             lname: 'Frost',             say: function(name) { return 'Hello ' + name }         }         console.log(`${person.id} ${person.fname} ${person.lname}`)         console.log( person.say('Lisa') )     </script> </head>
+
+-- Page 51 --
+HTML 46 Arrow Functions WARUWU@KKU ‣]ปแบบการเBยนงÄRนสâยใหå (parameter) => {statements} S≈นกระRบและùยมใJมากใน React/Node.js // vองเBยน return เอง <head>     <script> const calcTax = (price) => {     let tax = price * 0.07     let total = price + tax     return total  }     </script> </head> HTML <head>     <script> const calcTax = (price) => price * 1.07;  console.log(calcTax(100));     </script> </head> แบบเMม แบบ>อ (ใJเnอ°yzงบรร≤ดเãยว)
+
+-- Page 52 --
+HTML <head>     <script> // Param 1 ตัว ไม่ต้องใส่วงเล็บก็ได้ const double = n => n * 2 console.log(double(7))     </script> </head> 47 Arrow Functions WARUWU@KKU ‣กฎการใZวงเ∏บ () ใ} Parameter HTML <head>     <script> // ไม่มี Param const sayHi = () => console.log("Hi") sayHi() // หลาย Params const add = (a, b) => a + b console.log(add(3, 4))     </script> </head> 
+
+-- Page 53 --
+Built-in Objects WARUWU@KKU 
+
+-- Page 54 --
+48 Built-in Objects WARUWU@KKU ‣Build-in Object çอ Object มาตรฐานในภาษา JavaScript [งภายในประกอบVวย •Property: ใJในการüหนด†า หbอเsาdง†า»ณสม…´ของ Built-in Object fน ๆ [ปแบบการเUยกใO ObjectName.PropertyName •Method: งÄRน หbอ ดyzงSพ{อมใJ Oห>บ~งานàบ Built-in Object fน ๆ [ปแบบการเUยกใO ObjectName.MethodName([parameters])
+
+-- Page 55 --
+49 Built-in Objects WARUWU@KKU ‣öวอ£าง Built-in Object •Number: parseInt(), parseFloat(), isNaN(), isInteger() •Math: cos(), exp(), log(), max(), min(), sqrt(), pow() •Date: getDate(), getHours(), getMinutes() •Array: ประกอบVวย property เmน length Sระúêนวนสมาßกใน array https://devdocs.io/javascript รายการ Built-in Object และ7วอ>างการใOงาน
+
+-- Page 56 --
+HTML 50 Built-in Objects WARUWU@KKU ‣öวอ£าง Date Object // เÀอนมกราคม çอ 0 <script>     let d = new Date()     console.log(`วันนี้วันที่ ${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`)     console.log(`เวลา ${d.getHours()}:${d.getMinutes()} น.`) </script>
+
+-- Page 57 --
+51 Built-in Objects WARUWU@KKU ‣öวอ£าง String Object HTML // แºงsอความVวย " " // Ãนหา substring ใ}ผล"พÕเõน index แรกSเจอ <script>     let sentence = 'How are you doing today?'     let results = sentence.split(' ')     for(i=0; i<results.length; i++) {         console.log(`Result[${i}] = ${results[i]}`)     }     let text = 'Khon Kaen University '     let n = text.search('Kaen')     console.log(`Text = ${text}`)     console.log(`Position of "Kean" = ${n}`) </script>
+
+-- Page 58 --
+52 Built-in Objects WARUWU@KKU ‣öวอ£าง Window Object HTML การüหนด†าใหåใ}àบ property location หมายdงใ}หpาkางfนเปûยน ไปxงเŒาหมายใหå (redirect) ในScçอ https://www.google.com <script>     window.location = 'http://www.google.com' </script> xTitle of Webpage Hello!!
+
+-- Page 59 --
+52 Built-in Objects WARUWU@KKU ‣öวอ£าง Window Object HTML การüหนด†าใหåใ}àบ property location หมายdงใ}หpาkางfนเปûยน ไปxงเŒาหมายใหå (redirect) ในScçอ https://www.google.com <script>     window.location = 'http://www.google.com' </script> xTitle of Webpage Hello!! Google
+
+-- Page 60 --
+53 WARUWU@KKU References https://www.w3schools.com/js Flanagan, D. (2011). JavaScript: The Definitive Guide, O’Reilly. " O'Reilly Media, Inc.". œระEทธ ทองเคbอ. (2014). การKฒนาโปรแกรมประEกFบนเHบ. โรง7ม∂ค"งนานา2ทยา
+
+=== 04 - Javascript Part 02 (2).pdf ===
+PAGES 47
+
+-- Page 1 --
+ห"ก$ตรเทคโนโล-สารสนเทศ สาขา2ชา2ทยาการคอม7วเตอ9 2ทยา"ยการคอม7วเตอ9 มหา2ทยา"ยขอนแ;น ผศ.ดร.ว>ญญา วรรณศA SC362004 WEB APPLICATION PROGRAMMING  การเBยนโปรแกรมประEกFบนเHบ CP351203 WEB PROGRAMMING and APPLICATION  การเBยนโปรแกรมเHบและการประEกFใJ CP410805 WEB APPLICATION DEVELOPMENT  การKฒนาโปรแกรมประEกFบนเHบ 04 -  JavaScript Part 02
+
+-- Page 2 --
+Asynchronous JavaScript 01 Outline WARUWU@KKU ภาษา JavaScript DOM: Document Object Model JSON AJAX
+
+-- Page 3 --
+02 DOM: Document Object Model WARUWU@KKU ‣DOM Oอ built-in object P web browser สQางSนจากโUด HTML เVอโหลดหWาเHบXน ๆ โดย element Zาง ๆ ใน หWาเHบเพจจะ\ก]ดเAยงในโครงสQางแบบ^นไ` (Tree Structure) HTML <!doctype html> <html>     <head>         <title>Basic DOM example</title>         <meta charset="UTF-8">     </head>     <body>         <h1>Hello World!</h1>         <p>While this is a <b>very basic HTML  document</b>, it actually serves as a detailed  example of the document object model.</p>     </body> </html> document html body b head h1 ptitle meta
+
+-- Page 4 --
+03 DOM: Document Object Model WARUWU@KKU ‣เVอไaโครงสQาง^นไ`ของหWาเHบแbว E l e m e n t  O b j e c t  \กcวจะ\กเdบไePcวแปรfอ d o c u m e n t  gงh m e t h o d   iห>บเjาkง เAยกใJ แlไขmา เnอoใpเqดการปrsมKนt (interactive) uบvใJ document html body b head h1 ptitle meta element element element element element element element element element document domain title location getElementById() getElementsByName() getElementsByTagName() getElementsByClassName() querySelector() querySelectorAll() .. createElement()
+
+-- Page 5 --
+04 DOM: Document Object Model WARUWU@KKU ‣ผล"พtจากการเAยกใJ method getElementByXXX() จะไaผล"พtเwน Element Object ‣Element Object เwน object PเdบjอxลของแZละ element document html body b head h1 ptitle meta p innerHTML childElementCount firstChild style classname appendChild() insertBefore() setAttribute() getAttribute() .. โดยyวไป element object  จะh property Pคbายคzง uบ attribute ของ tag Xน ๆ โดย{วนมาก method ของ แZละ element จะคbายคzง uน
+
+-- Page 6 --
+05 DOM: Document Object Model WARUWU@KKU ‣เVอเjาkง HTML Element P^องการไa dจะสามารถ}งใp element Pห~บมาเปยนแปลงไa !"ง ห%า' (วอ+าง element.innerText เปยนjอความjางใน title.innerText = "สวัสดี" element.innerHTML เปยนไÄใน (ใ{ HTML Tag ไa) box.innerHTML = "<b>ตัวหนา</b>" element.insertAdjacentHTML(position, text)แทรก HTML โดย ไÅลบของเ;า เÇอกÉแหÑง (position) ไa 4 Öด: "beforebegin": ;อนเÜม (บนกáอง) "afterbegin": ห"งเÜม (ในกáอง บนàด) "beforeend": ;อนจบ (ในกáอง áางàด) "afterend": ห"งจบ (áางกáอง) list.insertAdjacentHTML("beforeend",  "<li>New</li>") element.classList ]ดการ Class CSS box.classList.add("active"); box.classList.remove("hide"); box.classList.toggle("dark"); element.setAttribute() เปยน Attribute (เâน src, href) img.setAttribute("src", "cat.jpg") element.style เปยน CSS โดยตรง (ใJ CamelCase) box.style.backgroundColor = "red"
+
+-- Page 7 --
+06 DOM: Document Object Model WARUWU@KKU HTML <!doctype html> <html>     <head>         <title>Basic DOM example</title>         <meta charset="UTF-8">     </head>     <body>         <p id="txt1">How are you?</p>         <p id="txt2">I'm Fine.</p>         <script>             let txt1 = document.getElementById("txt1")             alert(txt1.innerHTML)         </script>     </body> </html> การ.ง/า Element Object โดยใ4 ID document html bodyhead p ptitle meta xBasic DOM example
+
+-- Page 8 --
+06 DOM: Document Object Model WARUWU@KKU HTML <!doctype html> <html>     <head>         <title>Basic DOM example</title>         <meta charset="UTF-8">     </head>     <body>         <p id="txt1">How are you?</p>         <p id="txt2">I'm Fine.</p>         <script>             let txt1 = document.getElementById("txt1")             txt1.innerHTML = "How r u?"         </script>     </body> </html> การ.ง/า Element Object โดยใ4 ID document html bodyhead p ptitle meta xBasic DOM example How r u? I'm Fine
+
+-- Page 9 --
+07 DOM: Document Object Model WARUWU@KKU การ.ง/า Element Object โดยใ4 querySelector() และ querySelectorAll() ‣querySelector() จะห~บ element แรกPเจอ 1 element ‣querySelectorAll() จะห~บäก element Pเจอ ไaผล"พtเwน List ‣ระãkง element P^องการเjาkงaวย CSS Selector •Tag Selector: ไÅ^องhเคåองหมายçหWา เâน querySelector("p") •Class Selector: ใJเคåองหมาย . çหWา เâน querySelector(".className") •ID Selector: ใJเคåองหมาย # çหWา เâน querySelector("#idOfElement")
+
+-- Page 10 --
+08 DOM: Document Object Model WARUWU@KKU HTML <!doctype html> <html>     <head>         <title>Basic DOM example</title>         <meta charset="UTF-8">     </head>     <body>         <p id="txt1">How are you?</p>         <p id="txt2">I'm Fine.</p>         <script>             let txt1 = document.querySelector("#txt1")             txt1.innerHTML = "How r u?"         </script>     </body> </html> การ.ง/า Element Object โดยใ4 querySelector() document html bodyhead p ptitle meta xBasic DOM example How r u? I'm Fine
+
+-- Page 11 --
+09 DOM: Document Object Model WARUWU@KKU HTML <body>     <ul>         <li class="fruit">Apple</li>         <li class="fruit">Banana</li>         <li class="fruit">Orange</li>     </ul>     <script>         let list = document.querySelectorAll(".fruit")         console.log(list)     </script> </body> การ.ง/า Element Object โดยใ4 querySelectorAll() xBasic DOM example •Apple •Banana •Orange document html bodyhead ultitle meta lili li 
+
+-- Page 12 --
+10 DOM: Document Object Model WARUWU@KKU ‣ในกรéP^องการoงานuบสมาèกของ Array JS ES6 êกëยมใJíงìîน}งงาน Array เïองจากเBยนñนและóานòายกôาíงìîนแบบปกö JS let prices = [100, 200, 300]; prices.forEach((p) => {     console.log(`ราคา: ${p} บาท`); }); let salePrices = prices.map(p => p * 0.5); console.log(salePrices); let passed = prices.filter(p => p >= 150); console.log(passed); let found = prices.find(p => p >= 150); console.log(found); // ใช้แทน for loop ปกติ เพื่อสั่งงานทีละตัว // สร้าง Array ใหม่ที่สมาชิกถูกเปลี่ยนแปลงค่าแล้ว // สร้าง Array ใหม่ ที่เลือกเก็บค่า เฉพาะตัวที่ผ่านเงื่อนไข // คืนค่าข้อมูลเฉพาะตัวแรกที่เจอตามเงื่อนไข  การ.ง/า Element Object โดยใ4 querySelectorAll()
+
+-- Page 13 --
+11 DOM: Document Object Model WARUWU@KKU JS const fruits = document.querySelectorAll('.fruit') fruits.forEach(function(fruit) {     fruit.innerHTML = `<b>${fruit.innerHTML}</b>` }) HTML <body>     <ul>         <li class="fruit">Apple</li>         <li class="fruit">Banana</li>         <li class="fruit">Orange</li>     </ul> </body> xBasic DOM example •Apple  •Banana  •Orange การ.ง/า Element Object โดยใ4 querySelectorAll()
+
+-- Page 14 --
+12 DOM: Document Object Model WARUWU@KKU HTML <body>     <input type="button" onclick="renderProducts('all')" value="All Products">     <input type="button" onclick="renderProducts('Fruit')" value="Fruit">     <input type="button" onclick="renderProducts('Tech')" value="Tech">     <hr>     <div id="productContainer"></div> </body> xProduct Filter <div id="productContainer"></div> JS const productsMock = [             { name: "Apple", cat: "Fruit", price: 30, inStock: true },             { name: "Banana", cat: "Fruit", price: 20, inStock: false },             { name: "Mouse", cat: "Tech", price: 500, inStock: true },             { name: "Keyboard", cat: "Tech", price: 1200, inStock: true },             { name: "Orange", cat: "Fruit", price: 40, inStock: true }         ]
+
+-- Page 15 --
+xProduct Filter 13 DOM: Document Object Model WARUWU@KKU JS function renderProducts(category) {     const filteredProducts = productsMock.filter(product => {         if (category === 'all') return true         return product.cat === category     })     const htmlStrings = filteredProducts.map(product => {         const stockStatus = product.inStock ? "มีสินค้าพร้อมส่ง" : "สินค้าหมด"         return `<div>             <h2>${product.name}</h2>             <p>หมวดหมู่: ${product.cat}</p>             <p>ราคา: ${product.price} บาท</p>             <p>สถานะ: ${stockStatus}</p><br>         </div>`     })     document.getElementById('productContainer').innerHTML = htmlStrings.join('') } renderProducts('all')// iõญมาก pามÇมเAยกใJ
+
+-- Page 16 --
+Event WARUWU@KKU 
+
+-- Page 17 --
+14 Event WARUWU@KKU ‣หมายkง เหúการùZาง ๆ PเqดSนขณะPvใJû"งüหWาเHบXน ๆ อ† เâน •û"งโหลดหWาเHบ •çcว°ของเมา¢วางบนภาพ ห£อcว§กษร •กด•มใด ๆ บนแ¶น7มß •กรอกแบบฟอ9ม ‣การเ©ม attribute PSน^นaวย onXXX ภายใน tag HTML เâน onclick onload จากXนระãfอíงìîนของภาษา  JavaScript เVอเqดเหúการùตามPûหนดเแbว íงìîนPûหนดไeจะ\กเAยกใJแบบ§ตโนêö
+
+-- Page 18 --
+15 WARUWU@KKU 8อ Event !อ9บาย onclick oงานเVอค™กP element ondbleclickoงานเVอ double click P element onmousedownoงานเVอกด•มเมา¢P element onmouseupoงานเVอปáอย•มเมา¢P element onmousemoveoงานเVอcว°ของเมา¢เค´อน¨าน element onmouseoveroงานเVอcว°ของเมา¢อ†บน element onmouseoutoงานเVอcว°ของเมา¢ออกจาก element Mouse Event HTML <head>     <title>Basic DOM example</title>     <meta charset="UTF-8">     <script>         function showMessage(){             alert("Hello!")         }     </script> </head> <body>     <img src="fall.png" onmouseover="showMessage()"> </body> xBasic DOM example  xBasic DOM example
+
+-- Page 19 --
+16 WARUWU@KKU 8อ Event !อ9บาย onkeydownoงานขณะกด•มPแ¶น7มßลง onkeyup oงานขณะปáอย•มPแ¶น7มßSน Keyboard Event HTML <head>     <title>Basic DOM example</title>     <meta charset="UTF-8">     <script>         function changeImg(){             let img = document.getElementById("fall")             if(event.key=="a") img.src = "spring.png"             else img.src = "fall.png"         }     </script> </head> <body onkeydown="changeImg()">     <img src="fall.png" id="fall" width="300"> </body> xBasic DOM example  xBasic DOM example 
+
+-- Page 20 --
+17 WARUWU@KKU 8อ Event !อ9บาย onchange oงานเVอhการเปยนแปลงmาใน element onfocus oงานเVอhการ focus P element onblur oงานเVอเ™ก focus P element onsubmit oงานเVอ submit แบบฟอ9ม onreset oงานเVอกด•ม reset ของแบบฟอ9ม Form Event HTML <head>     <title>Basic DOM example</title>     <meta charset="UTF-8">     <script>         function showChange(){             let op = document.getElementById("color")             alert(op.value)         }     </script> </head> <body>     <select id="color" onchange="showChange()">         <option>Black</option>         <option>Blue</option>         <option>Yellow</option>     </select> </body> xBasic DOM example  xBasic DOM example
+
+-- Page 21 --
+18 Event Listener WARUWU@KKU ‣JavaScript ES6 ใJ method addEventListener() เnอ≠ก]บäก event ของvใJ ‣fอ event ใJfอเÆยวuนuบ HTML event attribute Pcด on ออก element.addEventListener("eventName", function) HTML <body>     <input type="button" id="myBtn" value="Click Here!"> </body> JS let btn = document.querySelector("#myBtn") btn.addEventListener("click", () => {     console.log("Button Clicked") }) // Arrow Function
+
+-- Page 22 --
+19 Event Listener WARUWU@KKU ‣äกคØงPเqด event Browser จะ{ง Object 7เศษ (êก∞งfอôา e ห£อ event) มาใp gงเdบรายละเ±ยดของ event Xนไe JS document.addEventListener("keydown", (e) => {     console.log(e)     console.log("ปุ่มที่กด:", e.key)     console.log("รหัสปุ่ม:", e.code) }) // ดูข้อมูลทั้งหมด  ‣e.target: element Pเwน^นเหúของ event ‣e.key: •ม≤≥บอ9ดP\กกด (เâน "Enter", "a") ‣e.preventDefault(): }งpามการoงานปกö ;ณสม?@ABญใน event
+
+-- Page 23 --
+HTML <form id="myForm" method="GET" action="server.php">     <input type="text" id="myInput">     <input type="submit" value="Submit"> </form> 20 Form & Prevent Default WARUWU@KKU ‣โดยปกöเVอกด•ม Submit ในฟอ9ม หWาเHบจะ refresh เสมอ gงoใpjอxลหายหมดและ JavaScript หEดoงาน ‣ใJ¥}ง e.preventDefault() Pบรรµดแรก เnอpามไÅใpหWาเHบโหลดใหÅ JS let form = document.querySelector("#myForm") form.addEventListener("submit", (e) => {     e.preventDefault()     let txtBox = document.querySelector("#myInput")     console.log("ข้อมูลที่กรอก:", txtBox.value)     txtBox.value = "" }); // ห้ามรีเฟรชหน้าจอ // ดึงค่าจาก textbox // ลบข้อความเดิมใน textbox ออก
+
+-- Page 24 --
+HTML <form id="colorForm">     <label for="colorInput">พิมพ์ชื่อสี:</label>     <input type="text" id="colorTxt">     <button type="submit">เพิ่มสี</button> </form> <ul id="colorList"></ul> 21 Example WARUWU@KKU JS xColor List // ดึง Element ที่เกี่ยวข้องมารอไว้ const form = document.getElementById('colorForm') const txt = document.getElementById('colorTxt') const list = document.getElementById('colorList') form.addEventListener('submit', function(event) {     event.preventDefault()     const colorName = txt.value.trim()     if (colorName !== "") {         const liHTML = `<li>${colorName}</li>`         list.insertAdjacentHTML('beforeend', liHTML)         txt.value = ''     } }) // ห้ามรีเฟรชหน้าจอ // ดึงค่าจาก textbox // สร้าง String ของ HTML ที่ต้องการแทรก // แทรกเข้าไปเป็นลูกคนสุดท้าย (ต่อท้าย)
+
+-- Page 25 --
+JSON: JavaScript Object Notation WARUWU@KKU 
+
+-- Page 26 --
+22 JSON: JavaScript Object Notation WARUWU@KKU ‣เwน∂ปแบบjอความมาตรฐานiห>บการแทนโครงสQางjอxล และใJiห>บแลกเปยนjอxลPhขนาดเ∏ก ‣ใJในการ{งjอxลระหôาง Client และ Server Web Server Mobile Application IoT Application Web Browser 
+
+-- Page 27 --
+23 WARUWU@KKU ‣JSON h∂ปแบบไวยากรùคbายคzงuบ object และ array ของ JavaScript HTML Object ของ JavaScript <script>     let person = {         id: 1,         fullname: "Mary Frost",         weight: 49.7,         action: ["move","stop"]      }     console.log(person.weight * 0.5) </script> JSON: JavaScript Object Notation
+
+-- Page 28 --
+24 WARUWU@KKU ‣jอxลPอ†ใน∂ปแบบ JSON จะอ†ใน∂ปแบบπ≠บของ∫ key และ value ‣key Oอ ¥อªบายjอxลPจะ^องSน^นและลงºายaวย " (double quotes) เสมอ ‣หากhหลาย∫ key และ value จะΩนaวยเคåองหมาย , (comma) ‣รายการ key และ value เwนรายการแบบไÅสนใจπ≠บ JSON {     "id": 1,     "fullname": "Mary Frost",     "weight": 49.7,     "action": ["move", "stop"],     "active": true } ชFด !อ9บาย Numberเwนชëด integer, ﬂoating point ห£อ double โดยไÅ^องใ{เคåองหมาย double  quotes ครอบ Stringจะ^องSน^นและลงºายaวยเคåองหมาย " double quotes Booleanmาเwน true ห£อ false null mาôาง ไÅ^องการûหนดmาใด ๆ ใpuบcวแปร JSON: JavaScript Object Notation
+
+-- Page 29 --
+25 WARUWU@KKU ‣Object Pเwน Array JSON {     "books": [         { "id": 1,           "language": "Java",           "edition": "third",           "author": "Herbert Schildt"         },         { "id": 2,           "language": "C++",           "edition": "second",           "author": "E.Balagurusamy"         }     ] } ‣Object æอน Object JSON {     "firstname": "Mary",     "lastname": "Frost",     "address": {         "zipCode": "40000",         "country": "Thailand",         "geolocation": {             "lat": 16.4331702,             "long": 102.8407473,         }     } } JSON: JavaScript Object Notation
+
+-- Page 30 --
+26 WARUWU@KKU ‣Object ในภาษา JavaScript สามารถแปลงเwน JSON String ไaaวย¥}ง JSON.stringify([ตัวแปรที่เป็น object หรือ  array]) จะใJเVอ^องการ{งjอxลไปøง server การแปลง JavaScript Object เIน JSON String HTML <script>     let person = {         id: 1,         fullname: "Mary Frost",         weight: 49.7,         action: ["move","stop"]      }     let jsonString = JSON.stringify(person)     console.log(jsonString) </script> JSON: JavaScript Object Notation
+
+-- Page 31 --
+27 WARUWU@KKU ‣String Pอ†ใน∂ปแบบ JSON สามารถแปลงเwน object เnอใpçไปใJงานZอaวย¥}ง JSON.parse() การแปลง JSON String ใJเIน Object HTML <script>     //String ในรูปแบบ JSON ก่อนถูกแปลง     let jsonString = '{"height": 1.9, "age":36, "eyeColor": "brown"}'     //แปลงเป็น Object     let person = JSON.parse(jsonString)     //นํา Object ไปใช้งาน     console.log("Age: " + person.age)     console.log("Eye Color: " + person.eyeColor) </script> JSON: JavaScript Object Notation
+
+-- Page 32 --
+28 WARUWU@KKU ‣Web API (Application Programming Interface) Oอ การเผยแพ¿jอxลPอ†ใน∂ปแบบมาตรฐาน ใpãคคลภายนอกสามารถ เjาkงไa ‣Website ม¡ษ≥เwนvóาน แZ Web API แอปพ™เคîนเwนvóาน ‣การเผยแพ¿jอxลใน∂ปแบบ Web API เwน2¬Pâวยใp√กKฒนาโปรแกรมสามารถçjอxลไปใJประมวลผล ห£อแสดงผลใน2¬ การของตนเองไa ‣∂ปแบบมาตรฐานในƒจÖ≈นไaแ; XML และ JSON การใ4งาน JSON KวมLบ Web API JSON: JavaScript Object Notation
+
+-- Page 33 --
+29 WARUWU@KKU ‣∆กษา∂ปแบบของ URL iห>บขอjอxล JSON จาก∫«อของ Web API ‣เBยน¥}งเnอ»งjอxล¨าน HTTP โดยภาษาโปรแกรมใด ๆ เâน JavaScript ใJ Fetch API ห£อ XMLHttpRequest ‣ใJ Library ห£อ¥}งâวยแปลง JSON ใpเwน Object แbวçไปประมวลผล ห£อแสดงผล ‣(วอ+าง: https://jsonplaceholder.typicode.com/users การใ4งาน JSON KวมLบ Web API JSON: JavaScript Object Notation 
+
+-- Page 34 --
+30 WARUWU@KKU ‣สามารถöด∞ง{วนเส…ม ห£อใJบ…การเHบไซFออนไลÀZาง ๆ เnอâวย]ด∂ปแบบของ JSON ใpóานไaòายSน JSON: JavaScript Object Notation 
+
+-- Page 35 --
+31 WARUWU@KKU ‣เBยน¥}งเnอóานjอxล JSON HTML <script>     async function getDataFromAPI(){         try {             let response = await fetch("https://jsonplaceholder.typicode.com/users")             let rawData = await response.text()             console.log(rawData)         } catch (err) {             console.error("เกิดข้อผิดพลาด:", err)         }     }     getDataFromAPI() </script> •¥}งไหน^องรอ ใpใ{ await ไejางหWา และíงìîนPครอบอ† ^องh ¥ôา async เสมอ •await Oอ การรอใpประมวลเสÃจ;อน •ใJ try { ... } catch (err) { ... } ครอบโUดไeเnอ ≠ก Error รวบยอดในกáองเÆยว JSON: JavaScript Object Notation 
+
+-- Page 36 --
+32 WARUWU@KKU ‣เBยน¥}งเnอóานjอxล JSON HTML <script>     async function getDataFromAPI(){         let response = await fetch("https://jsonplaceholder.typicode.com/users")         let rawData = await response.text()         let objectData = JSON.parse(rawData)         let ul = document.createElement("ul")         document.body.appendChild(ul)         for(i=0;i<objectData.length;i++){             let li = document.createElement("li")             li.innerHTML = `${objectData[i].name} (${objectData[i].company.name})`             ul.appendChild(li)         }     }     getDataFromAPI() </script> JSON: JavaScript Object Notation
+
+-- Page 37 --
+33 WARUWU@KKU ‣เBยน¥}งเnอóานjอxล JSON JSON: JavaScript Object Notation User and Company
+
+-- Page 38 --
+34 WARUWU@KKU ‣ใ{ async ไeหWาวงเ∏บของ Arrow Function ‣แบบเÕม: async function fetchUser() { ... } JS const fetchUser = async () => {     try {         let user = await loginUserAsync("somchai", "1234")         console.log("ได้ข้อมูล:", user)     } catch (err) {         console.error("เกิดข้อผิดพลาด:", err)     } } fetchUser() Async & Arrow Function JS const btn = document.querySelector("#myBtn") btn.addEventListener("click", async () => {     console.log("กําลังโหลด..")     let data = await getProfileAsync(99)     console.log("ดาวน์โหลดเรียบร้อย:", data) }) // นิยมใช้ใน Event Listener
+
+-- Page 39 --
+AJAX WARUWU@KKU 
+
+-- Page 40 --
+35 AJAX WARUWU@KKU ‣Ajax Œอมาจาก Asynchronous Javascript And XML ‣œดUนโดย Jesse James Garrett ใน– 2548 ‣—ด¥}งเnอใJในการ>บและ{งjอxลuบ Server แบบ Asynchronous ‣ไÅใâภาษาใหÅ แZเwนการçเทคโนโล-Phอ†แbวมาใJใน∂ปแบบใหÅ ‣เwน2¬ในการแลกเปยนjอxลuบ Server แbว§พเดทบาง{วนของหWาเHบโดยไÅ^องhการ reload เHบเพจ“งหWา MปแบบการNงOอPลของเRบ ‣แบบ Synchronous Oอ การ{งjอxลจาก web browser ไปประมวลผลP web server โดยP^องรอใp web server ประมวลผลจน เสÃจ;อน ”ง{งjอxลก"บไปøง web browser ‣แบบ A s y n c h r o n o u s Oอ การ{งjอxลไปประมวลผลøง w e b  s e r v e r  แbว w e b  s e r v e r  จะประมวลผล แbว{งก"บมาP w e b   browser gง‘ง web browser จะoงาน’นZอ โดยPไÅรอใp web server ประมวลผลเสÃจ
+
+-- Page 41 --
+36 AJAX WARUWU@KKU ‣HTML และ CSS ใJiห>บการแสดงผล ‣JavaScript iห>บการประมวลผลPเคåองของ Client ‣Document Object Model (DOM) iห>บเjาkงjอxลในเพจ ‣XMLHttpRequest object (XHR Object) iห>บóานห£อ{งjอxลไปøง server แบบ Asynchronous เทคโนโลU'ใ4KวมLบ AJAX JSON
+
+-- Page 42 --
+37 AJAX WARUWU@KKU 
+
+-- Page 43 --
+38 AJAX WARUWU@KKU VนตอนการสXางเRบ'Yการใ4 AJAX 1. สQาง{วนPเwนโUด html •ûหนด event ใpuบ tag PใpเÜม{งjอxลแบบ asynchronous •ûหนดÖดแสดงผลเVอไa>บการตอบก"บ เâน <div> <p> <li> <input> 2. สQาง{วนPเwนโUด javascript •เBยนโUดiห>บPใJในการ{งjอxล •เBยนโUดiห>บPใJในการ>บjอxล
+
+-- Page 44 --
+39 Example WARUWU@KKU HTML <button id="loadBtn">ดึงข้อมูล Pikachu</button> <div id="result">     <p>คลิกปุ่มเพื่อโหลดข้อมูล..</p> </div> xPikachu Data xPikachu Data หน้าเว็บไม่รีเฟรช
+
+-- Page 45 --
+JS document.getElementById('loadBtn').addEventListener('click', async () => {     const resultDiv = document.getElementById('result')     resultDiv.innerHTML = '<p>กําลังโหลดข้อมูล...</p>'     try {         const response = await fetch('https://pokeapi.co/api/v2/pokemon/pikachu')         if (!response.status === 200) {             throw new Error(`เกิดข้อผิดพลาด: ${response.status}`)         }         const data = await response.json();         resultDiv.innerHTML = `<p><strong>ชื่อ:</strong> ${data.name}</p>             <p><strong>น้ําหนัก:</strong> ${data.weight}</p>             <p><strong>ส่วนสูง:</strong> ${data.height}</p>             <img src="${data.sprites.front_default}" alt="Pikachu">`     } catch (error) {         console.error('เกิดข้อผิดพลาดในการดึงข้อมูล:', error)         resultDiv.innerHTML = '<p>ไม่สามารถดึงข้อมูลได้ โปรดลองอีกครั้ง</p>'     } }) 40 AJAX WARUWU@KKU // รับข้อมูล // แสดงผลใน HTML element ที่เตรียมไว้ // ส่งข้อมูล •สามารถใJ response.ok ไa  เïองจากจะhmาเwน 
+
+-- Page 46 --
+41 WARUWU@KKU HTTP Response Status Codes 
+
+-- Page 47 --
+42 WARUWU@KKU References https://www.w3schools.com/js Flanagan, D. (2011). JavaScript: The Definitive Guide, O’Reilly. " O'Reilly Media, Inc.". ¬ระEทธ ทองเค£อ. (2014). การKฒนาโปรแกรมประEกFบนเHบ. โรง7มßค"งนานา2ทยา
+
+=== 11 - CSS Part 02.pdf ===
+PAGES 91
+
+-- Page 1 --
+ห"ก$ตรเทคโนโล-สารสนเทศ สาขา2ชา2ทยาการคอม7วเตอ9 2ทยา"ยการคอม7วเตอ9 มหา2ทยา"ยขอนแ;น ผศ.ดร.ว>ญญา วรรณศA SC362004 WEB APPLICATION PROGRAMMING  การเBยนโปรแกรมประEกFบนเHบ CP351203 WEB PROGRAMMING and APPLICATION  การเBยนโปรแกรมเHบและการประEกFใJ CP410805 WEB APPLICATION DEVELOPMENT  การKฒนาโปรแกรมประEกFบนเHบ 11 - CSS Part 02
+
+-- Page 2 --
+01 Outline WARUWU@KKU Flexbox Bootstrap Responsive Web Design Font Awesome Google Fonts
+
+-- Page 3 --
+Flexbox WARUWU@KKU 
+
+-- Page 4 --
+01 WARUWU@KKU Flexbox ‣Flexible Box Layout Module หMอเAยกNน ๆ Pา Flexbox เQนเคRองTอUห>บการVหนดWปแบบขององXประกอบYาง ๆ บนหZาเHบ ‣การVหนดWปแบบ[วย Flexbox สามารถป>บขนาด (ความก]างและความ$ง) ใ^เหมาะสม_บ`นaPางในแกนabองการไ[ ‣ในการVหนดWปแบบ[วย Flexbox จะประกอบ[วย 2 eวนfอ Flex container และ Flex items property display value inline | block | run-in | flex | grid | flow | flow-root | list-item | table | table- row-group | table-header-group | table-footer-group | table-row | table-cell | table- column-group | table-column | table-caption | inline-block | inline-table | inline-flex  | inline-grid | contents | none ใ"ไ$%บ gก element ﬂex  item ﬂex  item ﬂex  item ﬂex  item ﬂex  item Flex Container
+
+-- Page 5 --
+02 WARUWU@KKU Flexbox style.css .box { color: white; } .box1 { background-color: red ; } .box2 { background-color: orange ; } .box3 { background-color: green ; } .box4 { background-color: teal ; } .box5 { background-color: purple ; } index.html <div id="container"> <div class="box box1">1</div> <div class="box box2">2</div> <div class="box box3">3</div> <div class="box box4">4</div> <div class="box box5">5</div> </div> Container Items Block Layout Mode 1 2 3 4 5
+
+-- Page 6 --
+03 WARUWU@KKU Flexbox style.css #container { display: flex;              border: 1px solid teal; } .box { color: white; } .box1 { background-color: red ; } .box2 { background-color: orange ; } .box3 { background-color: green ; } .box4 { background-color: teal ; } .box5 { background-color: purple ; } index.html <div id="container"> <div class="box box1">1</div> <div class="box box2">2</div> <div class="box box3">3</div> <div class="box box4">4</div> <div class="box box5">5</div> </div> Flex container Flex  items Flex Layout Mode 12345 ‣เhอVหนด Flex container แiว element Yาง ๆ aอjภายใน จะlกระmใ^เQน Flex items โดยnตโนop
+
+-- Page 7 --
+04 WARUWU@KKU Flexbox การ*หนด.ศทางของ Flex Items property flex-direction value row | column | row-reverse | column-reverse ใ"ไ$%บ Flex containers style.css #container { display: flex;              flex-direction: row;              border: 1px solid teal; } 12345 ‣ใJ property flex-direction เqอVหนดPา items ใน container จะlกrดเAยงในsศทางใด
+
+-- Page 8 --
+1 2 3 4 5 12345 05 WARUWU@KKU Flexbox การ*หนด.ศทางของ Flex Items style.css #container { display: flex;              flex-direction: row-reverse; } style.css #container { display: flex;              flex-direction: column; } 1 2 3 4 5 style.css #container { display: flex;              flex-direction: column-reverse; }
+
+-- Page 9 --
+06 WARUWU@KKU Flexbox Flexbox Terminology ‣ในการวางองXประกอบหZาเHบ[วย Flexbox จะไtuการvางwง[านบน xาง yาย ขวา  ‣Flexbox จะvางwงzงแกนห"ก (main axis) และแกน{ดส"บ (cross axis) |งจะ}งฉาก_บแกนห"ก ‣Uห>บภาษาaÄานในแนวนอน จะVหนด flex-direction เQน row |งแกนห"กจะเQนแนวนอน แกน{ดส"บจะเQนแนว}ง ﬂex container ﬂex item ﬂex item main axis main size main end main start cross axis cross size cross start cross end
+
+-- Page 10 --
+07 WARUWU@KKU Flexbox Flexbox Terminology ‣Uห>บภาษาaÄานในแนว}ง จะVหนด flex-direction เQน column |งแกนห"กจะเQนแนว}ง แกน{ดส"บจะเQนแนวนอน ﬂex container ﬂex item ﬂex item cross axis cross size cross end cross start main axis main size main start main end
+
+-- Page 11 --
+08 WARUWU@KKU Flexbox property flex-wrap value nowrap | wrap | wrap-reverse ใ"ไ$%บ Flex containers ‣โดยปกp items ใน flex container จะเAยงYอ_นตาม direction aVหนด ไtÅนบรรÇดใหt ‣สามารถใJ property flex-wrap เqอVหนดใ^ flex items lกแÉงออกเQนหลายบรรÇดตาม direction abองการ style.css #container { display: flex;              flex-direction: row;              flex-wrap: nowrap; } .box { width: 25%; } 12345678 
+
+-- Page 12 --
+1234 5678 910 09 WARUWU@KKU Flexbox 1234 5678 910 style.css #container { display: flex;              flex-direction: row;              flex-wrap: wrap; } .box { width: 25%; } style.css #container { display: flex;              flex-direction: row;              flex-wrap: wrap-reverse; } .box { width: 25%; }
+
+-- Page 13 --
+1 2 3 4 5 6 10 WARUWU@KKU Flexbox style.css #container { display: flex;              flex-direction: column;              flex-wrap: nowrap; } .box { width: 25%; } style.css #container { display: flex;              flex-direction: column;              flex-wrap: wrap; } .box { width: 25%; } 1 2 3 4 5 6 7 8 9 10
+
+-- Page 14 --
+11 WARUWU@KKU Flexbox property flex-flow value flex-direction flex-wrap (row nowrap) ใ"ไ$%บ Flex containers ‣เQน s h o r t h a n d  p r o p e r t y  เqอVหนด d i r e c t i o n  และการ w r a p  ของ f l e x  i t e m s  โดยระmÑาของ p r o p e r t y  flex- direction และ property flex-wrap ตามÖÜบ style.css #container {  display: flex;               height: 350px;               flex-flow: column wrap; } 1 2 3 4 5 6 7 8 9 10
+
+-- Page 15 --
+12 WARUWU@KKU Flexbox property justify-content value flex-start | flex-end | center | space-between | space-around ใ"ไ$%บ Flex containers ‣Ñาเáมbนของ item จะVหนดใ^vางwงขนาดจากเàอหาaอjภายใน Üงâนภายใน container oกจะu`นaPางอjเสมอ ‣property justify-content ใJในการVหนดWปแบบการแสดงผลของ items _บ`นaPาง การ4ดเ6ยง Items ในแกนห9ก 12345 main start main end style.css #container { display: flex;              justify-content: flex-start; } 
+
+-- Page 16 --
+12345 13 WARUWU@KKU Flexbox การ4ดเ6ยง Items ในแกนห9ก main start main end 12345 style.css #container { display: flex;              justify-content: flex-end; }  style.css #container { display: flex;              justify-content: center; } 
+
+-- Page 17 --
+12345 style.css #container { display: flex;              justify-content: space-between; } 12345 main start main end 14 WARUWU@KKU Flexbox การ4ดเ6ยง Items ในแกนห9ก style.css #container { display: flex;              justify-content: space-around; } 
+
+-- Page 18 --
+1 2 3 4 5 style.css #container { display: flex;              flex-direction: column;              justify-content: flex-end; }  main start main end 15 WARUWU@KKU Flexbox การ4ดเ6ยง Items ในแกนห9ก style.css #container { display: flex;              flex-direction: column;              justify-content: center; }  1 2 3 4 5
+
+-- Page 19 --
+1 2 3 4 5 1 2 3 4 5 style.css #container { display: flex;              flex-direction: column;              justify-content: space-between; }  main start main end 16 WARUWU@KKU Flexbox การ4ดเ6ยง Items ในแกนห9ก style.css #container { display: flex;              flex-direction: column;              justify-content: space-around; } 
+
+-- Page 20 --
+17 WARUWU@KKU Flexbox property align-items value flex-start | flex-end | center | baseline | stretch ใ"ไ$%บ Flex containers ‣หาก Flex container u direction เQน row แกน{ดส"บfอแนว}ง (บนลงxาง) หากu direction เQน column แกน{ด ส"บfอแนวนอน (yายไปขวา) การ4ดเ6ยง Items ในแกน:ดส9บ style.css #container { display: flex; height: 200px;              flex-direction: row;              align-items: stretch; }  12345 cross start cross end
+
+-- Page 21 --
+18 WARUWU@KKU Flexbox การ4ดเ6ยง Items ในแกน:ดส9บ style.css #container { display: flex; height: 200px;              flex-direction: row;              align-items: flex-start; }  12345 cross start cross end style.css #container { display: flex; height: 200px;              flex-direction: row;              align-items: flex-end; }  12345
+
+-- Page 22 --
+1 2345 19 WARUWU@KKU Flexbox การ4ดเ6ยง Items ในแกน:ดส9บ style.css #container { display: flex; height: 200px;              flex-direction: row;              align-items: center; }  12345 cross start cross end style.css #container { display: flex; height: 200px;              flex-direction: row;              align-items: baseline; } 
+
+-- Page 23 --
+20 WARUWU@KKU Flexbox การ4ดเ6ยง Items ในกร<4ดเ6ยงหลายบรร>ด property align-content value flex-start | flex-end | center | space-around | space-between | stretch ใ"ไ$%บ Flex containers แบบหลายบรรÇด ‣property align-content ใJในการVหนดWปแบบการแสดงผลของ i t e m s  _บ`นaPาง แYจะäงานãYอเhอ  items lกrดเAยงแบบหลายบรรÇดเåาâน style.css #container { display: flex; height: 350px;              flex-flow: row wrap;              align-content: stretch; } .box { width: 25%;} 
+
+-- Page 24 --
+21 WARUWU@KKU Flexbox การ4ดเ6ยง Items ในกร<4ดเ6ยงหลายบรร>ด align-content: flex-start;  align-content: flex-end;  align-content: center; align-content: space-between;  align-content: space-around;
+
+-- Page 25 --
+Responsive Web Design WARUWU@KKU 
+
+-- Page 26 --
+22 Responsive Web Design WARUWU@KKU ‣Responsive Web Design หMอ RWD fอการออกแบบaอçญาตใ^เHบไซFสามารถแสดงผล และäงาน_บหลาย ๆ èปกรêไ[อëาง คxอง{ว ‣ห"กการUíญของ Responsive Web Design fอ การใJ HTML aเหTอน_น URL เìยว_น แYสามารถแสดงผลบนgกèปกรê[วยWป แบบaแตกYาง_น โดยป>บWปแบบการแสดงผลใ^เîา_บขนาดของ`นaการแสดงผลหZาเHบ (viewport) เqอใ^ใJงานไ[ตามปกp 
+
+-- Page 27 --
+23 Responsive Web Design WARUWU@KKU 
+
+-- Page 28 --
+24 Responsive Web Design WARUWU@KKU ‣ใJWปแบบโครงสïางเHบauความเAยบñายมากaóด โดยออกแบบเáมbนaหZาจอTอòอ ‣ใJÑา CSS Property แบบ Relative (การvางwงจากÑาเáมbน) ‣ตรวจสอบหZาจอ[วย Media Query ‣ใJ CSS Framework aรอง>บ เôน Bootstrap หMอ Bulma แนวทางในการส@างเAบแบบ Responsive Web Design 
+
+-- Page 29 --
+25 Responsive Web Design WARUWU@KKU ‣Vหนดใ^ป>บ`นaการแสดงผลหZาเHบ (viewport)  ตามความก]างของèปกรêaใJในการเöดหZาเHบ ‣`นฐานของการสïางเHบในúจùûน ควรVหนดÑา meta üเสมอ เqอรอง>บหZาจอauความแตกYาง_น การ*หนด Tag <meta> index.html <head>     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5"> </head>
+
+-- Page 30 --
+26 Responsive Web Design WARUWU@KKU การ*หนด Tag <meta>  ตามÑาเáมbน การแสดงผลของ viewport จะป>บลงใ^เîา_บขนาดของหZาจอ †าVหนด tag <meta> eวนของ viewport  จะlกสïาง[วยขนาดเìยว_บ_บหZาจอ
+
+-- Page 31 --
+27 Responsive Web Design WARUWU@KKU การ*หนด Tag <meta> BณสมEF GอHบาย width ความก]างของèปกรê ระmÑาเQน{วเลข (ห°วย pixel) หMอใJ¢Pา "device-width" เqอใ^ใJความก]างของหZาจอ จ£งๆ (หากไtบอก Browser จะแสดงเหTอนหZาจอให§ปกp) height ความ$งของèปกรê ระmÑาเQน{วเลข (ห°วย pixel) หMอใJ¢Pา "device-height" เqอใ^ใJความ$งของหZาจอจ£งๆ initial-scale Vหนดการขยาย (zoom) หZาจอเhอuการเöดหZาเHบ Ñา 1.0 หมายzงไtbองขยาย minimum-scale Vหนดขอบเขต•óดในการขยาย หากuÑาเQน 1.0 ¶ใJจะไtสามารถขยายไ[ maximum-scale Vหนดขอบเขต$งóดในการขยาย หากuÑาเQน 1.0 ¶ใJจะไtสามารถขยายไ[ user-scalable Vหนดใ^¶ใJสามารถขยายหZาจอไ[หMอไt |งuÑาเQน yes หMอ no index.html <head>     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5"> </head>
+
+-- Page 32 --
+28 Responsive Web Design WARUWU@KKU ‣Vหนดห°วยของ Font เQน em แทน px การ*หนดขนาด:วIกษรแบบ Relative index.html <html> <head>   <style>      body     { font-size: 100%; }      .topic   { font-size: 2em;  }      .content { font-size: 1em;  }   </style> </head> <body>   <div class="topic">Topic 01</div>   <div class="content">Text Text Text Text Text Text Text Text Text Text Text Text</div> </body> </html> Vหนดใ^ßงเHบใJขนาดฟอนFuÑาเáมbนa 100% หากbองการใ^ฟอนFuขนาดเ©มจากขนาดเáมbน™เåา  ใ^ใJห°วย em แทน px เôน •2 em = 200% •1 em = 100%
+
+-- Page 33 --
+29 Responsive Web Design WARUWU@KKU ‣ภาพaแสดงบนเHบauขนาดหZาจอแตกYาง_นควรuการป>บขนาดภาพโดยVหนด¨ณสมûp CSS Üงü •Vหนด property width [วยÑา|งเQนเปอ9เ≠นF หมายzง แสดงภาพaความก]างเÆมจอ แØPาไฟ∞ภาพจ£งจะuขนาด ให§หMอเ±กกPาหZาจอ เôน การ*หนดขนาดKปภาพแบบ Relative style.css img { width: 100%; } •Vหนด p r o p e r t y  max-width [วยÑา|งเQนเปอ9เ≠นF หมายzง แสดงภาพaความก]างเÆมจอ แYความก]าง$งóด ไtเ≤นความก]างของไฟ∞ภาพจ£ง เôน ควรใJ max-width เqอ≥อง_นภาพขยายเ≤นขนาดของภาพจ£ง style.css img { max-width: 100%; }
+
+-- Page 34 --
+30 Responsive Web Design WARUWU@KKU การ*หนดขนาดKปภาพแบบ Relative style.css img { max-width: 100%; }
+
+-- Page 35 --
+Media Query WARUWU@KKU 
+
+-- Page 36 --
+31 Media Query WARUWU@KKU ‣Media Query fอ การตรวจสอบรายละเ¥ยดของèปกรêa¶ใJ ใJในการชมเHบไซF เôน ขนาด, resolution, color capabilities เQนbน ‣îอµลaไ[จาก Media query จะôวยใ^∂กKฒนาVหนดWปแบบ CSS aเหมาะ_บการแสดงผลไ[ CSS Media Query @media type and (feature: value) {     /* styles สําหรับการแสดงผลที่ตรงกับเงื่อนไขที่กําหนด */  } CSS Media Query @media screen and (orientation: landscape) {      body { background: skyblue; } } @media screen and (orientation: portrait) {     body { background: coral; } }   
+
+-- Page 37 --
+32 Media Query WARUWU@KKU ‣จาก{วอëาง หากหZาจอแสดงผลuขนาด 4 0 e m  หMอก]างกPา 4 0 e m  จะแสดง{วnกษรแบบ ' L o b s t e r '  หMอ c u r s i v e  f o n t   family เ∑องจากu`นaก]างเ∏ยงพอ ‣แYหากหZาจอuขนาดZอยกPา 40em จะแสดง{วnกษรแบบ Georgia หMอ serif font family แทน เ∑องจากหZาจอuขนาดเ±ก  การแสดงผลแบบ serif จะäใ^Äานไ[ñายกPาแบบ cursive CSS Media Query h1 { font-family: Georgia, serif; } @media screen and (min-width: 40em) {      h1 { font-family: 'Lobster', cursive; } }
+
+-- Page 38 --
+33 Media Query WARUWU@KKU BณสมEF (feature) GอHบาย width ความก]างของ`นaแสดงผล สามารถใJ min-width และ max-width ไ[ height ความ$งของ`นaแสดงผล สามารถใJ min-height และ max-height orientation Wปแบบการวาง`นaแสดงผลแบบแนว}ง (portrait) หMอแนวนอน (landscape) aspect-ratio πดeวนของ`นaแสดงผล โดย∫ความก]างหาร[วยความ$ง (width/height) เôน aspect-ratio: 16/9 color ขนาด bit ของªaèปกรêแสดงผล เôน color: 8 หมายzงèปกรêaแสดงผลอëางZอยแบบ 8-bit color monochrome ºนวนของ bit Yอ pixels ของèปกรêaแสดงผลแบบ monochrome resolution ความหนาแ°นของ pixels ของèปกรêแสดงผล
+
+-- Page 39 --
+34 Media Query WARUWU@KKU ‣การVหนดWปแบบ CSS ใ^_บหZาจอแYละขนาด äไ[ 2 2Ω ไ[แ; •แยกไฟ∞ CSS Uห>บแYละหZาจอ •รวมไฟ∞ CSS Uห>บgกหZาจอในไฟ∞เìยว แยกไฟP CSS QหRบแSละหUาจอ index.html <head>     <link rel="stylesheet" media="screen and (max-width: 480px)" href="smartphone.css">     <link rel="stylesheet" media="screen and (min-width: 481px)" href="desktop.css"> </head> ‣Vหนดไฟ∞ CSS smartphone.css ใ^_บèปกรêauความก]าง$งóด 480 pixel หMอZอยกPาâน ‣Vหนดไฟ∞ CSS desktop.css ใ^_บèปกรêauความก]าง•óด 481 pixel หMอมากกPาâน
+
+-- Page 40 --
+รวมไฟP CSS QหRบWกหUาจอในไฟPเXยว index.html <head>     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">     <style>     @media screen and (max-width: 480px) {         .guarantee { margin-left: 30px;                      font-size: 2em;                      color: green; }     }     @media  screen and (min-width: 481px) {         .guarantee { margin-left: 250px;                      color: blue; }     }     </style> </head> <body>     <div class="guarantee">Test text for content which the container's size larger than 480  pixels or not</div> </body> 35 Media Query WARUWU@KKU ใส Tag <meta> ดวย
+
+-- Page 41 --
+การ*หนด Media Query แบบYวง index.html <head>     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">     <style>         /* กําหนดรูปแบบของหน้าจอปกติ */         @media (min-width: 600px) and (max-width: 700px) {          /* กําหนดรูปแบบของหน้าจอ 600-700 pixel */         }         @media (min-width: 400px) and (max-width: 599.99px) {             /* กําหนดรูปแบบของหน้าจอ 400-600 pixel */         }         @media (max-width: 399.99px) {             /* กําหนดรูปแบบของหน้าจอที่ต่ํากว่า 400 pixel */         }     </style> </head> 36 Media Query WARUWU@KKU
+
+-- Page 42 --
+การ*หนด Breakpoints 37 Media Query WARUWU@KKU ‣การVหนด breakpoint fอ การVหนดเæอนไขaจะใJ media query เปøยนแปลง style ของหZาเHบ ‣เhอVหนดPา min-widht:800px ¿นหมายzง 800px fอ breakpoint aจะäใ^Wปแบบการแสดงผลเปøยนไป ‣โดยปกpoกจะVหนดตามขนาด`นฐานของแYละèปกรê เôน 320px Uห>บ smartphone 768px Uห>บ tablet https://www.screensize.io/devices.html
+
+-- Page 43 --
+38 Media Query WARUWU@KKU a breakpoint 480-pixel หมวดห¡ของïาน¬า เปøยนจากแบบรายการ เQนWปภาพ การสoครสมา√ก "Register" lกเ©มเîาใน navigation bar ทาง[านบน a breakpoint 501-pixel ¢Pา "Sell" กลายเQน "Sell on Etsy"  uหมวดห¡เ©มÅนaแถบ navigation bar ใbôอง¬นหา
+
+-- Page 44 --
+39 Media Query WARUWU@KKU a breakpoint 640-pixel Wปภาพ "How Etsy Works" และîอความ ƒายไปอj[านบนของหมวดห¡ïาน¬า และแสดงรายละเ¥ยดแทนaจะbองค≈ก "Learn how Esty words" เqอเîาชม
+
+-- Page 45 --
+40 Media Query WARUWU@KKU a breakpoint 910-pixel แถบ¬นหาlกƒายไปอjใน navigation bar ทาง[านบน max-width 1400 pixels a breakpoint 981-pixel ¢Pา "Cart" lกเ©มเîาไปในWปภาพ รถเ∆น«น¬าใน navigation bar รายการบนหมวดห¡ïาน¬าใbแถบ¬นหาแสดงเQนแบบเÆม
+
+-- Page 46 --
+41 Responsive Layout Patterns WARUWU@KKU ‣Luke Wroblewski ¶∫เสนอการออกแบบเHบ[วยแนว»ด " M o b i l e  F i r s t "  ∫เสนอการUรวจWปแบบการrดเAยง L a y o u t  ของเHบไซF แบบ responsive พบPาuWปแบบÜงü Mostly Fluid •ใJ single column Uห>บหZาจอขนาดเ±ก •Uห>บหZาจอขนาด…น ๆ จะใJการrดเAยงองXประกอบ…น ๆ aตามมา  aจะlกVหนดความก]าง$งóดเอาไ] เqอ≥อง_นไtใ^uความก]าง มากเ≤นไปจนเ≤นขนาด`นaแสดงผล
+
+-- Page 47 --
+42 Responsive Layout Patterns WARUWU@KKU Column Drop •จะส"บWปแบบการแสดงผลºนวนคอ"ม  โดยÅน_บ`นaแสดงผล aÀงPางอj  •หาก`นaPางไtเ∏ยงพอ ãจะ∫คอ"ม aไtสามารถแสดงผลไ[ลง มาแสดงผลa`นa[านxาง Layout Shifter •ออกแบบการแสดงผลโดยเฉพาะUห>บแYละขนาดหZาจอ •ใJเวลาในการออกแบบมากกPาแบบ…น ๆ แYWปแบบจะเหมาะสม _บแYละ`นaแสดงผลaไ[Vหนดไ]
+
+-- Page 48 --
+43 Responsive Layout Patterns WARUWU@KKU Tiny Tweaks •บางเHบไซFจะใJWปแบบ s i n g l e  c o l u m n  ในการแสดงผล แYจะ ป>บเปøยนการแสดงผลภายในแทน เôน `นaeวน{วnกษร Wปภาพ  aจะเQนWปแบบเฉพาะของแYละขนาด`นaแสดงผล Off Canvas •เQนการVหนดใ^แสดงผลบางeวนและหากbองการเîาzงเàอหา ของเàอaeวน…น จะbองuการïองขอ •เôน การเîาzงเมÃYาง ๆ ของ F a c e b o o k  aจะbองกดÕมเมÃ;อน Œงจะสามารถเîาzงบ£การเ©มเpมaไtแสดงในหZาห"กของ  smartphone ไ[
+
+-- Page 49 --
+Bootstrap WARUWU@KKU 
+
+-- Page 50 --
+44 Bootstrap WARUWU@KKU ‣Bootstrap fอ front-end framework aôวยใ^KฒนาเHบไซFรวมzงเHบไซFแบบ Responsive ไ[รวดเœว และñาย–งÅน โดย¶KฒนาเHบไซFสามารถใJ Bootstrap ไ[โดยไtuÑาใJ—าย ‣Bootstrap ประกอบ[วย template aเQน HTML และ CSS ขององXประกอบYาง ๆ บนหZาเHบไซF ßงการ rดWปแบบของบทความ แบบฟอ9ม ตาราง WปภาพYาง ๆ –งไปกPาâนÀงu plugin aเQน JavaScript เqอ ôวย“นวยความสะดวก¥ก[วย 
+
+-- Page 51 --
+45 Bootstrap WARUWU@KKU ‣ใ"งานไ$Zาย: สามารถใJงาน Bootstrap ไ[ เ∏ยงแÑuความ”`นฐานเ™ยว_บ HTML และ CSS ‣[BณสมEFการ4ดวางKปแบบ R e s p o n s i v e : B o o t s t r a p  สามารถôวยใ^rดวางหZาเHบในแบบ R e s p o n s i v e  ไ[ ñาย เqอเîาzงหZาเHบ‘านโทร’พ÷ แ◊บเ±ต และคอม7วเตอ9 ¥กßงÀงKฒนา[วยแนว»ด " M o b i l e - f i r s t "  |ง ÿดòอความเAยบñายในการออกแบบเQนห"ก¥ก[วย ‣สามารถใ"ไ$%บหลากหลาย web browser: Bootstrap5 สามารถใJงานไ[_บ web browser Ÿนใหtgก{ว เôน  Chrome, Firefox, Edge, Safari, และ O p e r a  หากbองการใ^ใJงานไ[_บ I E 1 1  จะbองก"บไปใJ B o o t s t r a p 4   หMอ Bootstrap3 ]อXของ Bootstrap
+
+-- Page 52 --
+46 Bootstrap WARUWU@KKU ‣สามารถเAยกใJ Bootstrap5 บนเHบไซFไ[ 2 2Ω ไ[แ; •เ⁄อมYอการใJงาน Bootstrap5 จาก CDN •Download Bootstrap5 จาก getbootstrap.com เ^ม_นใ" Bootstrap เ`อมSอการใ"งาน Bootstrap5 จาก CDN index.html <head>     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">     <!-- Latest compiled and minified CSS -->     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">     <!-- Latest compiled JavaScript -->     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script> </head> ใส Tag <meta> ดวย
+
+-- Page 53 --
+47 Bootstrap WARUWU@KKU Download Bootstrap5 จาก getbootstrap.com Download แลวไป import เขาไฟล HTML ตามปกติ
+
+-- Page 54 --
+48 Bootstrap WARUWU@KKU Containers Grid System Colors Tables Images Forms Buttons Navbar Documentation Tutorial
+
+-- Page 55 --
+49 Bootstrap: Containers WARUWU@KKU ‣Container lกใJเqอบรรùเàอหาหMอองXประกอบYาง ๆ ของเHบไซF แÉงออกเQน 2 "กษณะ (classes) ไ[แ; •Class .container เqอสïาง Responsive container aVหนดความก]างไ] •Class .container-fluid เqอสïาง container auความก]างแบบเÆม`นaแสดงผล Class .container index.html <div class="container">   <h1>My First Bootstrap Page</h1>   <p>This is some text.</p> </div> ความก]างของ c o n t a i n e r  จะเปøยนไปตามขนาด ของ`นaแสดงผล
+
+-- Page 56 --
+50 WARUWU@KKU Class .container-fluid index.html <div class="container-fluid">   <h1>My First Bootstrap Page</h1>   <p>This part is inside a .container-fluid class.</p>   <p>The .container-fluid class provides a full width container, spanning the entire width of the viewport.</p>      </div> ความก]างของ container จะขยายใ^เÆม`นaแสดงผลเสมอ Bootstrap: Containers
+
+-- Page 57 --
+51 WARUWU@KKU Responsive Containers index.html <div class="container pt-3">   <h1>Responsive Containers</h1>   <p>Resize the browser window to see the effect.</p> </div> <div class="container-sm border">.container-sm</div> <div class="container-md mt-3 border">.container-md</div> <div class="container-lg mt-3 border">.container-lg</div> <div class="container-xl mt-3 border">.container-xl</div> <div class="container-xxl mt-3 border">.container-xxl</div> สามารถใJ c l a s s  .container-sm|md|lg|xl|xxl เhอbองการสïาง  container แบบ responsive โดยขนาดของ container จะแตกYาง_นตามขนาด `นaแสดงผล Bootstrap: Containers
+
+-- Page 58 --
+52 Bootstrap: Grid System WARUWU@KKU ‣ระบบ G r i d  ของ B o o t s t r a p  จะใJ f l e x b o x  และอçญาตใ^หZาเHบสามารถแÉงไ[ 1 2  คอ"ม  โดยสามารถแÉงเQนคอ"ม  ëอย 12 คอ"ม  หMอrดก€มคอ"ม เîา[วย_นไ[ ‣ระบบ Grid üเQน responsive โดยแYละคอ"ม จะrดเAยงตามขนาด`นaแสดงผลโดยnตโนop 
+
+-- Page 59 --
+53 Bootstrap: Grid System WARUWU@KKU ‣ในการใJงาน คอ"ม จะlกบรรùใน container au class เQน row จากâนใ^เ©ม container aเQน class col เîาไปภายใน ‣หากu container aเQน class col 2 nนในห‹งแถว แYละคอ"ม จะuความก]างเQน 50% index.html <div class="container-fluid mt-3">   <h1>Three equal width columns</h1>   <p>Note: Try to add a new div with class="col" inside the  row class - this will create four equal-width columns.</p>   <div class="row">     <div class="col p-3 bg-primary text-white">.col</div>     <div class="col p-3 bg-dark text-white">.col</div>     <div class="col p-3 bg-primary text-white">.col</div>   </div> </div> 
+
+-- Page 60 --
+54 Bootstrap: Grid System WARUWU@KKU ‣สามารถใJงาน"กษณะ r esponsive column ไ[[วย .col-sm|md|lg|xl|xxl-XX Yาง ๆ โดย XX หมายzง ขนาดของ คอ"ม abองการ |งผลรวมของขนาดคอ"ม จะไtเ≤น 12  index.html <div class="container-fluid mt-3">   <h1>Two Unequal Responsive Columns</h1>   <p>Resize the browser window to see the effect.</p>   <p>The columns will automatically stack on top of each other when the screen is less than 576px wide.</p>   <div class="row">     <div class="col-sm-4 p-3 bg-primary text-white">.col</div>     <div class="col-sm-8 p-3 bg-dark text-white">.col</div>   </div> </div> 
+
+-- Page 61 --
+55 Bootstrap: Colors WARUWU@KKU ‣Bootstrap5 เตAยม class ของª{วnกษรYาง ๆ aÅน_บบ£บทของการใJงานไ] 9 ª index.html <div class="container mt-3">   <h2>Contextual Colors</h2>   <p>Use the contextual classes to provide "meaning through colors":</p>   <p class="text-muted">This text is muted.</p>   <p class="text-primary">This text is important.</p>   <p class="text-success">This text indicates success.</p>   <p class="text-info">This text represents some information.</p>   <p class="text-warning">This text represents a warning.</p>   <p class="text-danger">This text represents danger.</p>   <p class="text-secondary">Secondary text.</p>   <p class="text-dark">This text is dark grey.</p>   <p class="text-body">Default body color (often black).</p>   <p class="text-light bg-black">This text is light grey.</p>   <p class="text-white bg-black">This text is white.</p> </div> 
+
+-- Page 62 --
+56 Bootstrap: Colors WARUWU@KKU ‣สามารถใJ c l a s s  bg-contextual โดย contextual fอ บ£บทการใJงานªแบบYาง ๆ เqอVหนดª`นห"งของ e l e m e n t  อëางไร ãตาม class เหxาüไtuผล_บª{วnกษร index.html <div class="container mt-3">   <h2>Contextual Backgrounds</h2>   <p>Use the contextual background classes to provide  "meaning through colors".</p>   <div class="bg-primary p-3"></div>   <div class="bg-success p-3"></div>   <div class="bg-info p-3"></div>   <div class="bg-warning p-3"></div>   <div class="bg-danger p-3"></div>   <div class="bg-secondary p-3"></div>   <div class="bg-dark p-3"></div>   <div class="bg-light p-3"></div> </div> 
+
+-- Page 63 --
+57 Bootstrap: Colors WARUWU@KKU ‣หากbองการใ^ªของ{วnกษรป>บตามªของ`นห"ง สามารถใJ c l a s s  text-bg-contextual โดย contextual fอ บ£บทการใJ งานªแบบYาง ๆ โดย Boostrap จะป>บª{วnกษรใ^โดยnตโนop index.html <div class="container mt-3">   <h2>Background Color with Contrasting Text Color</h2>   <p class="text-bg-primary">This text is important.</p>   <p class="text-bg-success">This text indicates success.</p>   <p class="text-bg-info">This text represents some information.</p>   <p class="text-bg-warning">This text represents a warning.</p>   <p class="text-bg-danger">This text represents danger.</p>   <p class="text-bg-secondary">Secondary background color.</p>   <p class="text-bg-dark">Dark grey background color.</p>   <p class="text-bg-light">Light grey background color.</p> </div> 
+
+-- Page 64 --
+58 Bootstrap: Tables WARUWU@KKU ‣Bootstrap เตAยม class Uห>บป>บเปøยน"กษณะของตารางไ]หลายWปแบบ เôน •.table เQนตารางแบบ`นฐานauการเ©ม`นaขอบ[านใน (padding) และuเ›นแÉงแนวนอน •.table-striped เQนตารางa`นห"งของîอµลจะส"บªในแYละแถว •.table-bordered เQนตารางauเ›นขอบgก[าน •.table-hover เQนตารางaเhอ∫เมาﬁไปวาง จะแสดงเQนแถบªบนแถวîอµล •.table-dark เQนตารางa`นห"งเQนªTด •.table-borderless เQนตารางแบบไtuเ›นขอบ •สามารถใJ 2 class ﬂวม_นไ[ เôน .table-dark .table-striped เqอใ^ไ[ตารางau`นห"งเQนªTด และแถวของ îอµลแสดงแบบส"บªในแYละแถว
+
+-- Page 65 --
+59 Bootstrap: Tables WARUWU@KKU index.html <div class="container mt-3">   <h2>Bordered Table</h2>   <p>The .table-bordered class adds borders on all sides of the table and the cells:</p>               <table class="table table-bordered">     <thead><tr><th>Firstname</th><th>Lastname</th><th>Email</th></tr></thead>     <tbody>       <tr><td>John</td><td>Doe</td><td>john@example.com</td></tr>       <tr><td>Mary</td><td>Moe</td><td>mary@example.com</td></tr>       <tr><td>July</td><td>Dooley</td><td>july@example.com</td></tr>     </tbody>   </table> </div> ** ตองใส class table
+
+-- Page 66 --
+60 Bootstrap: Tables WARUWU@KKU 
+
+-- Page 67 --
+61 Bootstrap: Tables WARUWU@KKU ‣สามารถใJªตามบ£บท Uห>บßงตาราง (<table>) เฉพาะแถวîอµล (<tr>) หMอเฉพาะ cell îอµล (<td>) index.html <div class="container mt-3">   <h2>Table Head Colors</h2>   <p>You can use any of the contextual classes to only add a color to the table header:</p>   <table class="table">     <thead  class="table-success"><tr><th>Firstname</th><th>Lastname</th><th>Email</th></tr></thead>     <tbody>       <tr><td>John</td><td>Doe</td><td>john@example.com</td></tr>       <tr><td>Mary</td><td>Moe</td><td>mary@example.com</td></tr>       <tr><td>July</td><td>Dooley</td><td>july@example.com</td></tr>     </tbody>   </table> </div> 
+
+-- Page 68 --
+62 Bootstrap: Tables WARUWU@KKU ‣สามารถใJ class table-responsive ในกร‡aตารางuคอ"ม ºนวนมาก จะแสดง scrollbar เqอใ^สามารถ·îอµลในคอ"ม ‚าย ๆ ไ[ index.html <div class="container mt-3">   <h2>Responsive Table</h2>   <p>The .table-responsive class adds a scrollbar to the table when needed:</p>   <div class="table-responsive">     <table class="table table-bordered">       <thead>         <tr><th>#</th><th>Firstname</th><th>Lastname</th><th>Age</th><th>City</th><th>Country</th><th>Sex</th>           <th>Example</th>           ..           <th>Example</th></tr>       </thead>       <tbody>         <tr><td>1</td><td>Anna</td><td>Pitt</td><td>35</td><td>New York</td><td>USA</td><td>Female</td>           <td>Yes</td>           ..           <td>Yes</td></tr>       </tbody>     </table>   </div> </div> 
+
+-- Page 69 --
+63 Bootstrap: Images WARUWU@KKU ‣สามารถใJ class Yอไปü เqอแสดงกรอบของWปภาพ •.rounded ใJแสดงWปภาพแบบ„เหøยมขอบโ¬ง •.rounded-circle ใJแสดงWปภาพแบบวงกลม •.img-thumbnail ใJแสดงWปภาพUห>บภาพ {วอëางขนาดเ±ก (thumbnail) index.html <img src="img1.jpg" class="rounded" alt="Eiffel tower"> <img src="img2.jpg" class="rounded-circle" alt="City"> <img src="img3.jpg" class="img-thumbnail" alt="Bridge">
+
+-- Page 70 --
+64 Bootstrap: Images WARUWU@KKU ‣สามารถใJ class float-start และ float-end เqอrดWปภาพใ^อjใน‰แห°ง√ดyาย และ√ดขวาตามÖÜบ index.html <div class="container mt-3">   <h2>Aligning images</h2>   <p>Use the float classes to float the image to the left or to the right:</p>    <img src="paris.jpg" class="float-start" alt="Paris" width="304" height="236">    <img src="paris.jpg" class="float-end" alt="Paris" width="304" height="236">  </div> 
+
+-- Page 71 --
+65 Bootstrap: Images WARUWU@KKU ‣สามารถใJ class mx-auto (margin:auto) และ d-block (display:block) เqอrดWปภาพใ^อjใน‰แห°งÂงกลาง index.html <div class="container mt-3">   <h2>Centered Image</h2>   <p>Center an image by adding the utility classes .mx-auto (margin:auto) and .d- block (display:block) to the image:</p>    <img src="paris.jpg" class="mx-auto d-block" style="width:50%">  </div> 
+
+-- Page 72 --
+66 Bootstrap: Images WARUWU@KKU ‣สามารถใJ class img-fluid เqอVหนดใ^WปภาพเQนแบบ responsive โดยภาพจะu¨ณสมûp max-width: 100%; และ  height: auto; index.html <div class="container mt-3">   <h2>Image</h2>   <p>The .img-fluid class makes the image scale nicely to the parent element  (resize the browser window to see the effect):</p>   <img class="img-fluid" src="ny.jpg" alt="New York" width="1100" height="500">  </div> 
+
+-- Page 73 --
+67 Bootstrap: Forms WARUWU@KKU ‣สามารถใJ class form-control เqอเปøยน"กษณะของ input text element เôน <input> และ <textarea> ‣สามารถใJ class form-check-input เqอเปøยน"กษณะของ radio button และ checkbox ‣สามารถใJ class form-select เqอเปøยน"กษณะของ select menu (dropdown list) 
+
+-- Page 74 --
+68 Bootstrap: Forms WARUWU@KKU index.html <div class="container mt-3">   <h2>Stacked form</h2>   <form action="/action_page.php">     <div class="mb-3 mt-3">       <label for="email">Email:</label>       <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">     </div>     <div class="mb-3">       <label for="pwd">Password:</label>       <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">     </div>     <div class="mb-3">       <label for="email">ID:</label>       <select class="form-select">         <option>1</option>  <option>2</option>  <option>3</option>  <option>4</option>       </select>     </div>     <div class="form-check mb-3">       <label class="form-check-label">         <input class="form-check-input" type="checkbox" name="remember"> Remember me       </label>     </div>     <button type="submit" class="btn btn-primary">Submit</button>   </form> </div>
+
+-- Page 75 --
+69 Bootstrap: Forms WARUWU@KKU index.html <div class="container mt-3">   <h2>Inline Forms</h2>   <p>If you want your form elements to appear side by side, use .row and .col:</p>   <form>     <div class="row">       <div class="col">         <input type="text" class="form-control" placeholder="Enter email" name="email">       </div>       <div class="col">         <input type="password" class="form-control" placeholder="Enter password" name="pswd">       </div>     </div>   </form> </div> 
+
+-- Page 76 --
+70 Bootstrap: Buttons WARUWU@KKU ‣Bootstrap5 เตAยม c l a s s  btn และ btn-contextual โดย contextual fอ บ£บทการใJงานªแบบYาง ๆ เqอเปøยน "กษณะของÕม โดยสามารถใJไ[_บ <a>  <button> และ <input> index.html <div class="container mt-3">   <h2>Button Styles</h2>   <button type="button" class="btn">Basic</button>   <a href="#" class="btn btn-primary">Primary</a>   <input type="button" class="btn btn-secondary" value="Secondary">   <button type="button" class="btn btn-success">Success</button>   <button type="button" class="btn btn-info">Info</button>   <button type="button" class="btn btn-warning">Warning</button>   <button type="button" class="btn btn-danger">Danger</button>   <button type="button" class="btn btn-dark">Dark</button>   <button type="button" class="btn btn-light">Light</button>   <button type="button" class="btn btn-link">Link</button>       </div> 
+
+-- Page 77 --
+71 Bootstrap: Buttons WARUWU@KKU ‣สïางÕมแบบเ›นขอบ และเpมª`นห"งเhอ∫เมาﬁไปวาง[วยการเ©ม class btn-outline-contextual ‣เปøยนขนาดÕม[วยการเ©ม class .btn-lg และ .btn-sm index.html <div class="container mt-3">   <h2>Button Outline</h2>   <button type="button" class="btn btn-outline-primary">Primary</button>   <button type="button" class="btn btn-outline-secondary btn-sm">Secondary</button>   <button type="button" class="btn btn-outline-success btn-lg">Success</button> </div> 
+
+-- Page 78 --
+72 Bootstrap: Navbar WARUWU@KKU ‣สามารถสïางÕม N a v i g a t i o n  B a r  ( N a v b a r )  aสามารถขยายหMอëอไ[ตามขนาด`นaแสดงผล[วย c l a s s  navbar จากâนตาม [วย class .navbar-expand-xxl|xl|lg|md|sm ‣สามารถสïางรายการ link บน navbar ไ[[วยการเ©ม class navbar-nav บน tag <ul> หMอ <div> ‣เ©ม link แYละnนการเ©ม class nav-item บน tag <li> จากâนภายใน <li> ใ^เ©ม <a> au class nav-link index.html <nav class="navbar navbar-expand-sm bg-light">   <div class="container-fluid">     <ul class="navbar-nav">       <li class="nav-item"><a class="nav-link" href="#">Link 1</a></li>       <li class="nav-item"><a class="nav-link" href="#">Link 2</a></li>       <li class="nav-item"><a class="nav-link" href="#">Link 3</a></li>     </ul>   </div> </nav> 
+
+-- Page 79 --
+73 Bootstrap: Navbar WARUWU@KKU ‣สามารถเปøยนª`นห"ง navbar [วย class bg-contextual ‣class bg-light จะäใ^{วnกษรภายใน navbar เQนªÊ class bg-dark จะäใ^{วnกษรภายใน navbar เQนªขาว index.html <nav class="navbar navbar-expand-sm bg-dark navbar-dark">   <div class="container-fluid">     <ul class="navbar-nav">       <li class="nav-item">           <a class="nav-link active" href="#">Active</a>       </li>       <li class="nav-item">           <a class="nav-link" href="#">Link</a>       </li>       <li class="nav-item">           <a class="nav-link" href="#">Link</a>       </li>       <li class="nav-item">           <a class="nav-link disabled" href="#">Disabled</a>       </li>     </ul>   </div> </nav>
+
+-- Page 80 --
+Font Awesome WARUWU@KKU 
+
+-- Page 81 --
+74 WARUWU@KKU ‣ห"งจากสoครสมา√ก สามารถใJงานไ[ 2 Wปแบบ fอ download ไ]ในเคRอง (localhost) หMอใJ‘าน Kits (CDN) [Link] Font Awesome 
+
+-- Page 82 --
+75 WARUWU@KKU ‣กร‡ download ไ]ในเคRอง (localhost)  ใ^ download และ∫ไฟ∞ใน folder css  และ w e b f o n t s  มาไ]ใน‰แห°งa bองการ  Font Awesome Download นำทั้ง 2 folders ไปยัง folder ที่ตองการ
+
+-- Page 83 --
+76 WARUWU@KKU ‣จากหZา¬นหา (https://fontawesome.com/icons) เÁอก icon abองการใJ นำโคดไปแทรกไวตามที่ตองการ Font Awesome
+
+-- Page 84 --
+77 WARUWU@KKU Font Awesome index.html <html> <head>        <title>Font Awesome</title> <link href="css/fontawesome.css" rel="stylesheet">   <link href="css/brands.css" rel="stylesheet">   <link href="css/solid.css" rel="stylesheet"> </head> <body>     <div>This is icon "user" from Font Awesome: <i class="fa-solid fa-user"></i></div> </body> </html> xFont Awesome ‣vางwงไปÀงไฟ∞ css aจะbองใJ (Uห>บแบบฟAจะสามารถใJ icon ไ[แÑแบบ brands และ solid) จากâนเAยกใJ icon abองการ
+
+-- Page 85 --
+78 WARUWU@KKU ‣Uห>บแบบ Kits สามารถแËไข หMอเ©ม Kits ไ[ สรางใหม เลือกรูปแบบ บันทึก Font Awesome
+
+-- Page 86 --
+นำโคดไปแทรกไวใน Tag <head> 79 WARUWU@KKU Font Awesome
+
+-- Page 87 --
+80 WARUWU@KKU Font Awesome index.html <html> <head>        <title>Font Awesome</title> <script src="https://kit.fontawesome.com/XXXXXXXXXX.js" crossorigin="anonymous"></script> </head> <body>     <div>This is icon "user" from Font Awesome: <i class="fa-solid fa-user"></i></div> </body> </html> xFont Awesome ‣∫ code eวนของ Kit มาใeไ]ใน tag <head> จากâนเAยกใJ icon abองการ
+
+-- Page 88 --
+Google Fonts WARUWU@KKU 
+
+-- Page 89 --
+81 WARUWU@KKU ‣Google Fonts (https://fonts.google.com) เQนบ£การจาก Google aอçญาตใ^ใJ fonts แบบYาง ๆ ไ[ฟA Google Fonts ชื่อ font
+
+-- Page 90 --
+82 WARUWU@KKU index.html <html> <head> <title>Google Fonts</title> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mali"> <style>      body { font-family: "Mali", sans-serif; } </style> </head> <body>     <div>แสดง Font ภาษาไทยจาก Google Fonts</div> </body> </html> xGoogle Fonts ‣vางwงไปÀงไฟ∞ css aจะbองใJ‘าน Google Fonts API จากâนVหนด font-family [วย CSS Google Fonts API ชื่อ font ชื่อ font (มี double quotes) Google Fonts
+
+-- Page 91 --
+WARUWU@KKU References 83 Robbins, J. N. (2012). Learning web design: A beginner's guide to HTML, CSS, JavaScript,  and web graphics. " O'Reilly Media, Inc.". https://getbootstrap.com/docs/5.3/getting-started/introduction https://www.w3schools.com/bootstrap5/index.php https://fontawesome.com/docs https://fonts.google.com
+
+=== 10 - CSS Part 01.pdf ===
+PAGES 96
+
+-- Page 1 --
+ห"ก$ตรเทคโนโล-สารสนเทศ สาขา2ชา2ทยาการคอม7วเตอ9 2ทยา"ยการคอม7วเตอ9 มหา2ทยา"ยขอนแ;น ผศ.ดร.ว>ญญา วรรณศA SC362004 WEB APPLICATION PROGRAMMING  การเBยนโปรแกรมประEกFบนเHบ CP351203 WEB PROGRAMMING and APPLICATION  การเBยนโปรแกรมเHบและการประEกFใJ CP410805 WEB APPLICATION DEVELOPMENT  การKฒนาโปรแกรมประEกFบนเHบ 10 - CSS Part 01
+
+-- Page 2 --
+CSS Selector Conflicting Styles: The Cascade 01 Outline WARUWU@KKU การใJงาน CSS ระบบหNวยOดของ CSS CSS PใJQดการRปแบบSวTกษร Element Box Floating และ Positioning
+
+-- Page 3 --
+02 Cascading Style Sheets WARUWU@KKU ‣A language for describing web pages. It is not a programming language, but a  markup language. ‣ภาษาPใJWห>บอXบายหYาเHบ ไ[\อ]าเ^นภาษาโปรแกรมแ_เ^น ภาษา Markup ‣A language for describing the style of an HTML document. ‣ภาษาPใJWห>บอXบาย"กษณะของเอกสาร HTML The purpose of HTML is to add meaning and structure to the content The purpose of CSS is to deﬁne the presentation of content
+
+-- Page 4 --
+03 Cascading Style Sheets WARUWU@KKU ‣Cascading Style Sheets ห`อ CSS aอ มาตรฐานของ W3C PใJWห>บcยามRปแบบการdเสนอ เอกสารPeกเBยนfนgวยภาษา HTML และ XML ‣การdเสนอ หมายhง RปแบบของเอกสารPจะeกแสดงใjkบlใJ ไ[]าจะเ^นการแสดงmานหYาจอ คอม7วเตอ9 หYาจอโทรnพp การ7มqออกจากเคrอง7มq ห`อแsกระtงการuานvอwลโดยmาน โปรแกรมuานหYาจอ ‣CSS เ^นภาษาPxไวยากรyของภาษาแยก_างจากภาษาzน ‣การใJ C S S  kบเอกสาร H T M L  จะ{วยใjการQดRปแบบการdเสนอvอwล การQดหYาเอกสาร|าย  และสวยงามมาก}งfน 
+
+-- Page 5 --
+04 Cascading Style Sheets WARUWU@KKU 
+
+-- Page 6 --
+การใ%งาน CSS WARUWU@KKU 
+
+-- Page 7 --
+05 การใ%งาน CSS WARUWU@KKU ‣ส~างเอกสาร HTML index.html <!DOCTYPE html > <html>     <head>     <meta charset="utf-8">     <title>CSS</title>     </head>     <body>     <h1>Title of topic</h1>     <p>This is text in paragraph.</p>     </body> </html> xCSS 
+
+-- Page 8 --
+06 การใ%งาน CSS WARUWU@KKU ‣เม"กษณะ (style) ใjkบ HTML element gวย Style sheet  ‣Style sheet สามารถเม"กษณะgวยRปแบบของกฎ_าง ๆ ( s t y l e  r u l e s )  โดยระÉ]า e l e m e n t  แ_ละแบบจะeกdมา แสดงอÑางไร index.html <style>     h1{ color: green; }     p{         font-size: large;         font-family: sans-serif;     } </style> xCSS 
+
+-- Page 9 --
+07 การใ%งาน CSS WARUWU@KKU ‣ไวยากรyPWÖญของ CSS แÜงออกเ^น 2 áวน  •Selector aอ áวนPใJระÉ]า "กษณะ_อไปà จะeกxผลkบ elements ใด •Declaration aอ เ^นáวนPระÉ"กษณะการแสดงผล âงประกอบgวย property และ value xCSS index.html Selector Property Value <style>     h1{ color: green; }     p{         font-size: large;         font-family: sans-serif;     } </style>
+
+-- Page 10 --
+08 การใ%งาน CSS WARUWU@KKU ‣สามารถประกาศ declaration ภายในแ_ละ selector ไgมากก]า 1 rule ‣แ_ละ declaration äนãดPเคrองหมาย semi-colon ‣CSS จะไ[สนใจåนP]าง (whitespaces) และการfนบรรçดให[ xCSS index.html Declaration Block 1 declaration ending <style>     h1{ color: green; }     p{         font-size: large;         font-family: sans-serif;     } </style>
+
+-- Page 11 --
+09 การใ%งาน CSS WARUWU@KKU ‣Property aอ éวใจWÖญของ CSS โดยแ_ละ element จะx property เ^นของSวเอง ‣èาของ V a l u e  จะfนอêkบ p r o p e r t y  โดยบาง p r o p e r t y  อาจจะxหลาย v a l u e  Pëนgวย{อง]าง ( w h i t e s p a c e s )  ห`อ เคrองหมาย , (comma) xCSS index.html Property Value <style>     h1{ color: green; }     p{         font-size: large;         font-family: sans-serif, Tahoma;         border: 1px solid blue;     } </style>
+
+-- Page 12 --
+10 การใ%งาน CSS WARUWU@KKU ‣สามารถd style sheet ไปใJkบเอกสาร HTML ไg 3 Rปแบบ: •External style sheets index.html <!DOCTYPE html > <html>     <head>     <meta charset="utf-8">     <title>CSS</title>     <link rel="stylesheet" type="text/css" href="style.css">     </head>     <body>     <h1>Title of topic</h1>     <p>This is text in paragraph.</p>     </body> </html> style.css h1{ color: green; } p{     font-size: large;     font-family: sans-serif, Tahoma; } •ไฟì style sheet ใJนามสîล *.css •vอwลภายในไฟìจะเ^นเฉพาะไวยากรy css เñาóน  (ไ[x HTML element) •สามารถdไปใJไgkบเอกสาร H T M L  หลายไฟìP òองการ style แบบเôยวkน <style>     @import url(style.css);  </style> OR
+
+-- Page 13 --
+11 การใ%งาน CSS WARUWU@KKU ‣สามารถd style sheet ไปใJkบเอกสาร HTML ไg 3 Rปแบบ: •Internal style sheets/Embedded style sheets index.html <!DOCTYPE html > <html>     <head>     <meta charset="utf-8">     <title>CSS</title> <style>     h1{ color: green; }     p{  font-size: large;         font-family: sans-serif; } </style>     </head>     <body>     <h1>Title of topic</h1>     <p>This is text in paragraph.</p>     </body> </html> •Style sheet จะeกวางไöใน style element •SวกฎจะeกใJภายในเอกสารPวางกฎไöเñาóน •õกจะวาง style sheet ไöPáวน head element ของ เอกสาร
+
+-- Page 14 --
+12 การใ%งาน CSS WARUWU@KKU ‣สามารถd style sheet ไปใJkบเอกสาร HTML ไg 3 Rปแบบ: •Inline styles index.html <!DOCTYPE html > <html>     <head>     <meta charset="utf-8">     <title>CSS</title>     </head>     <body>     <h1 style="color:green;">Title of topic</h1>     <p style="font-size: large; font-family: sans-serif;">This is text in paragraph.</p>     </body> </html> •Property kบ value จะeกเBยนเ^นèาของ attribute  style •จะxผลเฉพาะ element PeกระÉใน attribute style •ควรหúกเùยงการใJ inline styles ใjมากPãด เöนแ_กรûüเ^น
+
+-- Page 15 --
+13 การใ%งาน CSS WARUWU@KKU ‣การ†หนด"กษณะของ element จะxผล_อ element Pอêภายในของ element óน ๆ gวย index.html <!DOCTYPE html > <html>     <head>     <meta charset="utf-8">     <title>CSS</title>     </head>     <body>         <h1>Title of topic</h1>         This is <em>text out of paragraph</em> element.         <p>This is <em>text in paragraph.</em></p>     </body> </html> style.css h1{ color: green; } p{     font-size: large;     font-family: sans-serif, Tahoma; } xCSS em element °บทอด style จาก p element
+
+-- Page 16 --
+14 การใ%งาน CSS WARUWU@KKU ‣¢งóน£งควร§ความเvาใจkบโครงส~างของเอกสาร HTML เ•อPจะไgระÉการใJ style ไgอÑางeกòอง ‣โครงส~างเอกสาร HTML อêในRปแบบ¶¢บßน (Hierarchy) âงสามารถแสดงใjอêในRปของแผนภาพòนไsไg descendants child parent siblings
+
+-- Page 17 --
+15 การใ%งาน CSS WARUWU@KKU ‣หาก†หนด style ของ font ใjkบ p element กฎจะeก†หนดใjkบ®ก ๆ p element (และ element Pอêภายใò p element)  ในเอกสาร ‣โดยจะไ[xผลkบ img element Pเ^นRปภาพ เ©องจาก img element ไ[x property Pเ™ยวvองkบ font 
+
+-- Page 18 --
+16 การใ%งาน CSS WARUWU@KKU ‣สามารถใJ´ณสม¨≠ในการ°บทอด"กษณะ เ•อวางแผนการแสดงผลของแ_ละ element ไg ‣เ{น หากòองการใjSวTกษรของÆงหYาเHบเพจแสดงเ^นØ∞เ±น ≤จะสามารถระÉ style ไöP body element ไg
+
+-- Page 19 --
+CSS Selectors WARUWU@KKU 
+
+-- Page 20 --
+index.html <style>     h1{          border: 1px solid blue;     } </style> 17 CSS Selectors WARUWU@KKU ‣†หนดการแสดงผลของ tag gวยการใJ≥อ tag เ^น seletor ‣HTML element ของ tag P†หนดในÆงเอกสารจะแสดงผลตาม declaration rules  Tag Selectors xCSS h1 element h1 element
+
+-- Page 21 --
+index.html <style>     h1, h2, p, em{          border: 1px solid blue;     } </style> 18 WARUWU@KKU ‣เ^นการ†หนด style ใjkบก¥มของ tag PระÉไö โดยสามารถ†หนดก¥มไggวยการเ≥อมgวยเคrองหมาย , (comma) ‣โดย element Pตรงkบเµอนไขของก¥ม จะeกแสดงผลโดยใJ declaration rules เôยวkน Group Selectors xCSS h1 element em element p element, em element p element CSS Selectors
+
+-- Page 22 --
+index.html <h1>Title of topic</h1> This is <em>text out of paragraph</em> element. <p>This is <em>text in paragraph</em>.</p> <p id="add_text">This is text in "add_text" paragraph.</p> 19 WARUWU@KKU ‣เ^นการ†หนด style ใjkบเ∂าหมายPอêภายใน tag óน ๆ (Descendent element) โดยการระÉ  parent element จากóนëน gวย{อง]าง ตามgวย descendent element Descendant Selectors xCSS CSS Selectors style.css p em { border: 1px solid blue; }
+
+-- Page 23 --
+index.html <p>This is      <a href="link.html">         a LINK text in <em>paragraph</em>     </a>     . But this is <em>outside</em> </p> 20 WARUWU@KKU ‣เ^นการ†หนด s t y l e  Pค∑ายkบ d e s c e n d e n t  s e l e c t o r  เ∏ยงแ_เ∂าหมายจะeกระÉP e l e m e n t  Pอêภายในของ p a r e n t   element โดยตรงเñาóน (ไ[vาม¶¢บπน) ‣ëนระห]าง parent element และ child element gวยเคrองหมาย > (greater-than sign) Child Selectors xCSS CSS Selectors style.css p > em {font-weight: bold;}
+
+-- Page 24 --
+index.html <body>     <h1>Title of topic</h1>     <p>This is text in paragraph.</p>     <p id="add_text">This is text in "add_text"  paragraph.</p> </body> 21 WARUWU@KKU ‣id attribute เ^นการระÉhง element ภายในเอกสาร HTML Pxเ∏ยงห∫งเôยวในหYาเอกสาร ‣id attribute สามารถใJไgkบ®ก ๆ element ‣ªญ"กษyPใJระÉhง element Px id attribute ในหYาเอกสาร aอ # (octothorpe) แ∑วตามgวยèาของ id Pòองการ ID Selectors xCSS CSS Selectors
+
+-- Page 25 --
+index.html <body>     <h1>Title of topic</h1>     <p>This is text in paragraph.</p>     <p id="add_text">This is text in "add_text"  paragraph.</p> </body> 22 WARUWU@KKU ID Selectors xCSS CSS Selectors style.css h1{ color: green; } p{    font-size: large;    font-family: sans-serif; } #add_text{ color: blue; }
+
+-- Page 26 --
+index.html <body>     <h1>Title of topic</h1>     <p>This is text in paragraph.</p>     <p id="add_text">This is text in "add_text"  <em>paragraph</em>.</p> </body> 23 WARUWU@KKU ID Selectors xCSS CSS Selectors style.css h1{ color: green; } p{    font-size: large;    font-family: sans-serif; } #add_text{ color: blue; } #add_text em{ color: red; }
+
+-- Page 27 --
+index.html <body>     <p class="odd">1</p><p class="even">2</p>     <p class="odd">3</p><p class="even">4</p>     <em class="odd">number 5</em> </body> 24 WARUWU@KKU ‣class attribute เ^นการระÉhงก(มของ elements ภายในเอกสาร HTML PใJ≥อก¥มเôยวkน ‣1 element สามารถxไgหลาย class (อêไgหลายก¥ม) ‣ªญ"กษyPใJระÉhง class attribute aอ . (period) แ∑วตามgวย≥อ class Class Selectors xCSS CSS Selectors style.css .odd{ color: blue; } .even{ color: red; }
+
+-- Page 28 --
+index.html <body>     <p class="odd">1</p><p class="even">2</p>     <p class="odd">3</p><p class="even special">4</p>     <em class="odd">number 5</em> </body> 25 WARUWU@KKU Class Selectors xCSS CSS Selectors style.css p.odd{ color: blue; } .even{ color: red; } .special{ border: 1px solid blue; }
+
+-- Page 29 --
+26 WARUWU@KKU ‣เ^นการระÉhง elements ภายในเอกสาร HTML Pxสถานะ (status) ตรงkบP†หนด ‣ªญ"กษyPใJระÉhงสถานะของ element aอ : (colon) แ∑วตามgวยสถานะของ element Pseudo-Class Selectors CSS Selectors a:linklink Pºงไ[eก click a:link{ color:blue; } a:hoverเΩอd mouse มาวางอêบน link  a:hover{      color:blue;     background-color:yellow; } a:activeเΩอd mouse มาวางอêบน link แ∑วคæก a:active{      color:red;     background-color:yellow; } a:visitedห"งจาก link eก click แ∑ว a:visited{ color:maroon; } xCSS •Past •Present •Click! •Future 
+
+-- Page 30 --
+Conflicting Styles: The Cascade WARUWU@KKU 
+
+-- Page 31 --
+27 WARUWU@KKU ‣ในหYาเอกสาร HTML สามารถเAยกใJ style sheets ไgหลากหลาย§ใjบางคøงเ¿ดการçบ¡อนkนของ styles ‣หากเ¿ดการçบ¡อนของ styles จะòอง7จารณา style Pxèา∞ห¬ก$งก]ามาแสดงผล ‣โดยèา∞ห¬กจะ7จารณาจาก ¶¢บความWÖญ (priority) ความเฉพาะ (specificity) และ¶¢บของกฎ (rule order) Conflicting Styles: The Cascade Priority ‣หากหYาเHบóน ๆ ไ[x style sheet เลย web browser จะแสดงผลโดยใJ internal style sheet Pเ^นของ web browser เอง   √นaอ user agent style sheet ‣หากlใJ†หนด style sheet ของตนเองโดยเฉพาะ (user style sheet) web browser จะแสดงผลโดย user style sheet ‣หากlส~างหYาเHบเพจ†หนด style sheet (author style sheet) web browser จะแสดงผลçบ style sheet zน ๆ
+
+-- Page 32 --
+28 WARUWU@KKU Conflicting Styles: The Cascade ‣aอ style sheet P web browser ใJเ^นåนฐาน (default) Wห>บ®ก ๆ เHบเพจPòองแสดงผล index.html <table>     <tr>         <th>Menu item</th><th>Calories</th><th>Fat (g)</th>     </tr>     <tr>         <td>Chicken noodle soup</td><td>120</td><td>2</td>     </tr>     <tr>         <td>Caesar salad</td><td>400</td><td>26</td>     </tr> </table> xCSS Priority: User Agent Style Sheet
+
+-- Page 33 --
+29 WARUWU@KKU Conflicting Styles: The Cascade Priority: User Style Sheet ‣aอ style sheet P web browser เมทางเƒอกใj user สามารถ†หนด style sheet เองไg 
+
+-- Page 34 --
+30 WARUWU@KKU Conflicting Styles: The Cascade Priority: Author Style Sheet ‣aอ style sheet Plส~างเHบเพจ†หนด style จากเอกสาร HTML òนทาง index.html <!DOCTYPE html > <html> <head>     <meta charset="utf-8">     <title>CSS</title> </head> <body>     <h1 style="color:green;">Title of topic</h1> </body> </html> xCSS 
+
+-- Page 35 --
+31 WARUWU@KKU Conflicting Styles: The Cascade ‣อÑางไร≤ตาม ¶¢บความWÖญของ style สามารถเAยง¶¢บจาก$งãดไปºง≈ãดไg ¢งà 1. Style Peก†หนด !important โดยlใJ 2. Style Peก†หนด !important โดยlส~างเHบเพจ 3. Style Peก†หนดโดยlส~างเHบเพจ (author style sheet) 4. Style Peก†หนดโดยlใJ (user style sheet) 5. Style èาเ∆มòนของ web browser (user agent style sheet) Priority
+
+-- Page 36 --
+32 WARUWU@KKU Conflicting Styles: The Cascade ‣การ†หนด«»ง !important ไöP d e c l a r a t i o n  r u l e  aอ การระÉใjกฎóนxèาความWÖญ$งãด โดยจะระÉไöPห"ง  value และ;อนหYา ; (semicolon) !important index.html <h1>Title of topic</h1> <p style="color=red;">This is text in paragraph.</p> style.css p {color: blue !important;}  ‣จากSวอÑาง การแสดงผลSวTกษรใน p element จะเ^นØ∞เ±น เ©องจากeก†kบgวย !important
+
+-- Page 37 --
+33 WARUWU@KKU Conflicting Styles: The Cascade ‣เΩอเ¿ดการçบ¡อนkนของ styles "กษณะของ selector จะeกdมา7จารณา ‣Selector Pxความเฉพาะเจาะจงจะไgèา∞ห¬กPมากก]า Speciﬁcity index.html <p>This is <em>text in paragraph</em>.</p> <p id="add_text">This is text in "add_text" paragraph.</p> xCSS style.css p{     font-size: large;     font-family: sans-serif;     color: green; } #add_text{ color: blue; }
+
+-- Page 38 --
+34 WARUWU@KKU Conflicting Styles: The Cascade ‣ในกรûP d e c l a r a t i o n  เ¿ดการçบ¡อนใน s t y l e  Px¶¢บความWÖญเñาkน จะSด…นจาก¶¢บโดยใjแสดงผลตาม"กษณะP เจอ าãด Rule Order index.html <head>     <title>CSS</title>     <style>             @import url(style.css);  /* set to red first */             h1 { color: purple;}  /* overridden by purple */     </style> </head> <body>     <h1 style="color:blue">Heading</h1>      /* blue comes last and wins */     … </body> xCSS style.css h1{ color: red; }
+
+-- Page 39 --
+ระบบห/วย2ดของ CSS WARUWU@KKU 
+
+-- Page 40 --
+35 WARUWU@KKU ‣ระบบหNวยOดของ CSS (CSS Unit of Measurement) แÜงออกเ^น 2 Rปแบบ aอ absolute unit kบ relative unit ระบบห/วย2ดของ CSS Absolute Unit ‣เ^นการÀางÃงèาจากSวเลขในความเ^นจÕง âงจะxèาเñาkนเสมอ ในกรûPใJในบÕบทเôยวkน ‣หNวยOดในRปแบบàPเ^นPcยมaอ pixel โดยeกcยามèาใjเñาkบ 1/96 Œว (inch) ห/วย 6อ7บาย px pixel eกระÉใjเñาkน 1/96 Œว ใน CSS3 inch Œว mm œลæเมตร cm เซน≠เมตร q ¼ œลæเมตร pt points (1/72 inch) õกeกใJเ^นหNวยในงานออกแบบ—ง7มq_าง ๆ
+
+-- Page 41 --
+36 WARUWU@KKU ระบบห/วย2ดของ CSS Relative Unit ‣เ^นการÀางÃงèาจากSวเลขในP†หนดจากขนาดของ property _าง ๆ Pxอêแ∑วในเHบเพจ ห/วย 6อ7บาย em หNวยOดPÀางÃงจากขนาดSวTกษร“จ”¨น rem หNวยOดPÀางÃงจากขนาดSวTกษรของ root element (โดยtวไปaอ 16 pixels) vw หNวยOดPÀางÃงจาก 1/100 ของความกöางของขนาด window vh หNวยOดPÀางÃงจาก 1/100 ของความ$งของขนาด window vmin xèาเñาkบ vw ห`อ vh โดยเƒอกจากèาPYอยก]า vmax xèาเñาkบ vw ห`อ vh โดยเƒอกจากèาPมากก]า
+
+-- Page 42 --
+37 WARUWU@KKU ระบบห/วย2ดของ CSS Relative Unit ‣หNวยOด em xPมาจากความกöางของSวTกษร M แบบTกษร7มqให‘ ‣หากSวTกษรxขนาด 16 pixel èาของหNวยOด em ≤จะxèาเñาkบ 16 pixels 
+
+-- Page 43 --
+38 WARUWU@KKU ระบบห/วย2ดของ CSS Relative Unit ‣โดยปก≠หNวยOด em õกจะeกใJในการ†หนดการเ’อง ความกöางของหYาเอกสาร ห`อåนPขอบของ element _าง ๆ ‣âงจะ§ใjเΩอxการป>บเปùยนขนาดSวTกษร èาของ property PใJหNวยOด em ≤จะเปùยนแปลงไปตามªดáวน 
+
+-- Page 44 --
+CSS 8ใ%9ดการ:ปแบบ=ว>กษร WARUWU@KKU 
+
+-- Page 45 --
+39 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การเปAยน:ปแบบ=ว>กษร property font-family value ≥อ font Pòองการ สามารถใá≥อ font Wรองไgหลาย font ëนgวยเคrองหมาย comma ใ%ไCDบ ®ก element PxSวTกษร style.css body { font-family: Arial; } var { font-family: Courier, monospace; } p { font-family: Verdana, sans-serif; } ‣Rปแบบ font Pไ[ใ{ generic font families ≥อจะòองfนòนgวยSวTกษร7มqให‘ เ{น òองใJ Arial แทน arial
+
+-- Page 46 --
+40 WARUWU@KKU Generic Font Families ‣Generic font families aอ RปแบบSวTกษรåนฐานPคอม7วเตอ9จะxไöรอง>บการแสดงผลSวTกษร ประกอบgวย 5  f o n t   families aอ serif san-serif
+
+-- Page 47 --
+41 WARUWU@KKU Generic Font Families monospace cursive fantasy 
+
+-- Page 48 --
+42 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การเปAยนขนาด=ว>กษร property font-size value หNวยOด | เปอ9เ÷นF | xx-small | x-small | small | medium | large | x-large | xx-large |  smaller | larger ใ%ไCDบ ®ก element PxSวTกษร style.css h1 { font-size: 1.5em; } ‣โดยáวนมาก õกใJหNวยOด em rem ห`อเปอ9เ÷นF ในการ†หนดขนาดSวTกษร
+
+-- Page 49 --
+43 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การเปAยนขนาด=ว>กษร index.html <h1>Headline in Body</h1> <p>Pellentesque ligula leo,…</p> <article>     <h1>Headline in Article</h1>     <p>Vivamus …</p> </article> xCSS style.css h1 {  font-size: 1.5em;      /* sets all h1s to 1.5em */} article {  font-size: .875em     /* 14 pixels based on 16px default */ }
+
+-- Page 50 --
+44 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การเปAยนขนาด=ว>กษร 
+
+-- Page 51 --
+45 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การเปAยนEหFก=ว>กษร property font-weight value normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 ใ%ไCDบ ®ก element PxSวTกษร 
+
+-- Page 52 --
+46 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร Gด6Hง:ปแบบ=ว>กษร property font value font-style font-weight font-variant font-stretch font-size/line-height font-family ใ%ไCDบ ®ก element PxSวTกษร ‣ใJWห>บ†หนด"กษณะของRปแบบSวTกษรหลาย ๆ property ใน declaration เôยว ‣¶¢บของ property value xความWÖญ ‣value Püเ^นPจะòองx เΩอใJ property font aอ value ของ font-size และ font-family ตาม¶¢บ style.css p { font: 1em sans-serif; }
+
+-- Page 53 --
+47 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การเปAยนI=ว>กษร property color value èาของØ สามารถใJไgÆง≥อØ èาØPเ^นSวเลขฐาน 16 และèาØแบบ RGB ใ%ไCDบ ®ก element PxSวTกษร style.css h1 { color: gray; } h1 { color: #666666; } h1 { color: #666; } h1 { color: rgb(102,102,102); } JอIมาตรฐาน 17 I black       white       purple      lime    navy aqua        silver      maroon      fuchsia olive blue        orange      gray        red     green yellow      teal Source: https://www.w3.org/wiki/CSS/Properties/color/keywords IMน ๆ เOมเPม
+
+-- Page 54 --
+48 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การQหนดความSงของบรรTด property line-height value Sวเลข | หNวยความยาว | เปอ9เ÷นF | normal ใ%ไCDบ ®ก element PxSวTกษร style.css p { line-height: 2em; } †หนดความ$งของบรรçด 2em (สองเñาของ SวTกษร) åนPPไgจะแÜงค◊งบน างของ บรรçด โดยเอาตรงกลางของบรรçดเ^น”ด ÿงกลาง;อน†หนดใjåนPxขนาดตาม òองการ ขนาด 1em
+
+-- Page 55 --
+49 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การQหนดUอหVา property text-indent value หNวยความยาว | เปอ9เ÷นF ใ%ไCDบ Block elements style.css p#1 { text-indent: 2em; } p#2 { text-indent: 25%; } p#3 { text-indent: -35px; } 
+
+-- Page 56 --
+50 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การ9ดเWยง=ว>กษร property text-align value left | right | center | justify |  start | end ใ%ไCDบ Block elements style.css p#1 { text-align: left; } p#2 { text-align: right; } p#3 { text-align: center; } p#4 { text-align: justify; } right left center justify
+
+-- Page 57 --
+51 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การXดเYน=ว>กษร property text-decoration value none | underline | overline | line-through ใ%ไCDบ ®ก element PxSวTกษร style.css a { text-decoration: none; } ‣โดยáวนมากõกใJkบกรûPไ[òองการใjSวTกษรของ link xBดเŸนใò 
+
+-- Page 58 --
+52 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การเปAยน bullet ของรายการ property list-style-type value none | disc | circle | square | decimal | decimal-leading-zero | lower-alpha |  upper-alpha | lower-latin | upper-latin | lower-roman | upper-roman | lower-greek ใ%ไCDบ ul, ol, li index.html <ul style="list-style-type: square">     <li>radish</li>     <li>avocado</li>     <li>pomegranite</li>     <li>cucumber</li>     <li>persimmon</li> <ul>
+
+-- Page 59 --
+53 WARUWU@KKU CSS 8ใ%9ดการ:ปแบบ=ว>กษร การเปAยน bullet ของรายการ property list-style-image value url(location) | none ใ%ไCDบ ul, ol, li style.css ul {      list-style-type: disc;     list-style-image: url(/images/rainbow.gif); } 
+
+-- Page 60 --
+Element Box WARUWU@KKU 
+
+-- Page 61 --
+54 Element Box WARUWU@KKU ‣Block Elements aอ ก¥มของ elements PใJ†หนดåนPบนหYาเHบแบบ block เ{น <h1> <p> <ul> <table> <div> vอwล ใน tag เห าàจะeกdมาแสดงผลโดยxการfนบรรçดให[Æง;อนและห"งการแสดงผลเสมอ ‣Inline Elements aอ elements PใJ†หนดขอบเขตของvอความในบรรçดเôยวkน เ{น <b> <td> <a> <img> <span> vอwล ใน tag เห าàจะeกdมาแสดงผลโดยไ[xการfนบรรçดให[ แ_จะแสดงผลในแนวนอนแบบเAยง¶¢บจนก]าåนPแนวนอนจะเ⁄ม ‣Tag div (block element) และ tag span (inline element) õกใJควบ´มขอบเขตการแสดงผลตามRปแบบของ CSS xCSS index.html <body> This content shows <div style="color: blue;">div element</div>  will break the line. <hr> But <span style="color: green;">span element</span> will not  break the line. </body>
+
+-- Page 62 --
+55 Element Box WARUWU@KKU ‣®ก ๆ e l e m e n t  ของเอกสาร ไ[]าจะเ^น b l o c k  e l e m e n t  ห`อ i n l i n e  e l e m e n t  จะอêในRปแบบของก อง€เหùยม  (rectangular element box) 
+
+-- Page 63 --
+56 WARUWU@KKU CSS 8ใ%9ดการ Element Box ขนาดของ Element Box property width, height value length | percentage | auto ใ%ไCDบ block-level element ‣โดยปก≠แ∑วความกöางและความ$งของ element จะeก«นวณโดย web browser ‣ความกöางõกจะÀางÃงจากขนาดของ window และ block element Pอêภายใน ‣ความ$งจะeก†หนดตามเ‹อหาPอêภายใน element
+
+-- Page 64 --
+57 WARUWU@KKU CSS 8ใ%9ดการ Element Box ขนาดของ Padding Area property padding, padding-top, padding-right, padding-bottom, padding-left value length | percentage | inherit ใ%ไCDบ ®ก element ยกเöน table-row, table-row group, table-header-group, table-footer-group,  table-column และ table-column-group ‣Padding area aอåนPPอêระห]าง Content area และเŸนขอบ ‣{วยใjเ¿ด{อง]างระห]างขอบและเ‹อหา ไ[ใj›≠ดkนจนเ¿นไป  (Breathing room) ‣สามารถ†หนดความกöางของåนPขอบภายในแ_ละgานแยกkน ไgโดยÃสระ 
+
+-- Page 65 --
+58 WARUWU@KKU CSS 8ใ%9ดการ Element Box ขนาดของ Padding Area style.css blockquote { padding-top: 2em;              padding-right: 4em;              padding-bottom: 2em;              padding-left: 4em;              background-color: #F2F5D7; /* light green */ } 
+
+-- Page 66 --
+59 WARUWU@KKU CSS 8ใ%9ดการ Element Box ขนาดของ Padding Area ‣สามารถใJ shorthand property padding ในการ†หนดåนP]างภายใน 1 declaration style.css blockquote { padding: 10px; } style.css blockquote { padding: 10px 6px; } style.css blockquote { padding: 10px 6px 4px; } style.css blockquote { padding: 10px 6px 4px 10px; } •†หนดåนPขอบของ®กgาน •ขนาดﬁดแรกหมายhงgานบนและ าง ﬁดP 2  หมายhงgาน¡าย และขวา •ขนาดﬁดแรกหมายhงgานบน ﬁดP 2  หมายhงgาน¡ายและขวา  ﬁดãดﬂายหมายhงgาน าง •ขนาดเAยงตามเ‡มนา·กา gานบน ขวา  าง ¡าย ตาม¶¢บ
+
+-- Page 67 --
+60 WARUWU@KKU CSS 8ใ%9ดการ Element Box การ9ดการเYนขอบ (Border) property border-style, border-top-style, border-right-style, border-bottom-style, border-left-style value none | solid | hidden | dotted | dashed | double | groove | ridge | inset | outset ใ%ไCDบ ®ก element ‣เŸนขอบ (Border) เ¿ดจากการลากเŸนระห]างขอบของåนPเ‹อหา (Content area) kบåนPขอบภายใน ‣สามารถ†หนดเŸนขอบของแ_ละgานแยกkนไgโดยÃสระ style.css div#content { border-style: solid dashed double dotted;               width: 300px;  height: 100px;} 
+
+-- Page 68 --
+61 WARUWU@KKU CSS 8ใ%9ดการ Element Box การ9ดการเYนขอบ (Border) property border-width, border-top-width, border-right-width, border-bottom-width, border-left-width value length | thin | medium | thick ใ%ไCDบ ®ก element ‣โดยปก≠แ∑วจะ†หนดความหนาเŸนขอบเ^นหNวย pixel ‣สามารถ†หนดความหนาเŸนขอบของแ_ละgานแยกkนไgโดยÃสระ style.css div#content { border-width: thin medium thick 12px;               border-style: solid;               width: 300px;  height: 100px;}
+
+-- Page 69 --
+62 WARUWU@KKU CSS 8ใ%9ดการ Element Box การ9ดการเYนขอบ (Border) property border-color, border-top-color, border-right-color, border-bottom-color, border-left-color value ≥อØ ห`อèาØ ใ%ไCDบ ®ก element style.css div#content { border-color: maroon aqua;               border-style: solid; border-width: 6px;               width: 300px;  height: 100px;} 
+
+-- Page 70 --
+63 WARUWU@KKU CSS 8ใ%9ดการ Element Box การ9ดการเYนขอบ (Border) property border, border-top, border-right, border-bottom, border-left value border-style border-width border-color ใ%ไCDบ ®ก element ‣Shorthand ของการ†หนด"กษณะเŸนขอบ จะประกอบไปgวยèาRปแบบของเŸนขอบ ความกöางของเŸนขอบ และØของเŸนขอบ แบบ ไ[†หนด¶¢บ ‣ไ[üเ^นòองระÉ®ก´ณ"กษณะ ‚าไ[ระÉ จะใJèาเ∆มòนของ element óน ๆ style.css h1 { border-left: red .5em solid; }  h2 { border-bottom: 1px solid; } p.example { border: 2px dotted #663; } •h1 element eก†หนด"กษณะเŸนขอบเฉพาะทางgาน¡าย •h2 element eก†หนด"กษณะเŸนขอบเฉพาะทางgาน าง •p element Pอêใน class example eก†หนด"กษณะเŸนขอบÆง 4 gาน
+
+-- Page 71 --
+64 WARUWU@KKU CSS 8ใ%9ดการ Element Box ขนาดของ Margin Area property margin, margin-top, margin-right, margin-bottom, margin-left value length | percentage | auto | inherit ใ%ไCDบ ®ก element ‣Margin area aอ åนPขอบนอกPเ∆มจากเŸนขอบ (จะxห`อ ไ[x≤ไg) ‣{วยใjเ¿ด{อง]างระห]าง element _าง ๆ ใน window ‣สามารถ†หนดความกöางของåนPขอบนอกแ_ละgานแยก kนไgโดยÃสระ 
+
+-- Page 72 --
+65 WARUWU@KKU CSS 8ใ%9ดการ Element Box ขนาดของ Margin Area style.css p#content { margin: 4em;             border: 2px solid red;             background: #e2f3f5; } style.css p#content { margin-top: 2em;             margin-right: 250px;                   margin-bottom: 1em;             margin-left: 4em;             border: 2px solid red;             background: #e2f3f5; } 
+
+-- Page 73 --
+66 WARUWU@KKU CSS 8ใ%9ดการ Element Box ขนาดของ Margin Area style.css body { margin: 0 20%;        border: 3px solid red;         background-color: #e2f3f5; } 
+
+-- Page 74 --
+67 WARUWU@KKU CSS 8ใ%9ดการ Element Box ขนาดของ Margin Area ‣การ†หนดåนPขอบนอกควรPจะระOงการçบ¡อนระห]าง e l e m e n t  Pอê≠ดkน หากåนPขอบนอกçบ¡อนkน จะใJ åนPPxขนาดให‘ก]า ‣SวอÑาง: ก องทางgานบนx margin-bottom: 4em; ก องทางgาน างx margin-top: 2em; åนPขอบนอก Pçบ¡อนkนจะไ[ไgxขนาด 6em แ_จะxขนาดเñาkบåนPขอบนอกPกöางPãดaอ 4em 
+
+-- Page 75 --
+68 WARUWU@KKU CSS 8ใ%9ดการ Element Box ขนาดของ Margin Area ‣การ†หนดåนPขอบนอกของ inline element Pเ^นSวTกษรจะไ[เมåนPขอบนอกทางgานบนและgาน าง รวมhง ความ$งของ element จะไ[เปùยน ขนาดP†หนดåนPขอบนอกจะxผลทางgาน¡ายและgานขวา เ^นåนP]างเป า ‣แ_ใน inline element zน ๆ การ†หนดåนPขอบนอกจะxผล®กgาน âงจะáงผลกระทบ_อความ$งของบรรçด style.css em { margin: 2em; } style.css img { margin: 2em; } 
+
+-- Page 76 --
+69 WARUWU@KKU การQหนด Display Roles property display value inline | block | run-in | flex | grid | flow | flow-root | list-item | table | table- row-group | table-header-group | table-footer-group | table-row | table-cell | table- column-group | table-column | table-caption | inline-block | inline-table | inline-flex  | inline-grid | contents | none ใ%ไCDบ ®ก element ‣Property display ใJ†หนดชcดของ element box Pจะแสดงบน layout ‣SวอÑาง: จากเ„ม li element Pxชcดเ^น block element สามารeกเปùยนเ^น inline element ไg style.css .menu li { display:inline;            margin: 1em; padding: .5em 1em;            border: 1px solid lightskyblue; } 
+
+-- Page 77 --
+Floating และ Positioning WARUWU@KKU 
+
+-- Page 78 --
+70 WARUWU@KKU Floating และ Positioning ‣Floating และ Positioning เ^นการ§ลายRปแบบการQดเAยง element บนหYาเHบแบบปก≠ ‣การ§ floating e l e m e n t  จะ§ใj e l e m e n t  óน ๆ เค‰อนPไปอêทางgาน¡าย ห`อขวา ตามP†หนด โดยอÂญาตใjSวห¬ง°อ  (text) Pตามมาอê∑อมรอบไg (wrap around) ‣การ§ positioning element จะ§ใjÊแหNงของ element óน ๆ eก†หนด ณ ”ดใด”ดห∫งของหYาเHบ ‣โดยปก≠แ∑ว b l o c k  e l e m e n t  จะไ[อÂญาตใj e l e m e n t  zน ๆ มาอêทางgานvาง âง‚าหากป>บขนาดของ w i n d o w  ขนาดของ  block element ≤จะป>บตาม และการแสดงผลของ inline element ในแ_ละบรรçด≤จะป>บตามเ{นเôยวkน เ‹อหาใน inline element จะป>บเปùยนตามขนาด ของ block element Pครอบอê Block จะขยายตามความกöาง
+
+-- Page 79 --
+71 WARUWU@KKU property float value left | right | none ใ%ไCDบ ®ก element ‣Property float จะ§ใj e l e m e n t  óน ๆ เค‰อนPไปอêทางgาน¡าย ห`อขวา ตามP†หนด โดยอÂญาตใjSว ห¬ง°อPตามมาอê∑อมรอบไg Floating index.html <p>     <img src="icecream.png" alt="ice cream"> After the cream is frozen rather stiff,… .. </p> การแทรกภาพแบบ inline ปกP åนP]างPเ¿ดจากการแทรกภาพ
+
+-- Page 80 --
+72 WARUWU@KKU ‣เม property float ใjRปภาพมาอêทางgานขวา index.html <p>     <img src="icecream.png" alt="ice cream" style="float: right;"> After the cream is frozen rather stiff,… .. </p> การแทรกภาพแบบ inline และ ﬂoat ทางขวา และxSวTกษร∑อมรอบ Rปภาพเ‰อนมาทางgานขวา Floating
+
+-- Page 81 --
+73 WARUWU@KKU ‣การ†หนด property float ใjkบ inline text element จะòอง†หนดความกöางเสมอ index.html <p> <span class="tip">TIP: Make sure that your packing tub or bucket has a  hole below the top of the mold so  the  water will drain off.</span>  After the cream is frozen rather stiff, prepare a tub or bucket of… </p> style.css span.tip { float: right; margin: 1em;              width: 200px; color: #fff;              background-color: lightseagreen;              padding: 1em; } Floating
+
+-- Page 82 --
+74 WARUWU@KKU ‣การ†หนด property float ใjkบ block element จะòอง†หนดความกöางเสมอ และ element zน ๆ Pตามมาจะ eกเ‰อนใjมา∑อมรอบ floating block element index.html <p>If you wish to pack ice cream...</p> <p id="float">After the ice cream is rather stiff,...</p> <p>Make sure that your packing tub or bucket...</p> <p>As cold water is warmer than the ordinary...</p> style.css p { border: 2px red solid; } #float { float: left; width: 300px;          margin: 1em; background: white; } Floating
+
+-- Page 83 --
+75 WARUWU@KKU property clear value left | right | both | none ใ%ไCDบ เฉพาะ block element ‣เΩอx floating element อêบนหYาเHบ อาจáงผล_อÊแหNงของ element zนPตามมา ‣สามารถ†หนดใj e l e m e n t  Pตามมา ไ[เค‰อนÊแหNงตามการเ¿ดของ f l o a t  e l e m e n t  แ_ใjแสดงตามÊแหNง ปก≠ไgโดยการใJ property clear style.css img { float: left;       margin-right: .5em; } h2 { margin-top: 2em; } Floating
+
+-- Page 84 --
+76 WARUWU@KKU ‣การ†หนดใj property clear xèาเ^น left หมายความ]าไ[อÂญาตใjx float element ใด ๆ อêทาง¡าย style.css img { float: left;       margin-right: .5em; } h2 { clear: left;      margin-top: 2em; } Floating
+
+-- Page 85 --
+77 WARUWU@KKU Positioning property position value static | relative | absolute | fixed | sticky ใ%ไCDบ ®ก element ‣Property position จะ§ใjÊแหNงของ e l e m e n t  óน ๆ eก†หนด ณ ”ดใด”ดห∫งของหYาเHบตามP†หนดไö  โดยใJ Property top, right, bottom, left เ•อระÉÊแหNง  property top, right, bottom, left value length | percentage | auto ใ%ไCDบ ภายใน element Pxการ†หนด position เ^นRปแบบ relative absolute ห`อ ﬁxed
+
+-- Page 86 --
+78 WARUWU@KKU Positioning ‣Property position แบบ relative §ใjÊแหNงของ element óน ๆ เ‰อนจาก”ดเ„มไปตามèาP†หนด Position แบบ Relative index.html <p> Mix the sugar, the grated rind and <em>juice of the  lemons</em>, and the orange juice together. Put .. </p> style.css em { position: relative;        top: 2em;      left: 3em;      background-color: fuchsia; } 
+
+-- Page 87 --
+79 WARUWU@KKU Positioning ‣Property position แบบ a b s o l u t e  §ใjÊแหNงของ e l e m e n t  óน ๆ เปùยนÊแหNงภายใน c o n t a i n e r  PอêไปตามèาP †หนด ‣อÑางไร≤ตาม หากไ[xการ†หนด containing block ในระ¢บ;อนหYา absolute จะ\อ]า body element aอ container ห"ก Position แบบ Absolute index.html <p> Mix the sugar, the grated rind and <em>juice of the  lemons</em>, and the orange juice together. Put .. </p> style.css em { position: absolute;      top: 2em; left: 3em;      background-color: fuchsia; } 
+
+-- Page 88 --
+80 WARUWU@KKU Positioning ‣การ†หนด containing block aอ การ†หนด position:relative ใjkบ element แ_ไ[òองระÉÊแหNง Position แบบ Absolute index.html <p> Mix the sugar, the grated rind and <em>juice of the  lemons</em>, and the orange juice together. Put .. </p> style.css p { position: relative;  padding: 15px;     background-color: #F2F5D5;     border: 2px solid purple;} em { position: absolute;      top: 2em; left: 3em;      background-color: fuchsia; }
+
+-- Page 89 --
+81 WARUWU@KKU Positioning Position แบบ Absolute index.html <div id="A">     <div id="B">&nbsp;</div> </div> style.css div#A { position: relative;         width: 600px;  height: 300px;           background-color: #C6DE89;} div#B { position: absolute;         top: 25px;  right: 50px;         bottom: 75px;  left: 100px;         background-color: steelblue; } 
+
+-- Page 90 --
+82 WARUWU@KKU Positioning ‣Property position แบบ fixed §ใjÊแหNงของ element óน ๆ อêÊแหNงP†หนด โดยÀางÃงจาก viewport hงแs]าจะ xการเ‰อนหYาเHบfน/ลง≤ตาม Position แบบ Fixed style.css #fixed { position: fixed; bottom: 0; right: 0; } After the cream is frozen rather stiﬀ, prepare a tub or bucket of coarsely chopped  ice, with one-half less salt than you use for freezing. To each ten pounds of ice  allow one quart of rock salt. Sprinkle a little rock salt in the bottom of your bucket  or tub, then put over a layer of cracked ice, another layer of salt and cracked ice,  and on this stand your mold, which is not ﬁlled, but is covered with a lid, and  pack it all around, leaving the top, of course, to pack later on. Take your freezer  near this tub. Remove the lid from the mold, and pack in the cream, smoothing it  down until you have ﬁlled it to overﬂowing. Smooth the top with a spatula or  limber knife, put over a sheet of waxed paper and adjust the lid.#ﬁxed
+
+-- Page 91 --
+83 WARUWU@KKU Positioning ‣Property position แบบ s t i c k y  เ^นการผสาน´ณสม¨≠ระห]าง r e l a t i v e  และ f i x  ก าวaอ e l e m e n t  จะx p o s i t i o n  เ^น  relative จนกระtงxการเ‰อนไปhงÊแหNงPระÉไöใน viewport Position แบบ Sticky style.css table, tr, td, th { border-collapse: collapse;                      border: 1px solid black; } #sticky { position: sticky; top: 0;           background-color: silver ; } index.html <table> <tr id="sticky"><th>No.</th><th>Color</th></tr> <tr><td>1</td><td>Red</td></tr> <tr><td>2</td><td>Green</td></tr> <tr><td>3</td><td>Blue</td></tr> <tr><td>4</td><td>Black</td></tr> <tr><td>5</td><td>White</td></tr>     .. <tr><td>50</td><td>Teal</td></tr> </table>
+
+-- Page 92 --
+84 WARUWU@KKU Positioning Stacking Order ‣element โดยtวไปบนหYาเHบจะx¶¢บการแสดงผลตาม¶¢บPปรากฏในเอกสารหYาเHบ แ_สามารถส"บ¶¢บóนไggวย  property z-index ‣èาของ z-index จะเ^นSวเลข (Æง≠ดลบและไ[≠ดลบ) }งèาของSวเลข$ง ¶¢บการแสดงผลของ element ≤จะ}งอêgานบน property z-index value Sวเลข | auto ใ%ไCDบ element Pxการ†หนด position Default Stack Order
+
+-- Page 93 --
+Laravel & CSS WARUWU@KKU 
+
+-- Page 94 --
+85 Laravel & CSS WARUWU@KKU ‣โดยปก≠แ∑วสามารถd style sheet ไปใJkบเอกสารหYาเHบไg 3 Rปแบบ: •External style sheets •Internal style sheets/Embedded style sheets •Inline styles ‣การเAยกใJ External style sheets ใน Laravel Project สามารถ§ไgโดย 1. dไฟì css ไปไöP folder public/css 2. เAยกใJจากไฟì view ของ Laravel gวย link element ห`อ @import (อÑางใดอÑางห∫ง) โดยระÉPอê ไฟìmานËงÈÍน asset()
+
+-- Page 95 --
+86 Laravel & CSS WARUWU@KKU css-example.blade.php <!DOCTYPE html > <html>     <head>     <meta charset="utf-8">     <title>CSS</title>     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css'}}">     <style>         @import url( {{asset('css/style.css'}} );     </style>     </head>     <body>     <h1>Title of topic</h1>     <p>This is text in paragraph.</p>     </body> </html> public/css/style.css h1{ color: green; } p{     font-size: large;     font-family: sans-serif, Tahoma; } เƒอกใJ ÀางÃงhง http://minishop.test/css/style.css url Pไg
+
+-- Page 96 --
+WARUWU@KKU References 87 Robbins, J. N. (2012). Learning web design: A beginner's guide to HTML, CSS, JavaScript,  and web graphics. " O'Reilly Media, Inc.".
+
+=== 09 - Laravel Part 03.pdf ===
+PAGES 34
+
+-- Page 1 --
+ห"ก$ตรเทคโนโล-สารสนเทศ สาขา2ชา2ทยาการคอม7วเตอ9 2ทยา"ยการคอม7วเตอ9 มหา2ทยา"ยขอนแ;น ผศ.ดร.ว>ญญา วรรณศA SC362004 WEB APPLICATION PROGRAMMING  การเBยนโปรแกรมประEกFบนเHบ CP351203 WEB PROGRAMMING and APPLICATION  การเBยนโปรแกรมเHบและการประEกFใJ CP410805 WEB APPLICATION DEVELOPMENT  การKฒนาโปรแกรมประEกFบนเHบ 09 - Laravel Part 03
+
+-- Page 2 --
+Session Transaction 01 Outline WARUWU@KKU การMหนดความNมKนOของ Eloquent ORM Middleware
+
+-- Page 3 --
+02 WARUWU@KKU Relationships ‣ตารางQอRลในฐานQอRลเTยวUนVกจะXความNมKนOระหYางUน โดยเฉพาะในฐานQอRลเ\งNมKนO ‣เ]น ฐานQอRล^ใJเ_บQอRลพ`กงานในบabท ^จะXความเcยวQองUบตารางQอRลแผนกในบabท ‣Eloquent Model ]วยใdeKฒนาสามารถgดการความNมKนOของ Model QอRลโดยhาย iวยความNมKนOหลายjปแบบ เ]น •One to One •One to Many •Many to Many ‣Relationships ของ Eloquent Model kกเAยกใJใน"กษณะของ method ของ model mงnนoงสามารถเAยกใJQอRล^เcยวQองpาน Query  Builder ไiเ]นเTยวUน OrderController.php $order->order_details()->where("total", ">", 1000)->get();
+
+-- Page 4 --
+03 WARUWU@KKU One to One Relationship ‣ความNมKนOแบบ One to One เrนความNมKนOแบบเAยบhาย ‣เ]น User ในระบบสามารถขอsม Order ไiคนละ 1 เคtอง สามารถMหนดความNมKนOโดยใdX method order ใน Payment model Table orders Table payments app/Models/Order.php app/Models/Payment.php class Order extends Model {     public function payment() {         return $this->hasOne(Payment::class);         //return $this->hasOne(Payment::class, "pid");     } } class Payment extends Model {     public function order() {         return $this->belongsTo(Order::class);         //return $this->belongsTo(Order::class, "oid");     } } id payment_id total 1 1 259 2 2 1200 3 3 990 id status method 9 1 transfer 12 0 credit card 17 1 transfer
+
+-- Page 5 --
+xOrder's Payment Order id: 1 Payment method: transfer Order id: 2 Payment method: credit card Order id: 3 Payment method: transfer Payment id: 9 Total: 259 Payment id: 12 Total: 1200 Payment id: 17 Total: 990 example.blade.php 04 WARUWU@KKU One to One Relationship OrderController.php class OrderController extends Controller {     public function index() {         $orders = Order::all();         $payments = Payment::all();         return view("example", compact("orders", "payments"));     } } ** ใน Controller อuาvมเwม use App\Models\[Model ที่ใช้]; <body>     @foreach($orders as $order)         <p>Order id: {{$order->id}}</p>         <p>Payment method: {{$order->payment->method}}</p>         <hr>     @endforeach     @foreach($payments as $payment)         <p>Payment id: {{$payment->id}}</p>         <p>Total: {{$payment—>order->total}}</p>         <hr>     @endforeach </body>
+
+-- Page 6 --
+app/Models/Order.phpTable orders id customer_id total 1 1 259 2 1 1200 3 3 990 05 WARUWU@KKU One to Many Relationship ‣ความNมKนOแบบ One to Many kกใJเxอระyความNมKนOระหYางQอRลแถวเTยวของ model A UบQอRลหลายแถวของ model B ‣เ]น Customer 1 คน สามารถXz{ง|อ (Order) ไiหลายz{ง|อ Table customers app/Models/Customer.php class Customer extends Model {     public function orders() {         return $this->hasMany(Order::class);     } } id name phone 1 Mary 0801234567 2 Jane 0812345678 3 Alice 0823456901 class Order extends Model {     public function customer() {         return $this->belongsTo(Customer::class);     } }
+
+-- Page 7 --
+example.blade.php 06 WARUWU@KKU CustomerController.php class CustomerController extends Controller {     public function index() {         $customers = Customer::all();         return view("example", compact("customers"));     } } xCustomer's Orders Customer's Name: Mary Order: •(1) 259 •(2) 1200 Customer's Name: Alice Order: •(3) 990 One to Many Relationship <body>     @foreach($customers as $customer)         <p>Customer's Name: {{$customer->name}}</p>         <p>Order: </p>             <ul>             @foreach($customer->orders as $order)                 <li>({{$order->id}}) {{$order->total}} บาท</li>             @endforeach              </ul>         <hr>     @endforeach  </body>
+
+-- Page 8 --
+project_id user_id 1 1 1 3 2 1 2 2 id name budget 1 Hotel Management 150000 2 Dormitory Management 100000 id name phone 1 Alisia alisia@email.com 2 Mary mary@email.com 3 Anna anna@email.com 07 WARUWU@KKU Many to Many Relationship ‣ความNมKนOแบบ Many to Many }อเrนความNมKนO^~บอนกYา One to One และ One to Many เÄองจากเrน"กษณะ^QอRล หลายแถวของ model A สามารถเÅอมโยงUบQอRลหลายแถวของ model B ‣เ]น User สามารถเQาÇวมไiหลาย Project ในขณะ^ Project สามารถXeเQาÇวมไiหลาย User ‣Éง^ความNมKนOแบบ Many to Many แตกÑางอuางมากจากความNมKนOjปแบบÖน Üอ จะáองใJตารางQอRลเwมàน 1 ตาราง เxอ ใJในการเ_บความNมKนOระหYางQอRลแÑละแถวใน model A และ model B Table users Table projects Table project_user ‣โดย Laravel จะkกâงäาÅอของตาราง^ใJเ_บความNมKนOระหYางQอRลแÑละแถวแบบãตโนVåYาเrนการçÅอของแÑละ model (éว ãกษร7มèเêก) เAยงëmบจาก a-z มาเÅอมUนiวยเคtองหมาย _ (underscore)
+
+-- Page 9 --
+08 WARUWU@KKU app/Models/User.php app/Models/Project.php Many to Many Relationship class User extends Authenticatable {     public function projects() {         return $this->belongsToMany(Project::class);     } } class Project extends Model {     public function users() {         return $this->belongsToMany(User::class);     } } project_id user_id 1 1 1 3 2 1 2 2 id name budget 1 Hotel Management 150000 2 Dormitory Management 100000 id name phone 1 Alisia alisia@email.com 2 Mary mary@email.com 3 Anna anna@email.com Table users Table projects Table project_user
+
+-- Page 10 --
+09 WARUWU@KKU UserController.php class UserController extends Controller {     public function index() {         $projects = Project::all();         return view("example", compact("projects"));     } } xUser's Project Project:Hotel Management Project's Member: •Name: Alisia (alisia@email.com) •Name: Anna (anna@email.com) Project:Dormitory Management Project's Member: •Name: Alisia (alisia@email.com) •Name: Mary (mary@email.com) example.blade.php Many to Many Relationship <body>     @foreach($projects as $project)         <p>Project:{{$project->name}}</p>         <p>Project's Member:</p>         <ol>         @foreach($project->users as $user)             <li>Name: {{$user->name}} ({{$user->email}})</li>         @endforeach          </ol>         <hr>     @endforeach  </body>
+
+-- Page 11 --
+10 WARUWU@KKU Relationships Relationships Model A Model B Pivot Table One to One function b(){   return $this->hasOne(B::class); } function a(){   return $this->belongsTo(A::class); } - One to Many function bs(){   return $this->hasMany(B::class); } function a(){   return $this->belongsTo(A::class); } - Many to Many function bs(){   return $this->belongsToMany(B::class); } function as(){   return $this->belongsToMany(A::class); } Table name = a_b
+
+-- Page 12 --
+app/Model/Order.php public function customer(){     return $this->belongsTo(Customer::class)->withTrashed(); } public function orderDetails(){     return $this->hasMany(OrderDetail::class); } 11 WARUWU@KKU Relationship: MiniShop app/Model/OrderDetail.php public function order(){     return $this->belongsTo(Order::class); } public function product(){     return $this->belongsTo(Product::class)->withTrashed(); } app/Model/Customer.php public function orders(){     return $this->hasMany(Order::class); } app/Model/Product.php public function orderDetails(){     return $this->hasMany(OrderDetail::class); } ‣การสíาง Relationship ระหYาง Model จะ]วยใdเAยกใJäาของQอRล^XความNมKนOÑอUนมาใJงานไiอuางสะดวก
+
+-- Page 13 --
+OrderController.php public function index(): View {     $orders = Order::with('customer')->orderByDesc('id')->get();     return view('orders.index', compact('orders')); } resources/views/orders/index.blade.php .. @foreach($orders as $order)     <tr>        <td>{{ $order->id }}</td>        <td>{{ $order->customer?->name ?? '-' }}</td>        <td>฿{{ number_format($order->total) }}</td>        <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>        <td><a href="{{ route('orders.show', ['order' => $order]) }}">รายละเอียด</a></td>     </tr> @endforeach .. 12 WARUWU@KKU Relationship: MiniShop ‣การสíาง Relationship ระหYาง Model จะ]วยใdเAยกใJäาของQอRล^XความNมKนOÑอUนมาใJงานไiอuางสะดวก
+
+-- Page 14 --
+13 WARUWU@KKU Relationship: MiniShop ‣{งใdìงQอRลของ model Customers และ OrderDetails ^เcยวQองUบ Orders îจïñนมาóงาน OrderController.php public function show(Order $order): View {     $order->load(['customer','orderDetails.product']);     return view('orders.show', compact('order')); } resources/views/orders/show.blade.php .. @foreach($order->orderDetails as $detail)     <tr>         <td>{{ $detail->product->name ?? 'ไม่พบสินค้า' }}</td>         <td>฿{{ number_format($detail->price) }}</td>         <td>{{ $detail->quantity }}</td>         <td>฿{{ number_format($detail->price * $detail->quantity) }}</td>     </tr> @endforeach ..
+
+-- Page 15 --
+Session WARUWU@KKU 
+
+-- Page 16 --
+14 WARUWU@KKU Session Laravel VกจะใJ Session ใน 2 jปแบบ ‣Session ปกå •QอRลอòÑอไปเtอย ๆ จนกYาจะลบหöอ Session หมดอาE เ]น ใJเ_บQอRลตะกíาõนúา •เหมาะUบการเ_บQอRลQามหลายหùา ‣Flash Session •ใJQอความสถานะûน ๆ เ]น แüงการเwมõนúาลงตะกíา โดย Laravel จะลบ Flash Data ห"งจากnนตาม lifecycle ของ flash session •เหมาะUบการเ_บQอRล†วคราว°ห>บ Request ¢ดไป
+
+-- Page 17 --
+15 WARUWU@KKU Session: MiniShop ‣เ£อáองการใdõนúา^eใJกดเwมไ§•งคงอòเ£อเป¶ยนหùาไปมา ‣Laravel Session Xหùา^เ_บQอRลของeใJQามหลาย requests ไi CartController.php class CartController extends Controller {     public function add(Product $product): RedirectResponse {         if($product->stock <= 0) {             return redirect()->route('products.index')->with('error', 'สินค้านี้หมดสต็อก');         }         $cart = session('cart', []);         $currentQuantity = $cart[$product->id] ?? 0;         if($currentQuantity + 1 > $product->stock) {             return redirect()->route('cart.index')->with('error', 'จํานวนสินค้าในตะกร้าเกินจํานวนที่มีในสต็อก');         }         $cart[$product->id] = $currentQuantity + 1;         session(['cart' => $cart]);         return redirect()->route('cart.index')->with('success', 'เพิ่มสินค้าเข้าตะกร้าแล้ว');     } } Flash Session // อานคาจาก Session ปกติ ถาไมมี session cart ใหใช empty array // บันทึกคาให Session ปกติ
+
+-- Page 18 --
+16 WARUWU@KKU Session: MiniShop ‣ßวนของ view ^จะแสดงผล จะX®น^°ห>บการแสดงQอความจาก Flash Session ^kก return ก"บมาพíอมUบ redirect() resources/views/layouts/app.blade.php .. <main>     @if(session('success'))         <p><strong>{{ session('success') }}</strong></p>     @endif     @if(session('error'))         <p><strong>{{ session('error') }}</strong></p>     @endif     @yield('content') </main> .. resources/views/cart/index.blade.php @extends('layouts.app') @section('title', 'Cart') @section('content')     <h2>ตะกร้าสินค้า</h2>     @if($items->isEmpty())         <p>ยังไม่มีสินค้าในตะกร้า</p>         <p><a href="{{ route('products.index') }}">เลือกสินค้า</a></p>     @else         <table border="1" cellpadding="8" cellspacing="0">             <thead>                 <tr>                     <th>สินค้า</th> ..
+
+-- Page 19 --
+CartController.php 17 WARUWU@KKU Session: MiniShop ‣©าน Session Åอ cart เxอçõนúาใน cart มาแสดง CartController.php public function index(): View {     [$items, $total] = $this->getCartItems();     return view('cart.index', compact('items', 'total')); } private function getCartItems(): array {     $cart = session('cart', []);     if(empty($cart)) {         return [[], 0];     }     $productIds = array_keys($cart);     $products = Product::whereIn('id', $productIds)->orderBy('id')->get();     $items = [];     $total = 0;     foreach($products as $product) {         $quantity = $cart[$product->id] ?? 0;         $subtotal = $product->price * $quantity;         $items[] = [             'product' => $product,             'quantity' => $quantity,             'subtotal' => $subtotal         ];         $total = $total + $subtotal;     }     return [$items, $total]; } Session  ปกติ
+
+-- Page 20 --
+CartController.php 18 WARUWU@KKU Session: MiniShop ‣แ™ไขQอRลใน Session เxอลบõนúาออกจาก cart CartController.php ‣ลบ Session เxอçõนúา´งหมดออกจาก cart public function clear(): RedirectResponse {     session()->forget('cart');     return redirect()         ->route('cart.index')         ->with('success', 'ล้างตะกร้าเรียบร้อยแล้ว'); } public function destroy(Product $product): RedirectResponse {     $cart = session('cart', []);     unset($cart[$product->id]);     session(['cart' => $cart]);     return redirect()         ->route('cart.index')         ->with('success', 'นําสินค้าออกจากตะกร้าแล้ว'); }
+
+-- Page 21 --
+Transaction WARUWU@KKU 
+
+-- Page 22 --
+19 WARUWU@KKU RECAP: Transaction ‣Transaction Üอ ก¨มของz{งหöอการ≠เÆนการUบฐานQอRล âงแÑ 1 z{งàนไป ^kกรวบรวมเQาiวยUนและมองYาเrน "หØวยการóงานเ\งตรรกะ เ∞ยงหØวยเTยว"  ±งจะáองóงานใdเส≤จสม≥ร¥´งหมด หากóงานไµสม≥ร¥จะáองไµเ∂ดการเป¶ยนแปลงใด ๆ •∑กz{งóงานไiอuางสม≥ร¥ → sน•นQอRลiวย COMMIT •Xz{งใดz{งห∏งπมเหลว → ยกเ∫ก´งหมดiวย ROLLBACK ‣ยกéวอuางเ]น ªกúาเwมõนúา 3 ºนในตะกíาõนúา แπวกด check out XกระบวนการÑาง ๆ ^ระบบจะáอง≠เÆนการใdครบΩวน หากไµครบΩาจะáอง ยกเ∫กการ≠เÆนการ´งหมด ไiแ; •สíางz{ง|อ (Order) •สíางรายละเæยดz{ง|อ (OrderDetail) 3 รายการ โดยใJรายการõนúาในตะกíา  •ลดøนวนõนúาใน stock •ลบõนúาในตะกíา^ check out ออก
+
+-- Page 23 --
+20 WARUWU@KKU Transaction ‣ใน Laravel สามารถใJ¿ง¡¬นของ Facade DB °ห>บ≠เÆนการUบ ฐานQอRล •beginTransaction() Üอ เ√มƒดงานßวน Transaction •commit() Üอ sน•นการóงานUบฐานQอRล^ครบΩวน∑ก≈นตอน ^Mหนดไ§ •rollBack() Üอ ยกเ∫ก∑กการเป¶ยนแปลงในƒดงานnน ‣ควรใJÇวมUบ try .. catch เ£อเ∂ดQอ∆ดพลาด จะเAยกใJz{ง  rollBack() ExampleController.php use Illuminate\Support\Facades\DB; class ExampleController extends Controller{ .. .. try{     DB::beginTransaction();     DB::commit(); } catch(Exception $exception){     DB::rollBack(); } ชุดคำสั่งที่ตองดำเนินการ ใหครบถวน ชุดคำสั่งที่ตองดำเนินการหากเกิดขอผิดพลาด เชน แจงเตือน
+
+-- Page 24 --
+21 WARUWU@KKU Transaction: MiniShop  ‣เปAยบเ«ยบจากéวอuาง ªกúาเwมõนúา 3  ºนในตะกíาõนúา  แπวกด check out จะáอง≠เÆนการ •สíางz{ง|อ •สíางรายละเæยดz{ง|อ 3  รายการ โดยใJรายการõนúาใน ตะกíา  •ลดøนวนõนúาใน stock •ลบõนúาในตะกíา^ check out ออก ExampleController.php public function store(Request $request): RedirectResponse {     // ตรวจสอบข้อมูลที่นําเข้า และดึงข้อมูลจากตะกร้าสินค้า     try{         DB::beginTransaction();         // สร้าง instance ของ model Order         // วนซ้ําอ่านข้อมูลจากตะกร้าสินค้า:             // สร้าง instance ของ OrderDetail             // คํานวณราคารวมของคําสั่งซื้อ         // แก้ไขราคารวมของคําสั่งซื้อ และบันทึกใหม่         DB::commit();     } catch(Exception $exception){         DB::rollBack();         // redirect กลับหน้าเดิมพร้อมแจ้งข้อผิดพลาด     }     // ลบรายการสินค้าที่บันทึกแล้วออกจากตะกร้าสินค้า     // redirect ไปยังหน้าแสดงรายละเอียดคําสั่งซื้อ }
+
+-- Page 25 --
+Middleware WARUWU@KKU 
+
+-- Page 26 --
+22 WARUWU@KKU Middleware ‣Middleware เrนßวนการóงาน^ Laravel Framework ใJ°ห>บตรวจสอบและ»ดกรอง HTTP requests ^kกßงเQามา•งแอปพ∫เค¬น ‣กร… กษา^เAยกใJ middleware ^ÀgกUนÃวไป เ]น การใJ middleware เxอ»ดกรองYาeใJ^พยายามเQาÕงบaการของแอปพ∫เค¬นไisน•นéวตนแπว หöอไµ หากeใJsน•นéวตนpานหùาเQาŒระบบแπว_จะใdบaการตาม^íองขอ แÑหาก•งไµsน•นéวéว จะßงeใJก"บไป•งหùาเQาŒระบบ เxอใdeใJเQา Œระบบ;อนใJบaการ ‣Middleware •งkกใJในæกหลายงาน^เcยวQองUบการsน•นéวตนในระบบ รวมÕงkกใJในการเ_บ log ของการเQาŒระบบiวย ‣Middleware ´งหมดkกเ_บอò^ไดเรกทอA app/Http/Middleware 
+
+-- Page 27 --
+23 WARUWU@KKU Middleware ‣ใน Laravel 13 สามารถสíาง middleware เxอใJงานเองไiiวยz{ง ‣จะไiไฟ– middleware ใน app/Http/Middleware เ£อแ™ไขไฟ–ตามเ—อนไข^áองการแπว จะáองçไป register ใน bootstrap/app.php  ;อนçไปเAยกใJใน Routes bootstrap/app.php use App\Http\Middleware\middlewareName; use Illuminate\Foundation\Configuration\Middleware; .. ->withMiddleware(function (Middleware $middleware): void {     $middleware->alias([         'alias' => middlewareName::class     ]); }) Terminal minishop> php artisan make:middleware middlewareName
+
+-- Page 28 --
+24 WARUWU@KKU Middleware: MiniShop ‣สíางไฟ– m i d d l e w a r e  E n s u r e C a r t I s N o t E m p t y  เxอตรวจสอบYาตอน“ตะกíาõนúาXõนúาหöอไµ หากXõนúาในตะกíาõนúาจะอ”ญาตใdóงานÑอ  หากไµXõนúาในตะกíาõนúาจะ redirect ไป•งหùารายการõนúา พíอมQอความแüงเ‘อน "ก’ณาเwมõนúาเQาตะกíา;อน Checkout" app/Http/Middleware/EnsureCartIsNotEmpty.php class EnsureCartIsNotEmpty {     public function handle(Request $request, Closure $next): Response {         $cart = $request->session()->get('cart', []);         if($cart === []) {             return redirect()                 ->route('products.index')                 ->with('error', 'กรุณาเพิ่มสินค้าเข้าตะกร้าก่อน Checkout');         }         return $next($request);     } } bootstrap/app.php use App\Http\Middleware\EnsureCartIsNotEmpty; use Illuminate\Foundation\Configuration\Middleware; .. ->withMiddleware(function (Middleware $middleware): void {     $middleware->alias([         'cart.not.empty' => EnsureCartIsNotEmpty::class     ]); })
+
+-- Page 29 --
+25 WARUWU@KKU Middleware: MiniShop ‣จากnนoงçไปใJงานใน routes/web.php routes/web.php Route::middleware('cart.not.empty')->group(function () {     Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout.create');     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store'); }); routes/web.php Route::get('/checkout', [CheckoutController::class, 'create'])->middleware('cart.not.empty')     ->name('checkout.create'); Route::post('/checkout', [CheckoutController::class, 'store'])->middleware('cart.not.empty')     ->name('checkout.store'); ‣หöอใJjปแบบการgดก¨มของ routes
+
+-- Page 30 --
+26 WARUWU@KKU Middleware: MiniShop ‣การเAยกใJใน routes สามารถใJไiหลาย middleware routes/web.php Route::middleware(['auth', 'cart.not.empty'])->group(function () {     Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout.create');     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store'); }); routes/web.php Route::get('/checkout', [CheckoutController::class, 'create'])->middleware(['auth', 'cart.not.empty'])     ->name('checkout.create'); Route::post('/checkout', [CheckoutController::class, 'store'])->middleware(['auth', 'cart.not.empty'])     ->name('checkout.store'); ‣หöอใJjปแบบการgดก¨มของ routes
+
+-- Page 31 --
+27 WARUWU@KKU Authentication ‣ระบบการsน•นéวตนeใJของ L a r a v e l  1 3  สามารถåดâงไiโดยใJ L i v e w i r e  S t a r t e r  K i t  ±งจะใJ L a r a v e l  F o r t i f y  เrนéว≠เÆนการในการ sน•นéวตน ‣ใJ middleware auth ^kกสíางàนแบบãตโนVåในการตรวจสอบการเQาŒระบบ routes/web.php Route::middleware('auth')->group(function () {   }); Route ที่จะตองเขาสูระบบกอน จึงจะอนุญาต ใหทำงาน
+
+-- Page 32 --
+28 WARUWU@KKU Authentication ‣¿ง¡¬นเcยวUบการเQาŒระบบ^ควรÀgก !"ง การใ(งาน Auth::check() ตรวจสอบสถานะการเQาŒระบบ Auth::id() Üนäาเrน user id ^เQาŒระบบ Auth::user() Üนäาเrน instance ของ User model ^เQาŒระบบ $request->user() Üนäาเrน instance ของ User model ^kกßงมาpาน HTTP Request ->middleware('auth')เAยกใJ middleware ^ตรวจสอบการเQาŒระบบ @auth / @guest ตรวจสอบสถานะการเQาŒระบบภายใน blade
+
+-- Page 33 --
+29 WARUWU@KKU Authentication ‣¿ง¡¬นเcยวUบการเQาŒระบบ^ควรÀgก ExampleMiddleware.php public function handle(Request $request, Closure $next): Response {     $user = $request->user();     if($user->id !== 1) {         return redirect()->route('products.index');     }     return $next($request); } example.blade.php @auth     <p>สวัสดี {{ auth()->user()->name }}</p>     <a href="{{ route('orders.index') }}">Orders</a> @endauth @guest     <a href="{{ route('login') }}">Login</a> @endguest
+
+-- Page 34 --
+WARUWU@KKU References 30 Stauffer, M. (2019). Laravel: Up & running: A framework for building modern php apps.  O'Reilly Media. https://laravel.com/docs/13.x
+
+=== 08 - Laravel Part 02.pdf ===
+PAGES 51
+
+-- Page 1 --
+ห"ก$ตรเทคโนโล-สารสนเทศ สาขา2ชา2ทยาการคอม7วเตอ9 2ทยา"ยการคอม7วเตอ9 มหา2ทยา"ยขอนแ;น ผศ.ดร.ว>ญญา วรรณศA SC362004 WEB APPLICATION PROGRAMMING  การเBยนโปรแกรมประEกFบนเHบ CP351203 WEB PROGRAMMING and APPLICATION  การเBยนโปรแกรมเHบและการประEกFใJ CP410805 WEB APPLICATION DEVELOPMENT  การKฒนาโปรแกรมประEกFบนเHบ 08 - Laravel Part 02
+
+-- Page 2 --
+การเMอมNอOบฐานQอRล การ Query QอRลในSปแบบ Eloquent ORM การเTมQอRลในSปแบบ Eloquent ORM การสUาง Eloquent Model การแWไขQอRลในSปแบบ Eloquent ORM การลบQอRลในSปแบบ Eloquent ORM การYหนดความZมKน[ของ Eloquent ORM 01 Outline WARUWU@KKU
+
+-- Page 3 --
+การเ%อม(อ)บฐาน-อ.ล WARUWU@KKU 
+
+-- Page 4 --
+02 การเ%อม(อ)บฐาน-อ.ล WARUWU@KKU ‣;อน\จะเ^ม_นการ`งานระหaาง L a r a v e l  F r a m e w o r k  OบฐานQอRล จะ_องYหนดรายละเbยดของฐานQอRลภายใน ไฟe .env ;อน fงประกอบgวย •DB_CONNECTION = sqlite hนiอYหนดใjเMอมNอOบ SQLite ‣ในกรk\_องการเMอมNอOบ MySQL •DB_CONNECTION = mysql hนiอYหนดใjเMอมNอOบ mysql •DB_HOST iอ การYหนด host ของฐานQอRล\_องการเMอมNอ fงหากใJเHบเl9ฟเวอ9mลอง จะหมายnง localhost  หoอ 127.0.0.1 •DB_DATABASE iอ การYหนดMอฐานQอRล\_องการเMอมNอ •DB_USERNAME iอ การYหนด username \pqทrในการเMอมNอOบฐานQอRล •DB_PASSWORD iอ การYหนดรsสtานของ username
+
+-- Page 5 --
+03 การเ%อม(อ)บฐาน-อ.ล WARUWU@KKU ‣เuน command line interface \อvภายใน root folder ของ Laravel Framework  ‣เuนwวxวยในการสUางองyประกอบNาง ๆ ของแอปพ|เค}น artisan Migration ‣เuน version control ของฐานQอRล ‣เuนwวxวยในการสUางและแWไข schema ของฐานQอRล โดยYหนด~งNาง ๆ เxน •php artisan make:migration <class_name> เuน~งÄห>บการสUางไฟe migration •php artisan migrate เuน~งÄห>บ run migration •php artisan migrate:fresh เuน~งÄห>บลบตารางQอRลÅงหมด และง run ใหÇbกคÉง •php artisan migrate:refresh เuน~งÄห>บ rollback migration Åงหมด และง run ใหÇbกคÉง •php artisan migrate:rollback เuน~งÄห>บยกเ|กการ run คÉง;อนหÑา
+
+-- Page 6 --
+04 การเ%อม(อ)บฐาน-อ.ล WARUWU@KKU ‣จะไgไฟeMอ YYYY_MM_DD_hhmmii_create_products_table.php  อvในไดเรกทอA database > migrations •YYYY iอ หมายเลขÖ ค.ศ. 4 ห"ก •MM iอ หมายเลขเÜอน 2 ห"ก •DD iอ หมายเลขáน 2 ห"ก •hh iอ หมายเลขàวโมง 2 ห"ก •mm iอ หมายเลขนาâ 2 ห"ก •ii iอ หมายเลข2นาâ 2 ห"ก Command prompt/Terminal LaravelLab > php artisan make:migration create_products_table 
+
+-- Page 7 --
+05 การเ%อม(อ)บฐาน-อ.ล WARUWU@KKU YYYY_MM_DD_hhmmii_create_products_table.php public function up(){     Schema::create('products', function (Blueprint $table) {     $table->id();     $table->string('name');     $table->string('category');     $table->integer('price');     $table->integer('stock');     $table->timestamps();     }); } Note:: สามารถãรายละเbยด Data Types ไg\ https://laravel.com/docs/13.x/migrations#available-column-types Command prompt/Terminal LaravelLab > php artisan migrate Table products 
+
+-- Page 8 --
+การเ%อม(อ)บฐาน-อ.ล WARUWU@KKU Command prompt/Terminal LaravelLab > php artisan make:migration add_note_to_products_table --table=products YYYY_MM_DD_hhmmii_add_note_to_products_table.php public function up(){     Schema::table("products", function (Blueprint $table) {         $table->string("note");     }); } public function down(){     Schema::table("products", function (Blueprint $table) {         $table->dropColumn("note");     }); } ห"งจาก migrate 06
+
+-- Page 9 --
+07 การเ%อม(อ)บฐาน-อ.ล WARUWU@KKU Note:: สามารถãรายละเbยดการแWไข column ไg\ https://laravel.com/docs/8.x/migrations#column-modifiers ‣p"กษณะการแWไขคอ"มçตารางหลายSปแบบเxน การแ1ไข 45ง Yหนด default ใjOบéาของคอ"มçในตาราง table->string("note")->default($value) อèญาตใjéาของคอ"มçในตารางเuน null ไg table->string("note")->nullable() เปêยนMอคอ"มçในตาราง table->renameColumn("from", "to"); ลบคอ"มçในตาราง table->dropColumn("column"); Yหนดใjคอ"มçส"บไปเuนคอ"มçแรก table->string("note")->first() Yหนดใjคอ"มçไปอvห"งจากคอ"มç\Yหนด table->string("note")->after("price") // ใชกับ MariaDB/MySQL // ใชกับ MariaDB/MySQL
+
+-- Page 10 --
+08 การเ%อม(อ)บฐาน-อ.ล WARUWU@KKU Command prompt/Terminal LaravelLab > php artisan migrate:rollback YYYY_MM_DD_hhmmii_add_note_to_products_table.php public function up(){     Schema::table("products", function (Blueprint $table) {         $table->string("note");     }); } public function down(){     Schema::table("products", function (Blueprint $table) {         $table->dropColumn("note");     }); } ;อน Rollback ห"ง Rollback 
+
+-- Page 11 --
+09 การ7ง8า Timezone WARUWU@KKU ‣เëอใjเวลา\íกìนîกในฐานQอRลíก_องตามเวลาไทย ïงควรแWไข Timezone ใน config ของ Laravel ‣แWไขไฟe\ config/app.php ñวนของ Application Timezone config/app.php 'timezone' => 'UTC', config/app.php 'timezone' => 'Asia/Bangkok',
+
+-- Page 12 --
+การส:าง Eloquent Model WARUWU@KKU 
+
+-- Page 13 --
+Controller Routes Controller Client  - Web Browser - API Consumer Model  - Eloquent Models - Service Providers Data Source  MySQL, MongoDB, etc. View  - PHP Templates - Blade Templates 10 การส:าง Eloquent Model WARUWU@KKU ‣ในการKฒนาเHบแอปพ|เค}นgวย L a r a v e l  F r a m e w o r k  \ใJสถาóตกรรมการKฒนาแอปพ|เค}นแบบ M V C  จะpñวน  Model ในการเMอมNอการ`งานOบฐานQอRล โดยpการ`งาน"กษณะ Object Relation Mapper (ORM) ‣ห"กการของ Eloquent ORM iอการmลองตารางQอRลเuน class òงôนïงpการöบõOบตารางQอRล ‣Mอของ Model úยมùงgวย~\ûน_นgวย~นามเอกพจç ûน_นแNละ~gวยwวüกษรภาษาüงกฤษ7ม°ให¢ เxน Food,  Drinking, Comment, BlogPost, Customer, Product เuน_น
+
+-- Page 14 --
+11 WARUWU@KKU ‣สามารถสUาง Model ของQอRลใน Laravel Framework ไgโดยใJ~ง Command prompt/Terminal LaravelLab > php artisan make:model ModelName ‣ผล"พ[จาก php artisan make:model Product จะไgไฟe /app/Models/Product.php /app/Models/Product.php <?php namespace App\Models; use Illuminate\Database\Eloquent\Model; class Product extends Model {         // } ?> การส:าง Eloquent Model
+
+-- Page 15 --
+/app/Models/Product.php 12 WARUWU@KKU ‣โดยปก£ M o d e l  จะpการöบõการ`งานOบตาราง QอRล\pMอเ§ยวOนแบบüตโน•£ หาก_องการเปêยน ตาราง หoอMอตาราง mเuน_องแWไขรายละเbยดใน ไฟe /app/Models/Product.php ‣หoอหาก_องการเปêยนแปลงMอคอ"มç\เuน  Primary Key, แWไขไÇใj P r i m a r y  K e y  เTมéาแบบ üตโน•£¶สามารถแWไขการùงéาไg, แWไขเëอไÇใj ใJคอ"มç\เuน timestamp การส:าง Eloquent Model <?php namespace App\Models; use Illuminate\Database\Eloquent\Model; class Product extends Model {     protected $table = "new_product";     protected $primaryKey = "product_id";     public $incrementing = false;     public $timestamp = false; } ?>
+
+-- Page 16 --
+‣หาก_องการใjสUาง Model และสUางwว migration OบฐานQอRลgวย สามารถใJ~ง Command prompt/Terminal LaravelLab > php artisan make:model Modelname --migration LaravelLab > php artisan make:model Modelname -m 13 WARUWU@KKU ‣ผล"พ[จาก php artisan make:model Product -m จะไgไฟe 2 ไฟeเTมûนมา ไgแ; PHP /app/Models/Product.php PHP /database/migrations/YYYY_MM_DD_HHmmii_create_products_table.php การส:าง Eloquent Model
+
+-- Page 17 --
+‣ใñรายละเbยดคอ"มçใjตาราง products และง migrate เëอใj artisan สUางตารางในฐานQอRล 14 WARUWU@KKU YYYY_MM_DD_HHmmii_create_products_table.php Command prompt/Terminal LaravelLab > php artisan migrate Table products public function up(){     Schema::create('products', function (Blueprint $table) {     $table->id();     $table->string('name');     $table->string('category');     $table->integer('price');     $table->integer('stock');     $table->timestamps();     }); } การส:าง Eloquent Model 
+
+-- Page 18 --
+การ Query -อ.ล WARUWU@KKU 
+
+-- Page 19 --
+15 WARUWU@KKU CRUD vs HTTP Method CRUD HTTP Method ความหมายของ HTTP Method Create POST ñงQอRลเëอสUางQอRลใหÇ หoองใj Server ประมวลผลบางอßาง Read GET ขอ®าน/©งQอRล โดยไÇùงใจเปêยนแปลงQอRล Update PUT แทน\/แWไขQอRลเ™มโดยรวม PATCH แWไขเฉพาะบางñวนของQอRลเ™ม Delete DELETE ขอใjลบQอRล\ระ¨ ‣_องระ¨ HTTP Method ใjเหมาะสมOบงาน\`
+
+-- Page 20 --
+Controller Routes Controller Client  - Web Browser - API Consumer Model  - Eloquent Models - Service Providers Data Source  MySQL, MongoDB, etc. View  - PHP Templates - Blade Templates 16 WARUWU@KKU Query Eloquent ORM Table products's schema  Table products's data 
+
+-- Page 21 --
+17 WARUWU@KKU Query Eloquent ORM Command prompt/Terminal LaravelLab > php artisan make:controller ProductController ProductController.php xProducts 1 -> Mechanical Keyboard 2 -> Wireless Mouse 3 -> Gaming Headset 4 -> USB-C Hub .. products/index.blade.php <body>     @foreach($products as $product)         {{$product->id}} -> {{$product->name}} <br>     @endforeach </body> <?php namespace App\Http\Controllers; use Illuminate\Http\Request; use App\Models\Product; class ProductController extends Controller {     public function index()     {         $products = Product::all();         return view("products.index", [                     "products"=>$products]);     } }
+
+-- Page 22 --
+18 WARUWU@KKU Query Eloquent ORM ‣สามารถ Query Eloquent Model ไggวย method where ‣เAยง≠òบผล"พ[ไggวย method orderBy โดย\หาก_องการเAยง≠òบจากมากไปÑอย ใjเTม parameter "DESC" ‣mOดmนวนผล"พ[ไggวย method take โดยใñmนวนผล"พ[\_องการเuน parameter ‣เAยกใJ method get เëอ>บผล"พ[ ProductController.php $products = Product::where("price", ">", 1000)                        ->orderBy("id", "DESC")                        ->take(2)                        ->get(); xProducts 10 -> 27-inch Monitor 8 -> External SSD 1TB Table products 
+
+-- Page 23 --
+19 WARUWU@KKU Query Eloquent ORM ‣สามารถเBยนเÆอนไขของ method where ไgหลายSปแบบ ProductController.php $products = Product::where("price", ">", 1000)->get(); $products = Product::where("price", "<", 1000)->get(); $products = Product::where("price", 1000)->get(); $products = Product::where("category", "Audio")->get(); $products = Product::where("category", "!=", "Audio")->get(); Table products ‣สามารถYหนด>บผล"พ[เฉพาะQอRลแถวแรกไggวย method first ProductController.php $products = Product::where("price", "<", 1000)->first();
+
+-- Page 24 --
+20 WARUWU@KKU Query Eloquent ORM ‣หากทราบ id ของQอRลแØว สามารถเQาnงQอRลไggวย method findOrFail หากไÇพบQอRลจะใj ModelNotFoundException  öดการในกรk\ไÇเจอQอRล โดยจะแสดงหÑาไÇพบQอRลแทน ProductController.php xProducts 404 | Not Found $product = Product::findOrFail(2); return view("products.index", [             "product"=>$product]); id
+
+-- Page 25 --
+ProductController.php 21 WARUWU@KKU Query Eloquent ORM ‣สามารถหาผล"พ[จาก Aggregate function Nาง ๆ ไgแ; count, max, min, avg, และ sum products/summary.blade.php <body>        มี Accessory ทั้งหมด {{$num_acc}} รายการ <br>        ราคาเฉลี่ยของ Accessory {{$avg_price}} บาท <br> </body> xProducts’ Summary p Accessory Åงหมด 3 รายการ ราคาเฉêยของ Accessory 756.66666666667 บาท $num_acc = Product::where("category", "Accessory")->count(); $max_id = Product::where("category", "Accessory")->max("id"); $min_id = Product::where("category", "Accessory")->min("id"); $avg_price = Product::where("category", "Accessory")->avg("price"); $sum_price = Product::where("category", "Accessory")->sum("price"); return view(______________, compact(_______________________) ; // ใช number_format($avg_price, 2) —> 756.67
+
+-- Page 26 --
+การเ?ม-อ.ล WARUWU@KKU 
+
+-- Page 27 --
+22 WARUWU@KKU ‣ในñวน Model ของ Laravel Framework \pการ`งาน"กษณะ Object Relation Mapper จะpการเQาnงตารางในฐาน QอRล\เMอมNอOบ class ของ Model \สUางûน การเ?ม-อ.ล PHP /app/Models/Product.php ProductController.php $product = Product::find(1); $id = $product->id; $name = $product->name; $type = $product->type; $price = $product->price; $created_at = $product->created_at; $updated_at = $product->updated_at; การเQาnงéาของQอRล Table products's data
+
+-- Page 28 --
+ProductController.php 23 WARUWU@KKU ‣หาก_องการเTมQอRลใหÇในตารางQอRล สามารถเTมไgโดยสUาง instance ของ class ôน ๆ ûนมาใหÇ ‣จากôนYหนดéาใjOบ attribute จากôนเAยกใJเมธอด save เëอìนîกéา xProducts 1 -> Mechanical Keyboard 2 -> Wireless Mouse ..  10 -> 27-inch Monitor 11 -> Pastel Mouse products/index.blade.php <body>     @foreach($products as $product)         {{$product->id}} -> {{$product->name}} <br>     @endforeach </body> การเ?ม-อ.ล class ProductController extends Controller {     public function index()     {         $new_product = new Product();         $new_product->name = "Pastel Mouse";         $new_product->category = "Mouse";         $new_product->price = 590;         $new_product->stock = 6;         $new_product->save();         $products = Product::all();         return view("products.index", compact("products"));     } }
+
+-- Page 29 --
+24 WARUWU@KKU @วอAาง: การเ?ม-อ.ลBนCา xCreate Product [GET] http://minishop.test/products/create PHP /app/Http/Controllers/ProductController.php PHP /routes/web.php Web browsers Controller Controller View
+
+-- Page 30 --
+xCreate Product 25 WARUWU@KKU PHP /app/Http/Controllers/ProductController.php PHP /routes/web.php Controller Controller View [POST] http://minishop.test/products/store Database xProducts 1 -> Mechanical Keyboard 2 -> Wireless Mouse ..  10 -> 27-inch Monitor 11 -> Pastel Mouse 12 -> LED Mouse @วอAาง: การเ?ม-อ.ลBนCา
+
+-- Page 31 --
+products/create.blade.php 26 WARUWU@KKU Cross-Site Request Forgery xCreate Product <form action="{{route('products.store')}}" method="POST">     @csrf     <div><label for="name">ชื่อสินค้า</label>         <input type="text" id="name" name="name" value="{{old('name')}}" required></div>     <div><label for="category">หมวดหมู่</label>         <select id="category" name="category" required>             <option value="">-- เลือกหมวดหมู่ --</option>             <option value="Keyboard" @selected(old('category') === 'Keyboard')>Keyboard</option>             ..             <option value="Monitor" @selected(old('category') === 'Monitor')>Monitor</option>         </select></div>     <div><label for="price">ราคา</label>         <input type="number" id="price" name="price" value="{{old('price')}}" min="0" required></div>     <div><label for="stock">จํานวนสินค้าในสต็อก</label>         <input type="number" id="stock" name="stock" value="{{old('stock')}}" min="0" required></div>     <button type="sub
+
+-- Page 32 --
+ProductController.php (1) WARUWU@KKU Web browsers routes/web.php Route::get('/products/create', [ProductController::class, 'create'])->name("products.create"); Route::post('/products/store', [ProductController::class, 'store'])->name("products.store"); ProductController.php (2) 27 public function create(): View {     return view("products.create"); } public function store(Request $request): RedirectResponse {     $validated = $request->validate([         'name' => ['required', 'string', 'max:255'],         'category' => ['required', 'string'],         'price' => ['required', 'integer', 'min:0'],         'stock' => ['required', 'integer', 'min:0']     ]);     $product = new Product();     $product->name = $validated['name'];     $product->category = $validated['category'];     $product->price = $validated['price'];     $product->stock = $validated['stock'];     $product->save();     return redirect()         ->route('products.show', $product->id); } @วอAาง: การเ?ม-อ.ลBนCา
+
+-- Page 33 --
+$request data name=LED Mouse category=Mouse price=545 stock=3 ProductController.php WARUWU@KKU 28 $validated = $request->validate([     'name' => ['required', 'string', 'max:255'],     'category' => ['required', 'string'],     'price' => ['required', 'integer', 'min:0'],     'stock' => ['required', 'integer', 'min:0'] ]); Validation ‣หากQอRลtาน Validation จะiนเฉพาะQอRล\tานกฎก"บมาเuน array ‣Validation Rules pโครงสUางiอ 'ชื่อ field' => ['rule1', 'rule2', 'rule3'] $validate data [     'name' => 'LED Mouse',     'category' => 'Mouse',     'price' => '545',     'stock' => '12' ]
+
+-- Page 34 --
+$request data name= category=Mouse price=545 stock=3 ProductController.php WARUWU@KKU 29 $validated = $request->validate([     'name' => ['required', 'string', 'max:255'],     'category' => ['required', 'string'],     'price' => ['required', 'integer', 'min:0'],     'stock' => ['required', 'integer', 'min:0'] ]); Validation ‣แNหากไÇtาน L a r a v e l  จะหEดการ`งานของ C o n t r o l l e r  และÄห>บ W e b  F o r m  ปก£จะ redirect ก"บหÑาเ™มพUอม  validation errors และ old input ใjüตโน•£ products/create.blade.php @if($errors->any())     <h3>ข้อมูลไม่ถูกต้อง</h3>     <ul>         @foreach($errors->all() as $error)             <li>{{ $error }}</li>         @endforeach     </ul> @endif
+
+-- Page 35 --
+30 WARUWU@KKU products/create.blade.php <form action="{{route('products.store')}}" method="POST">     @csrf     <div><label for="name">ชื่อสินค้า</label>         <input type="text" id="name" name="name" value="{{old('name')}}" required></div>     <div><label for="category">หมวดหมู่</label>         <select id="category" name="category" required>             <option value="">-- เลือกหมวดหมู่ --</option>             <option value="Keyboard" @selected(old('category') === 'Keyboard')>Keyboard</option>             ..             <option value="Monitor" @selected(old('category') === 'Monitor')>Monitor</option>         </select></div>     <div><label for="price">ราคา</label>         <input type="number" id="price" name="price" value="{{old('price')}}" min="0" required></div>     <div><label for="stock">จํานวนสินค้าในสต็อก</label>         <input type="number" id="stock" name="stock" value="{{old('stock')}}" min="0" required></div>     <button type="submit">เพิ่มสินค้า</button>  </form> Validati
+
+-- Page 36 --
+การแ1ไข-อ.ล WARUWU@KKU 
+
+-- Page 37 --
+31 WARUWU@KKU ‣หาก_องการแWQอRลในตารางQอRล สามารถแWไขไgโดยYหนดéาใหÇลงบน instance ของ class ôน ๆ ‣จากôนYหนดéาใjOบ attribute จากôนเAยกใJเมธอด save เëอìนîกéา การแ1ไข-อ.ล ProductController.php public function update(Request $request, int $id): RedirectResponse {     // $validated แบบเดียวกับ store     $product = Product::findOrFail($id);     $product->name = $validated['name'];     $product->category = $validated['category'];     $product->price = $validated['price'];     $product->stock = $validated['stock'];     $product->save();     return redirect()         ->route('products.show', $product->id); } ProductController.php Product::where("price",1000)->update(["price"=>1100]); ‣หoอสามารถใJเมธอด update เëอแWไขQอRลไg
+
+-- Page 38 --
+32 WARUWU@KKU การแ1ไข-อ.ล products/edit.blade.php <form action="{{route('products.update', $product)}}" method="POST">     @csrf     @method('PUT')     <div>         <label for="name">ชื่อสินค้า</label>         <input type="text" id="name" name="name" value="{{ old('name', $product->name) }}" required>     </div>     <!-- แบบฟอร์มที่เหลือ -->     <button type="submit">บันทึกการแก้ไข</button> </form> ‣HTML <form> รอง>บ method ห"ก ๆ เ≤ยง GET และ POST ‣Laravel ïงใJเทคúค\เAยกaา Form Method Spoofing iอñง Request จ≥งเuน POST แNใñQอRลเTมเ£มaาใj Laravel มอง Request ¥เuน PUT ‣หากpéาจากการ Submit คÉง;อน ใjใJ old('name') แNµาไÇp ใjใJ $product->name routes/web.php Route::get('/products/{pid}/edit', [ProductController::class, 'edit'])->whereNumber('pid')->name("products.edit"); Route::put('/products/{pid}', [ProductController::class, 'update'])->whereNumber('pid')->name("products.update");
+
+-- Page 39 --
+การลบ-อ.ล WARUWU@KKU 
+
+-- Page 40 --
+33 WARUWU@KKU การลบ-อ.ล ‣Äห>บการลบQอRล จะñง Request จ≥งเuน POST แNใñQอRลเTมเ£มaาใj Laravel มอง Request ¥เuน DELETE products/index.blade.php <form action="{{route('products.destroy', $product)}}" method="POST"        onsubmit="return confirm('ยืนยันการลบสินค้านี้หรือไม่?');">     @csrf     @method('DELETE')     <button type="submit">ลบ</button> </form> xProducts routes/web.php Route::delete('/products/{pid}', [ProductController::class, 'destroy'])->whereNumber('pid')->name("products.destroy");
+
+-- Page 41 --
+34 WARUWU@KKU การลบ-อ.ล ‣สามารถลบQอRลจาก Query Eloquent Model ไggวย method delete Table products ProductController.php Product::where("stock",0)->delete(); $led_mouse = Product::find(7); $led_mouse->delete();
+
+-- Page 42 --
+35 WARUWU@KKU ‣นอกจาก¥ Eloquent สามารถใJ∂ณสมì£ Soft Delete Model ไg ‣เ∑อYหนดใj Model p∂ณสมì£ Soft Delete ตารางQอRล\íก∏กOบ Model จะpคอ"มç deleted_at เTมûนมา ‣เ∑อpการงลบQอRล ระบบจะìนîกเวลา\íกงใjลบในคอ"มç deleted_at และเ∑อpการเAยกใJQอRลห"งจากôน ระบบ จะไÇπQอRล\pการìนîกในคอ"มç deleted_at มาใJ การลบ-อ.ล: Soft Delete Table products 
+
+-- Page 43 --
+/app/Models/Product.php 36 WARUWU@KKU ‣การùงéาใj Model เuน Soft Delete mเuน_องเAยกใJ∂ณสมì£ในไฟeของ Model การลบ-อ.ล: Soft Delete <?php namespace App\Models; use Illuminate\Database\Eloquent\Model; use Illuminate\Database\Eloquent\SoftDeletes; class Product extends Model {    use SoftDeletes; } ?>
+
+-- Page 44 --
+37 WARUWU@KKU ‣และ_องเTมคอ"มç deleted_at ในตารางQอRล โดยใJ Schema builder YYYY_MM_DD_HHmmii_add_soft_delete_to_product.php public function up(){     Schema::table('products', function (Blueprint $table) {         $table->softDeletes();     }); } public function down(){     Schema::table('products', function (Blueprint $table) {         $table->dropSoftDeletes();     }); } Command prompt/Terminal LaravelLab > php artisan migrate การลบ-อ.ล: Soft Delete Table products’s schema Table products’s schema 
+
+-- Page 45 --
+38 WARUWU@KKU ‣เ∑อลบQอRลtาน Model \เuน Soft Delete จะเuนการìนîกเวลา\íกงลบแทน และจะไÇπQอRลôนมาใJงาน การลบ-อ.ล: Soft Delete ProductController.php Product::where("stock",0)->delete(); $led_mouse = Product::find(7); $led_mouse->delete(); Table products
+
+-- Page 46 --
+39 WARUWU@KKU ‣อßางไร¶ตาม ระบบ∫งสามารถ Query QอRล\íกลบgวย Soft Delete ไปไggวยการเAยกใJ method withTrashed การลบ-อ.ล: Soft Delete Table products xWithTrash ‣dd($var1 [, $var2, ..]) (Dump and Die) เuน  Helper Function Äห>บ D e b u g  โดยจะแสดงéาของ wวแปร แØวหEดการ`งานªนâ ProductController.php $products = Product::all(); $products_wt = Product::withTrashed()->get(); dd($products,$products_wt);
+
+-- Page 47 --
+40 WARUWU@KKU ‣สามารถเAยกQอRล\íกลบgวย Soft Delete ก"บiนไggวยการเAยกใJ method restore การลบ-อ.ล: Soft Delete Table productsProductController.php Product::withTrashed()->find(7)->restore();
+
+-- Page 48 --
+40 WARUWU@KKU ‣สามารถเAยกQอRล\íกลบgวย Soft Delete ก"บiนไggวยการเAยกใJ method restore การลบ-อ.ล: Soft Delete Table products ProductController.php Product::withTrashed()->find(7)->restore();
+
+-- Page 49 --
+41 WARUWU@KKU ‣หาก_องการลบQอRลอßางถาวรจาก Model \เuน Soft Delete สามารถเAยกใJ method forceDelete การลบ-อ.ล: Soft Delete Table productsProductController.php Product::find(7)->forceDelete();
+
+-- Page 50 --
+41 WARUWU@KKU ‣หาก_องการลบQอRลอßางถาวรจาก Model \เuน Soft Delete สามารถเAยกใJ method forceDelete การลบ-อ.ล: Soft Delete Table productsProductController.php Product::find(7)->forceDelete(); 
+
+-- Page 51 --
+Stauffer, M. (2019). Laravel: Up & running: A framework for building modern php apps.  O'Reilly Media. WARUWU@KKU References https://laravel.com/docs/13.x 42
+
+=== 07 - Laravel Part 01.pdf ===
+PAGES 52
+
+-- Page 1 --
+ห"ก$ตรเทคโนโล-สารสนเทศ สาขา2ชา2ทยาการคอม7วเตอ9 2ทยา"ยการคอม7วเตอ9 มหา2ทยา"ยขอนแ;น ผศ.ดร.ว>ญญา วรรณศA SC362004 WEB APPLICATION PROGRAMMING  การเBยนโปรแกรมประEกFบนเHบ CP351203 WEB PROGRAMMING and APPLICATION  การเBยนโปรแกรมเHบและการประEกFใJ CP410805 WEB APPLICATION DEVELOPMENT  การKฒนาโปรแกรมประEกFบนเHบ 07 - Laravel Part 01
+
+-- Page 2 --
+Laravel Framework 01 Outline WARUWU@KKU PHP Framework และ MVC Controllers & Routes Views & Layouts Blade Template
+
+-- Page 3 --
+02 PHP Framework WARUWU@KKU ‣EคแรกในการKฒนาเHบแอปพNเคOน PกKฒนาจะRองเBยนโปรแกรมเTอUดการแทบจะVกWวนของเHบไซF ไZ[าจะเ\นเ]อม^อ  HTTP request การเ]อม^อ_บฐานaอbล การตรวจสอบการเaาcระบบของdใJ ‣รวมeงdKฒนาจะRองUดการfดgง Library ^าง ๆ iRองใJjวม_นเองkวย ‣PHP Framework lอ การรวมองmประกอบ (component) หnอ package iใJในการKฒนาเHบkวยภาษา PHP หลาย ๆ Wวนเaา kวย_น โดยqการUดการใrองmประกอบเหsาtนuงานjวม_นไkอvางราบwน qการgงxาเTอเ]อม^อ service ^าง ๆ เaาkวย_น  รวมeงการUดการการyน_นของ Library ^าง ๆ kวย
+
+-- Page 4 --
+03 PHP Framework WARUWU@KKU ‣การKฒนาเHบแอปพNเคOนkวย framework ในEคแรก เzมRนจาก Ruby on Rails ใน{ ค.ศ.2004 และ|อเ\น framework iq}ท~พล^อการKฒนา web application framework ในEค^อไปkวย ‣CakePHP เ\น P H P  f r a m e w o r k  วแรกiÄกKฒนาyนใน{ 2 0 0 5  ห"งจากtนÅq S y m f o n y ,  C o d e I g n i t e r ,  Z e n d  F r a m e w o r k   และ Kohana iแยกออกมาจาก CodeIgniter ตามมา 
+
+-- Page 5 --
+04 PHP Framework WARUWU@KKU ‣FuelPHP และ Laravel ÄกปsอยใrใJงานใน{ 2011  ‣PHP Framework WวนมากเÇนการuงานไปiการเ]อมโยงโครงสÉาง_บฐานaอbล ( O b j e c t - R e l a t i o n a l  M a p p e r s :  O R M s )  และ การKฒนาเHบแอบพNเคOนตามสถาÖตยกรรมแบบ MVC (Model-View-Controller) ‣aอÜของการใJ PHP Framework •áวยใrเBยนโàดเ\นâปแบบมาตรฐาน ลดและäUดโàดWวนiไZãเ\น •ลดระยะเวลาในการuงาน •สPบสåนการuงานเ\นçม เéองจากใJมาตรฐานของ framework ในการKฒนา และèêง>กษาโปรแกรมไkëายyน 
+
+-- Page 6 --
+05 Model-View-Controller WARUWU@KKU ‣Model-View-Controller หnอ MVC lอ สถาÖตยกรรมในการKฒนาซอฟFแว9iแìงWวนระห[าง Model (aอbล) View (Wวนแสดง ผล) และ Controller (การประสานงานระห[างaอbลและWวนแสดงผล) ออกจาก_น ‣เ\นแนวîดiแยกWวนการuงานออกเ\นïนWวนเñก ๆ และóมาประสานเTอใruงานjวม_น uใrëาย^อการKฒนาแอปพNเคOน Controller Routes Controller Client  - Web Browser - API Consumer Model  - Eloquent Models - Service Providers Data Source  MySQL, MongoDB, etc. View  - PHP Templates - Blade Templates
+
+-- Page 7 --
+Model  - Eloquent Models - Service Providers Data Source  MySQL, MongoDB, etc. 06 Model-View-Controller WARUWU@KKU ‣เ\นWวนiประสานงานระห[าง O b j e c t  ของ P H P  และฐานaอbล โดยidKฒนาไZRองใJภาษา S Q L  ในการเAยกใJ aอbล เéองจาก Model จะผสานการuงานระห[าง Object ใrเaา_บการuงานของฐานaอbลใrแòว (Mapping) ‣การผสาน"กษณะของ Object และฐานaอbลในiôöงรวมeงWวนของตรรกะทางõรúจ (Business Logic) ùกkวย ‣นอกจากôöงqหÇาในUดการเwองûน ๆ iเüยวaอง_บฐานaอbล เáน การตรวจสอบความÄกRองของaอbลในฐาน aอbล (validation) การUดการความ†มKน°ระห[างaอbล (association) การUดการ transaction เ\นRน Model
+
+-- Page 8 --
+Controller Routes Controller Client  - Web Browser - API Consumer View  - PHP Templates - Blade Templates 07 Model-View-Controller WARUWU@KKU ‣เ\นWวนการแสดงผล โดยจะแสดงผล¢าน web browser ‣โดย£นฐานจะเ\นไฟ§iประกอบkวยภาษา HTML และ PHP script uงานjวม_น_บWวน Controller กsาวlอ View จะ óaอbลiไkจาก Controller มาแสดงผล ‣สามารถäหนด t e m p l a t e  และ s t y l e  s h e e t  jวม_นระห[างไฟ§ในWวน v i e w  เTอใrเHบแอปพNเคOนqâปแบบการแสดง ผลiเ\นมาตรฐานเÜยว_น View
+
+-- Page 9 --
+Controller Routes Controller Client  - Web Browser - API Consumer Model  - Eloquent Models - Service Providers View  - PHP Templates - Blade Templates 08 Model-View-Controller WARUWU@KKU ‣เ\นWวนiuงานเ\น•น¶บแรก เßอเHบแอปพNเคOนÄกเAยกใJงานจาก web browser ‣uงาน^อประสานระห[างdใJ และเHบแอปพNเคOน ‣Controller |อ[าเ\นWวนประมวลผลห"กของเHบแอปพNเคOน โดยจะ>บการ®งงานจากdใJ เAยกใJaอbล¢านWวน  Model ประมวลผลaอbล และWงaอbลไปใrWวน View แสดงผล Controller
+
+-- Page 10 --
+Laravel Framework WARUWU@KKU 
+
+-- Page 11 --
+09 Laravel Framework WARUWU@KKU ‣เ\น PHP Framework iใJในการKฒนาเHบแอปพNเคOนkวยสถาÖตยกรรมแบบ MVC ‣Kฒนาโดย Taylor Otwell ใน{ 2011 ‣Laravel q©ด™งหมายเTอเ\นรากฐานของการKฒนาเHบแอปพNเคOน เTอใrPกKฒนาสามารถKฒนาเHบแอปพNเคOนไk โดยëาย ¢านการเBยนโàดiqไวยากร´iสวยงาม สามารถóเวลาไปสÉางสรรmเHบไซFไkโดยไZRอง¨งยาก_บงานเñก ๆ  Çอย ๆ 
+
+-- Page 12 --
+10 !ด#ง Laravel Framework WARUWU@KKU ‣ในการfดgง Laravel Framework ãเ\นจะRองเตAยมสภาพแวดòอมของเคwอง ¶งô •ซอฟFแว9≠ห>บãลองเHบเÆ9ฟเวอ9 เáน •             version 7.3 yนไป •Composer เคwองØอ≠ห>บUดการ Library iãเ\นจะRองใJงานใน project ภาษา PHP •                         version LTS (Long Term Support) ≠ห>บUดการWวน front-end •IDE (Integrated Development Environment) หnอ Code Editor iใJ≠ห>บเBยนโàด 
+
+-- Page 13 --
+11 !ด#ง Laravel Framework WARUWU@KKU ‣Composer lอ เคwองØอiใJUดการ Library iãเ\น^อการใJงานใน project iä"งKฒนา ‣A Dependency Manager for PHP ‣dKฒนาจะระ∞ Library iRองการใJไ±ในไฟ§ composer .json โดย Composer จะ≤านไฟ§และ fดgง Library iRองการตาม version iเหมาะสมในการใJงาน และสามารถ update Library ไk kวย≥®งเÜยว 
+
+-- Page 14 --
+12 ส&าง Laravel Project: Laravel Herd WARUWU@KKU ᶃ ᶄ ᶇ ᶅ ᶆ ᶈuncheck ᶉ ติดตั้งระบบยืนยันตัวตน
+
+-- Page 15 --
+./public เÅบไดเรกทอAและไฟ§ index javascript css โดยไฟ§เหsาôสามารถเaาeงไkแบบสาธารณะ รวมeงไฟ§ .htaccess ÅÄก วางiไดเรกทอAô 13 โครงส&างของ Laravel Framework WARUWU@KKU ‣ห"งจากการfดgง Laravel ภายในไดเรกทอA จะประกอบkวยไดเรกทอAและไฟ§≠µญ ¶งô ./app เÅบไดเรกทอAและไฟ§ Controller และ Model iใJในการประมวลผล และเ]อม^อ_บฐานaอbล ./database เÅบไดเรกทอAและไฟ§≠ห>บ Migrate และ Seeding iใJในการสÉางตารางaอbล หnอเ∂มaอbลในฐานaอbล¢าน≥®ง  artisan ของ Laravel ./config เÅบไฟ§iใJในการgงxา^าง ๆ ของระบบ Laravel Framework
+
+-- Page 16 --
+./vendor เÅบไดเรกทอAและไฟ§iเüยวaอง_บ Library ^าง ๆ iÄกfดgงkวย Composer ./resources เÅบไดเรกทอAและไฟ§iใJในWวนของการแสดงผล^าง ๆ เáน Views และWวนiเüยวaอง 14 โครงส&างของ Laravel Framework WARUWU@KKU ‣ห"งจากการfดgง Laravel ภายในไดเรกทอA จะประกอบkวยไดเรกทอAและไฟ§≠µญ ¶งô ./routes เÅบไดเรกทอAและไฟ§iเüยวaอง_บการäหนด URL ของเHบ ./storage เÅบไดเรกทอAและไฟ§i Blade Engine ไk complied มาแòว และUดเÅบaอbล Session และ caches ^าง ๆ
+
+-- Page 17 --
+json composer.json Project dependencies manifest: ไฟ§iใJระ∞ Library และ dependencies iãเ\น^อการuงานของ project 15 โครงส&างของ Laravel Framework WARUWU@KKU ‣ห"งจากการfดgง Laravel ภายในไดเรกทอA จะประกอบkวยไดเรกทอAและไฟ§≠µญ ¶งô env .env ไฟ§iใJgงxาสภาพแวดòอมการuงานของ Laravel artisan Artisan command-line utility
+
+-- Page 18 --
+Controllers & Routes WARUWU@KKU 
+
+-- Page 19 --
+Controller Routes Controller Client  - Web Browser - API Consumer Model  - Eloquent Models - Service Providers Data Source  MySQL, MongoDB, etc. View  - PHP Templates - Blade Templates 16 Laravel และ MVC WARUWU@KKU ‣Laravel qสถาÖตกรรมในการKฒนาเHบแอปพNเคOนแบบ MVC dKฒนา∑งãเ\นRองเaาใจห"กการuงาน£นฐาน ¶งô •การสÉาง Route •การสÉาง Controller •การWงaอbลไปแสดงผลi View
+
+-- Page 20 --
+17 การส&าง Controller WARUWU@KKU ‣≠ห>บการสÉาง Controller tน สามารถใJเคwองØอ Artisan ∏งใJงาน¢าน command line ในการสÉาง ¶งô command line php artisan make:controller FirstController ‣FirstController lอ ]อของ Controller iสÉางyน โดยปกfπกgง]อใryนRนkวยว•กษร7ม∫ใหª แòวตามkวย≥ [า Controller ‣โดยจะเAยกใJ≥®ง¶งกsาวเßอไดเรกทอAiuงานÖจ©ºน lอ ไดเรกทอAของ p r o j e c t  iสÉางyน เáน C:/Users/ username/Herd/projectname ‣Controller iสÉาง จะปรากฎเ\นไฟ§ p h p  อæในไดเรกทอA app/Http/Controllers ∏งจะสามารถเBยน โปรแกรมเTอuงาน_บ FirstController iสÉางไkในไฟ§ FirstController.php
+
+-- Page 21 --
+18 WARUWU@KKU app/Http/Controllers/FirstController.php resources/views/welcome.blade.php ระบุวา function จะคืนคาเปน String class FirstController extends Controller {     public function index(): string     {         return "Hello, from FirstController.";     }     public function getParams($number)     {         return "Hello, we got $number";     }     public function callViews()     {         return view("welcome");     } } การส&าง Controller
+
+-- Page 22 --
+19 การส&าง Route WARUWU@KKU ‣เøดไฟ§ routes/web.php เTอäหนดเ¿นทาง (route) หnอ URL idใJRองการเaาeง ‣âปแบบไวยากร´ของการสÉางเ¿นทาง สามารถใJตามâปแบบ¶งô routes/web.php xlocalhost/ProjectNa Hello, First Route http://laravellab.test/firstRoute http://laravellab.test/ Route::get('/firstRoute', function(){     return "Hello, First Route"; }); Route::get('/', function(){     return view("welcome"); }); resources/views/welcome.blade.php xLaravel
+
+-- Page 23 --
+20 WARUWU@KKU routes/web.php Route::get('/firstRoute', function(){     return "Hello, First Route"; }); Route::get('/', function(){     return view("welcome"); }); Route Verbs •get('path', $callback) •post('path', $callback) •put('path', $callback) •delete('path', $callback) •any('path', $callback) •match(['get', 'post'], 'path', $callback) การส&าง Route ‣ระ∞ method iใJในการWง Request เขียนแบบสั้น ๆ ไดดวยRoute::view("/", "welcome");
+
+-- Page 24 --
+21 Route และ Controller WARUWU@KKU การส&าง Route เ2อเ3อม5บการ7งานใน Controller routes/web.php app/Http/Controllers/FirstController.php use App\Http\Controllers\FirstController; Route::get('/toController', [FirstController::class, "index"]); xlocalhost/ProjectNa Hello, from FirstController. http://laravellab.test/toController class FirstController extends Controller {     public function index()     {         return "Hello, from FirstController.";     } } ประกาศ Controller ให Route รูจัก **หามลืม**
+
+-- Page 25 --
+22 Laravel และ MVC WARUWU@KKU การส&าง Route แบบ:ง parameter routes/web.php app/Http/Controllers/FirstController.php xhttp://laravellab.test Hello, we got 20 http://laravellab.test/toController/20 class FirstController extends Controller {     public function getParams($number)     {         return "Hello, we got $number";     } } use App\Http\Controllers\FirstController; Route::get('/toController/{number}', [FirstController::class, "getParams"]);
+
+-- Page 26 --
+23 Laravel และ MVC WARUWU@KKU การส&าง Route Names routes/web.php ‣การสÉาง Route Name เ\น2¡iสะดวก≠ห>บการ¬างeง route จากVก ๆ iในเHบแอปพNเคOน ‣สามารถใJ route() ∏งเ\น helper เTอสÉาง URL จาก Route Name use App\Http\Controllers\FirstController; Route::get('/toController', [FirstController::class, "index"])->name("first.idx"); display.blade.php <a href="<?php echo route('first.idx'); ?>">FirstController</a>  xLaravel FirstController href="http://laravellab.test/toController" สามารถตรวจสอบ r o u t e  iq√งหมดไkkวย  php artisan route:list
+
+-- Page 27 --
+24 ;วอ=าง Minishop WARUWU@KKU app/Http/Controllers/ProductController.php use Illuminate\View\View; class ProductController extends Controller {     private function getProducts(): array {..};     public function index(): View     {         $products = $this->getProducts();         return view("products.index",["products" => $products]);     }     public function show(string $id): View     {         // โค้ดตรวจสอบรหัสสินค้า และดึงข้อมูลจาก $products         abort_if($product === null, 404);         return view("products.show",["product" => $product]);     } } // คืนคาเปน array ขอมูลสินคา // คืนคาเปน view ที่แสดงสินคาทุกชนิด // คืนคาเปน view ที่แสดงสินคาตาม id ที่ไดรับ
+
+-- Page 28 --
+25 ;วอ=าง Minishop WARUWU@KKU routes/web.php use App\Http\Controllers\ProductController; Route::get('/products', [ProductController::class, "index"])        ->name("products.idx"); Route::get('/products/{id}', [ProductController::class, "show"])        ->whereNumber("id");        ->name("products.show"); http://minishop.test/products xLaravel http://minishop.test/products/2 xLaravel http://minishop.test/products/x xLaravel 
+
+-- Page 29 --
+26 View และ Layout WARUWU@KKU ‣Views lอWวนi Laravel ใJแสดงผล ∏งจะÄกUดเÅบไ±iไดเรกทอA resources/views ‣ใน Laravel ใJ Blade Template áวยUดการการแสดงผล Uดโàดใrเ\นระเƒยบมาก≈งyน ‣ùก∆ณสมºfห«งiáวยใrdKฒนาสะดวกในการสÉางหÇาแสดงผลมาก≈งyน lอ Template Inheritance resources/views/layouts/app.blade.php <title>App Name -            </title>title sidebar This is the master sidebar. <div class="container"> </div> content # »าไฟ§ió template ไปใJ q section i]อเหØอน_น จะóมา^อ <html>     <head>         <title>App Name - @yield('title')</title>     </head>     <body>         @section('sidebar')             This is the master sidebar.         @show           <div class="container">             @yield('content')         </div>     </body> </html>
+
+-- Page 30 --
+WARUWU@KKU resources/views/child.blade.php <title>App Name -            </title>title sidebar <div class="container"> </div> content @extends('layouts.app')   @section('title', 'Page Title')   @section('sidebar')     @parent       <p>This is appended to the master sidebar.</p> @endsection   @section('content')     <p>This is my body content.</p> @endsection # โàดใน section ôจะรวม_บ code ใน section iq]อเหØอน_น ใน template 27 …งเอา template มาใJ View และ Layout ‣สÉาง View child มา แòว…ง Layout app iสÉางไ±มาใJ
+
+-- Page 31 --
+WARUWU@KKU resources/views/child.blade.php <title>App Name -            </title>title sidebar <div class="container"> </div> content @extends('layouts.app')   @section('title', 'Page Title')   @section('sidebar')     @parent       <p>This is appended to the master sidebar.</p> @endsection   @section('content')     <p>This is my body content.</p> @endsection # โàดใน section ôจะรวม_บ code ใน section iq]อเหØอน_น ใน template <title>App Name - Page Title </title> This is the master sidebar. This is appended to the master sidebar. This is my body content. 27 …งเอา template มาใJ View และ Layout ‣สÉาง View child มา แòว…ง Layout app iสÉางไ±มาใJ
+
+-- Page 32 --
+WARUWU@KKU 28 routes/web.php app/Http/Controllers/FirstController.php <div class="container"> </div> <title>App Name - Page Title </title> This is the master sidebar. This is appended to the master sidebar. This is my body content. child.blade.php xPage Title This is the master sidebar. This is appended to the master sidebar. This is my body content. use App\Http\Controllers\FirstController; Route::get('/layout', [FirstController::class, "showLayout"]); class FirstController extends Controller {     public function showLayout()     {         return view("child");     } } View และ Layout
+
+-- Page 33 --
+Blade Template WARUWU@KKU 
+
+-- Page 34 --
+29 Blade Template WARUWU@KKU ‣ในการKฒนาเHบแอปพNเคOนkวย L a r a v e l  F r a m e w o r k  iใJสถาÖตกรรมการKฒนาแอปพNเคOนแบบ M V C  โดยในWวน  Views ∏งเ\นWวนแสดงผล จะใJ template engine iเAยก[า Blade ‣สามารถใJเคwองหมาย {{$variable}} ในการแสดงผลxาของวแปร แบบเÜยว_น_บ≥®ง <?=$variable?> ของ  ภาษา PHP ปกf ‣นอกจากô การใJ {{$variable}} จะแสดงผลของวแปรโดยเAยกใJ งÀOน htmlentities() โดย•ตโนπfkวย   ÃนlอเçยบเÕา <?=htmlentities($variable)?> example.blade.php <h1> {{ $heading }} </h1> $heading = "Heading Lv.<1>"; Heading Lv.&lt;1&gt; htmlentities()
+
+-- Page 35 --
+30 Blade Template: Control Structures WARUWU@KKU ‣ใJ≥®ง @if เTอระ∞การuงานแบบเŒอนไข โดยจะใJควบœ_บ @endif ∏งจะเçยบเÕา_บการใJ <?php  if(condition){}?> ของภาษา PHP ปกf ‣สามารถใJ @elseif และ @else ไkเหØอนการเBยน≥®งเŒอนไขแบบปกf >?งเ@อนไข example.blade.php xExample Value is 2. @if($var==1)     Value is 1. @elseif($var==2)     Value is 2. @else     Value is {{$var}}. @endif $var = 2;
+
+-- Page 36 --
+31 Blade Template: Control Structures WARUWU@KKU ‣ใน B l a d e  q≥®งเŒอนไขเ∂มเfมจาก P H P  ปกflอ≥®ง @unless เTอระ∞การuงานแบบไZตรง_บเŒอนไข โดยจะใJ ควบœ_บ @endunless ∏งจะเçยบเÕา_บการใJ <?php if(!condition){}?> ของภาษา PHP ปกf >?งเ@อนไข example.blade.php @unless($var==1)     Value is not 1. @endunless $var = 2; xExample Value is not 1.
+
+-- Page 37 --
+32 Blade Template: Control Structures WARUWU@KKU ‣ใJ≥®ง @for เTอระ∞การuงานแบบวน– โดยจะใJควบœ_บ @endfor >?งวนB example.blade.php  xExample The number is 0. The number is 1. The number is 2. @for($i=0; $i<3; $i++)     The number is {{$i}}.<br> @endfor
+
+-- Page 38 --
+33 Blade Template: Control Structures WARUWU@KKU ‣ใJ≥®ง @foreach เTอระ∞การuงานแบบวน– โดยจะใJควบœ_บ @endforeach >?งวนB example.blade.php  xExample book pen rubber $items = ["book", "pen", "rubber"]; @foreach($items as $item)    {{$item}}<br> @endforeach
+
+-- Page 39 --
+34 Blade Template: Control Structures WARUWU@KKU ‣ใJ≥®ง @while เTอระ∞การuงานแบบวน– โดยจะใJควบœ_บ @endwhile >?งวนB example.blade.php  xExample rubber pen book @while($item = array_pop($items))    {{$item}}<br> @endwhile $items = ["book", "pen", "rubber"];
+
+-- Page 40 --
+35 Blade Template: Control Structures WARUWU@KKU ‣ใJ≥®ง @forelse เTอระ∞การuงานแบบวน– โดยจะใJควบœ_บ @endforelse อvางไรÅตาม ≥®ง @forelse  จะสÉางทางเ—อกใrในกร“i object iÄกใJในการวน–เ\นxา[าง >?งวนB example.blade.php xExample No items. $items = []; @forelse($items as $item)    {{$item}}<br> @empty    No items.<br> @endforelse
+
+-- Page 41 --
+การ:งCอDลไปFง Views WARUWU@KKU 
+
+-- Page 42 --
+36 การ:งCอDลไปFง Views WARUWU@KKU ‣ในการKฒนาเHบแอปพNเคOนkวย Laravel Framework iใJสถาÖตกรรมการKฒนาแอปพNเคOนแบบ MVC จะqการWง aอbลไปöง Views ∏งเ\นWวนแสดงผลอæเสมอ Controller Routes Controller Client  - Web Browser - API Consumer Model  - Eloquent Models - Service Providers Data Source  MySQL, MongoDB, etc. View  - PHP Templates - Blade Templates
+
+-- Page 43 --
+37 การ:งCอDลไปFง Views WARUWU@KKU ‣ในWวนของ Controller จะระ∞ใrWงการuงานไปöงWวนแสดงผลkวยการ return view() app/Http/Controllers/FirstController.php xExample Today's items  No items class FirstController extends Controller {     public function welcome(){         return view("example");     } } example.blade.php <body> <h1>Today's items</h1> @if(isset($items))     @foreach($items as $item)         - {{$item}}<br>     @endforeach @else     No items<br> @endif </body>
+
+-- Page 44 --
+38 การ:งCอDลไปFง Views WARUWU@KKU ‣สามารถWงxาของวแปรจาก Controller ไปแสดงผลi Views ไkkวย งÀOน with("name_in_views", $value) app/Http/Controllers/FirstController.php xExample Today's items  - book - pen - rubber class FirstController extends Controller {     public function welcome(){         $items = ["book", "pen", "rubber"];         return view("example")->with("items", $items);     } } example.blade.php <body> <h1>Today's items</h1> @if(isset($items))     @foreach($items as $item)         - {{$item}}<br>     @endforeach @else     No items<br> @endif </body>
+
+-- Page 45 --
+39 การ:งCอDลไปFง Views WARUWU@KKU ‣หากRองการWงxาของวแปรหลายxาkวย งÀOน with("name_in_views", $value) สามารถใJ งÀOน  with("name_in_views", $value) ^อไปไkเwอย ๆ app/Http/Controllers/FirstController.php xLaravel Hello, Alice. Today's items contain  - book - pen - rubber class FirstController extends Controller {     public function welcome(){         $user = "Alice";         $items = ["book", "pen", "rubber"];         return view("example")->with("user", $user)->with("items", $items);     } } example.blade.php <body> <h1>Hello, {{$user}}. Today's items contain</h1> @foreach($items as $item)     - {{$item}}<br> @endforeach </body>
+
+-- Page 46 --
+40 การ:งCอDลไปFง Views WARUWU@KKU ‣ในกร“iRองการWงxาของวแปรหลายxาจาก C o n t r o l l e r  ไปแสดงผลi V i e w s  ÅสามารถWง¢าน งÀOน  view("view_name", $array) ไkเáน_น app/Http/Controllers/FirstController.php xLaravel Hello, Alice. Today's items contain  - book - pen - rubber class FirstController extends Controller {     public function welcome(){         $user = "Alice";          $items = ["book", "pen", "rubber"];         return view("example", ["user"=>$user, "items"=>$items]);     } } example.blade.php <body> <h1>Hello, {{$user}}. Today's items contain</h1> @foreach($items as $item)     - {{$item}}<br> @endforeach </body>
+
+-- Page 47 --
+41 การ:งCอDลไปFง Views WARUWU@KKU ‣หnอสามารถใJ งÀOน compact() ในการรวมวแปรหลาย ๆ xาเTอWงไปแสดงผลi Views app/Http/Controllers/FirstController.php class FirstController extends Controller {     public function welcome(){         $user = "Alice";           $items = ["book", "pen", "rubber"];         return view("example", compact("user", "items"));     } } xLaravel Hello, Alice. Today's items contain  - book - pen - rubber example.blade.php <body> <h1>Hello, {{$user}}. Today's items contain</h1> @foreach($items as $item)     - {{$item}}<br> @endforeach </body>
+
+-- Page 48 --
+42 ;วอ=าง Minishop WARUWU@KKU resources/views/layouts/app.blade.php <title>            </title>title <header> .. </header> <hr> <main> </main> content <hr> <footer> .. </footer> http://minishop.test/products xLaravel content title // ถา View ที่ extends Layout นี้ไปใช  ไมไดกำหนด Section title ใหใชคำวา Mini Shop แทน <!DOCTYPE html> <html lang="th"> <head>     <meta charset="UTF-8">     <meta name="viewport" content="width=device-width, initial-scale=1.0">     <title> @yield('title', 'Mini Shop') </title> </head> <body>     <header>         <h1><a href="{{ route('products.index') }}">Mini Shop</a></h1>         <nav>             <a href="{{ route('products.index') }}">รายการสินค้า</a>         </nav>     </header>     <hr>     <main> @yield('content') </main>     <hr>     <footer><p>SC362004 CP351203 CP410805 Learning Material</p></footer> </body> </html>
+
+-- Page 49 --
+43 ;วอ=าง Minishop WARUWU@KKU resources/views/products/index.blade.php <title>            </title>title <header> .. </header> <hr> <main> </main> content <hr> <footer> .. </footer> http://minishop.test/products xLaravel content title @extends('layouts.app') @section('title', 'Product List') @section('content')     <h2>Product List</h2>     @if(count($products) > 0)         // HTML แสดงตารางสินค้า     @else         <p>ไม่พบข้อมูลสินค้า</p>     @endif @endsection
+
+-- Page 50 --
+resources/views/products/index.blade.php <tbody>     @foreach($products as $product)         <tr>             <td><img src="{{ asset('images/products/' . $product['image']) }}" alt="{{ $product['name'] }}" width="120"></td>             <td>{{ $product['id'] }}</td> <td>{{ $product['name'] }}</td>             <td>{{ $product['category'] }}</td> <td>฿{{ number_format($product['price']) }}</td>             <td>                 @if($product['stock'] > 0)                     มีสินค้า {{ $product['stock'] }} ชิ้น                 @else                     สินค้าหมด                 @endif             </td>             <td><a href="{{ route('products.show', ['id' => $product['id']]) }}">ดูรายละเอียด</a></td>         </tr>     @endforeach </tbody> // ใช function asset() ในการสราง URL ของไฟลใน public 44 ;วอ=าง Minishop WARUWU@KKU
+
+-- Page 51 --
+45 ;วอ=าง Minishop WARUWU@KKU ‣หากRองการóไฟ§ภาพiqอæแòวมาแสดงผลใน V i e w  จะRองóภาพไปไ±ใน d i r e c t o r y   public เáน public/images/products/01.png ‣ใน V i e w  ใJ f u n c t i o n  asset() เTอเป”ยน p a t h  ของไฟ§ปกfใrเ\น U R L  จะไkเ\น  http://minishop.test/images/products/01.png ‣ó URL ใWเ\นxาของ attribute src ของ HTML tag <img> ไkตามปกf การGไฟIภาพมาแสดงผลใน View <img src="http://minishop.test/images/products/01.png"      alt="Mechanical Keyboard"      width="120">
+
+-- Page 52 --
+WARUWU@KKU References https://laravel.com/docs/13.x https://getcomposer.org/doc 46

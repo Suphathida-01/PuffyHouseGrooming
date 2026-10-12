@@ -9,11 +9,13 @@ class ProfileController extends Controller
 {
     public function edit()
     {
+        abort_unless(request()->user()->user_role === 'customer', 403);
         return view('profile.edit');
     }
 
     public function update(Request $request)
     {
+        abort_unless($request->user()->user_role === 'customer', 403);
         $user = $request->user();
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -28,6 +30,7 @@ class ProfileController extends Controller
 
     public function updatePassword(Request $request)
     {
+        abort_unless($request->user()->user_role === 'customer', 403);
         $data = $request->validate([
             'current_password' => ['required', 'current_password'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],

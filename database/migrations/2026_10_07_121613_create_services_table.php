@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('service_id');
             $table->string('service_name');
             $table->text('service_description');
+            $table->string('service_image_path')->nullable();
             $table->integer('service_duration_minutes');
             $table->decimal('price_small', 10, 2)->default(0);
             $table->decimal('price_medium', 10, 2)->default(0);

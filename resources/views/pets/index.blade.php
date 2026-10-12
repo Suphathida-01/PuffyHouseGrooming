@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="site-header">
-        <a class="site-brand" href="{{ route('home') }}"><span class="brand-icon">🐾</span> Puffly House <span>Grooming</span></a>
+        <a class="site-brand" href="{{ route('home') }}"><img class="brand-icon" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt=""> Puffly House <span>Grooming</span></a>
         @include('partials.site-nav')
         @include('partials.account-menu')
     </header>
@@ -26,11 +26,17 @@
                 @foreach ($pets as $pet)
                     @php($lastBooking = $pet->bookings->sortByDesc('booking_date')->first())
                     <article class="pet-card">
-                        <div class="pet-photo">{{ $pet->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}</div>
+                        <div class="pet-photo">
+                            @if ($pet->pet_image)
+                                <img class="pet-avatar-image" src="{{ asset('storage/'.$pet->pet_image) }}" alt="รูปสัตว์เลี้ยง {{ $pet->pet_name }}">
+                            @else
+                                {{ $pet->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}
+                            @endif
+                        </div>
                         <div class="pet-card-body">
                             <h2>{{ $pet->pet_name }}</h2>
                             <p class="pet-breed">{{ $pet->breed->petType->pet_type_name }} ({{ $pet->breed->pet_breed_name }})</p>
-                            <div class="pet-facts"><span>อายุ {{ $pet->pet_birth->age }} ปี</span><span>น้ำหนัก {{ number_format((float) $pet->pet_weight, 2) }} กก.</span></div>
+                            <div class="pet-facts"><span>{{ $pet->pet_birth ? 'อายุ '.$pet->pet_birth->age.' ปี' : 'ไม่ทราบวันเกิด' }}</span><span>น้ำหนัก {{ number_format((float) $pet->pet_weight, 2) }} กก.</span></div>
                             <div class="pet-last-visit"><small>รับบริการล่าสุด</small><strong>{{ $lastBooking ? $lastBooking->booking_date->format('d/m/Y') : 'ยังไม่มีประวัติการใช้บริการ' }}</strong></div>
                             <div class="pet-actions">
                                 <a class="button pet-edit" href="{{ route('pets.edit', $pet->id) }}">✎ แก้ไข</a>

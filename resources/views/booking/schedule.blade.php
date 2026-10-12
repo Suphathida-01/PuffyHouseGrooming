@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>เลือกวันเวลา | Puffly House Grooming</title>
     <link rel="stylesheet" href="{{ asset('css/puffly.css') }}?v={{ filemtime(public_path('css/puffly.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/date-picker.css') }}?v={{ filemtime(public_path('css/date-picker.css')) }}">
 </head>
 <body>
 <header class="site-header">
-    <a class="site-brand" href="{{ route('home') }}"><span class="brand-icon">🐾</span> Puffly House <span>Grooming</span></a>
+    <a class="site-brand" href="{{ route('home') }}"><img class="brand-icon" src="{{ asset('images/logo.jpeg') }}?v={{ filemtime(public_path('images/logo.jpeg')) }}" alt=""> Puffly House <span>Grooming</span></a>
     @include('partials.site-nav')
     @include('partials.account-menu')
 </header>
 <main class="booking-page">
-    <div class="booking-steps"><span class="done"><b>✓</b> สัตว์เลี้ยง</span><i></i><span class="active"><b>2</b> วันเวลา</span><i></i><span><b>3</b> ยืนยัน</span></div>
+    <div class="booking-steps"><span class="done"><b>✓</b> สัตว์เลี้ยง</span><i></i><span class="active"><b>2</b> วันเวลา</span><i></i><span><b>3</b> ยืนยันข้อมูล</span><i></i><span><b>4</b> ชำระเงิน</span></div>
     <div class="booking-layout">
         <section class="booking-main">
             <div class="booking-panel">
@@ -77,7 +78,7 @@
         <div class="booking-side">
             <aside class="booking-summary">
                 <h2>สรุปรายการจอง</h2>
-                <div class="booking-summary-row"><span class="booking-icon">{{ $pet->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}</span><div><small>สัตว์เลี้ยง</small><strong>{{ $pet->pet_name }} · {{ $pet->breed->pet_breed_name }}</strong></div></div>
+                <div class="booking-summary-row"><span class="booking-icon">@if ($pet->pet_image)<img class="pet-avatar-image" src="{{ asset('storage/'.$pet->pet_image) }}" alt="">@else{{ $pet->breed->petType->pet_type_name === 'แมว' ? '🐱' : '🐶' }}@endif</span><div><small>สัตว์เลี้ยง</small><strong>{{ $pet->pet_name }} · {{ $pet->breed->pet_breed_name }}</strong></div></div>
                 <div class="booking-summary-row"><span class="booking-icon service-icon">🫧</span><div><small>บริการที่เลือก</small><strong>{{ $service->service_name }}</strong></div></div>
                 <div class="booking-summary-row booking-date-placeholder"><div><small>วันเวลา</small><strong>{{ $selectedDate ? $selectedDateLabel : 'ยังไม่ได้เลือกวันเวลา' }}</strong></div></div>
                 <div class="booking-total"><span>ยอดชำระโดยประมาณ</span><strong>{{ number_format($price, 0) }}฿</strong></div>
