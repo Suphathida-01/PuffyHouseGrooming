@@ -60,6 +60,5 @@
             </div>
         </section>
     </main>
-    <footer class="site-footer">© {{ date('Y') }} Puffly House Grooming · ดูแลด้วยความรักและใส่ใจ</footer>
 </body>
 </html>

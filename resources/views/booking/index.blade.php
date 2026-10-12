@@ -14,7 +14,7 @@
 </header>
 <main class="my-bookings-page">
     <div class="my-bookings-heading">
-        <div><span class="section-kicker">PUFFLY HOUSE GROOMING</span><h1>การจองของฉัน 🐾</h1><p>ดูนัดหมายที่กำลังจะมาถึงและประวัติการใช้บริการของน้อง ๆ</p></div>
+        <div><h1>การจองของฉัน 🐾</h1><p>ดูนัดหมายที่กำลังจะมาถึงและประวัติการใช้บริการของน้อง ๆ</p></div>
         <a class="button" href="{{ route('services') }}">＋ จองบริการใหม่</a>
     </div>
 
@@ -86,6 +86,5 @@
         @endif
     </section>
 </main>
-<footer class="site-footer">© {{ date('Y') }} Puffly House Grooming · ดูแลด้วยความรักและใส่ใจ</footer>
 </body>
 </html>

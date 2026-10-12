@@ -1,7 +1,15 @@
 /* Puffly House shared page styles */
 
+@import url("/css/fonts.css");
+
 * {
     box-sizing: border-box;
+}
+button,
+input,
+select,
+textarea {
+    font: inherit;
 }
 body.auth-page {
     margin: 0;
@@ -11,7 +19,7 @@ body.auth-page {
     place-items: center;
     background: #1d1d1d;
     color: #352f43;
-    font-family: Arial, "Noto Sans Thai", sans-serif;
+    font-family: "Sarabun", sans-serif;
 }
 .card {
     width: min(940px, 100%);
@@ -54,31 +62,28 @@ body.auth-page {
     padding: 22px;
     border-radius: 12px;
     color: white;
-    background:
-        radial-gradient(circle at 75% 20%, #fff1cc99 0 12%, transparent 28%),
-        linear-gradient(150deg, #f1d4be, #c29a78 58%, #624936);
+    background: linear-gradient(150deg, #f1d4be, #c29a78 58%, #624936);
 }
-.dog {
+.story-image {
     position: absolute;
-    left: 50%;
-    top: 42%;
-    transform: translate(-50%, -50%);
-    font-size: 150px;
-    filter: drop-shadow(0 10px 7px #493a3266);
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
-.tub {
+.story::after {
+    content: "";
     position: absolute;
-    left: 12%;
-    right: 12%;
-    bottom: 55px;
-    height: 90px;
-    border: 8px solid #dfc493;
-    border-radius: 18px 18px 45% 45%;
-    background: linear-gradient(#c9a267, #805b35);
+    inset: 42% 0 0;
+    z-index: 1;
+    background: linear-gradient(transparent, #231a16c9);
+    pointer-events: none;
 }
 .story-copy {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     text-shadow: 0 1px 4px #493a32;
 }
 .story-copy h2 {
@@ -215,14 +220,6 @@ body.auth-page {
         min-height: 190px;
         padding: 16px;
     }
-    .dog {
-        top: 40%;
-        font-size: 105px;
-    }
-    .tub {
-        height: 55px;
-        bottom: 30px;
-    }
     .story-copy h2 {
         font-size: 18px;
     }
@@ -237,7 +234,7 @@ body.auth-page {
 body {
     margin: 0;
     color: #352f43;
-    font-family: Arial, "Noto Sans Thai", sans-serif;
+    font-family: "Sarabun", sans-serif;
 }
 .site-header {
     position: sticky;
@@ -410,26 +407,6 @@ body {
     color: #fff6d2;
     font-size: 42px;
 }
-.art-bubble {
-    position: absolute;
-    top: 25px;
-    left: 25px;
-    padding: 12px 16px;
-    border-radius: 50%;
-    background: #fff9;
-    color: #7043d3;
-    font-size: 12px;
-    text-align: center;
-    transform: rotate(-8deg);
-}
-.art-caption {
-    position: absolute;
-    bottom: 18px;
-    color: #fff;
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-shadow: 0 1px 3px #554;
-}
 .services-section {
     padding: 65px max(8vw, 30px) 75px;
     text-align: center;
@@ -485,12 +462,6 @@ body {
 }
 .about-strip h2 {
     font-size: 21px;
-}
-.site-footer {
-    padding: 20px;
-    color: #88808e;
-    text-align: center;
-    font-size: 11px;
 }
 @media (max-width: 760px) {
     .site-header {
@@ -563,6 +534,8 @@ body {
     gap: 20px;
 }
 .service-item {
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     border: 1px solid #eee2ff;
     border-radius: 15px;
@@ -597,6 +570,9 @@ body {
     text-shadow: 0 1px 4px #574336;
 }
 .service-details {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
     padding: 17px;
 }
 .service-title-row {
@@ -619,6 +595,7 @@ body {
     font-size: 10px;
 }
 .service-details > p {
+    flex: 1;
     min-height: 42px;
     margin: 9px 0 18px;
     color: #817985;
@@ -2491,14 +2468,6 @@ body {
 .account-menu > summary::-webkit-details-marker {
     display: none;
 }
-.account-menu > summary span {
-    display: inline-flex;
-    align-items: center;
-    margin: 0;
-    color: #82789a;
-    font-size: 16px;
-    line-height: 1;
-}
 .account-menu-dropdown {
     position: absolute !important;
     top: calc(100% + 9px) !important;
@@ -2804,8 +2773,14 @@ a.text-button:hover {
 .team-card {
     text-align: center;
 }
-.team-card > span {
-    font-size: 25px;
+.team-card-photo {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 6px;
+    border: 3px solid #f2d9e9;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 .contact-cta {
     margin-top: 8px;

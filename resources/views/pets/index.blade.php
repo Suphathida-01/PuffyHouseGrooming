@@ -50,6 +50,5 @@
             <section class="pets-empty"><div>🐾</div><h2>ยังไม่มีข้อมูลสัตว์เลี้ยง</h2><p>เพิ่มข้อมูลน้องก่อน เพื่อใช้ในการจองบริการ</p><a class="button" href="{{ route('pets.create') }}">＋ เพิ่มสัตว์เลี้ยงตัวแรก</a></section>
         @endif
     </main>
-    <footer class="site-footer">© {{ date('Y') }} Puffly House Grooming · ดูแลด้วยความรักและใส่ใจ</footer>
 </body>
 </html>

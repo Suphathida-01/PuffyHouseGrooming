@@ -1,3 +1,5 @@
+@import url("/css/fonts.css");
+
 .date-picker-widget {
     position: relative;
     display: inline-flex;
@@ -89,7 +91,7 @@
     background: #fff;
     box-shadow: 0 8px 20px #16132624;
     color: #161326;
-    font-family: Arial, "Noto Sans Thai", sans-serif;
+    font-family: "Sarabun", sans-serif;
 }
 .date-picker-popover[hidden] {
     display: none;

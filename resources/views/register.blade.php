@@ -15,8 +15,7 @@
 
         <div class="columns">
             <aside class="story">
-                <span class="dog">🐩</span>
-                <span class="tub"></span>
+                <img class="story-image" src="{{ asset('images/Gemini_Generated_Image_5asu0v5asu0v5asu_edited.jpg') }}?v={{ filemtime(public_path('images/Gemini_Generated_Image_5asu0v5asu0v5asu_edited.jpg')) }}" alt="สุนัขและแมวในร้านอาบน้ำตัดขน">
                 <div class="story-copy">
                     <h2>ดูแลสัตว์เลี้ยง<br>ด้วยความรักและใส่ใจ</h2>
                     <p>พื้นที่อบอุ่นสำหรับเจ้าตัวฟูและคนที่รักเขา</p>

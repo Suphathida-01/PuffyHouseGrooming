@@ -15,7 +15,6 @@
 
     <main class="services-page">
         <section class="services-heading">
-            <span class="section-kicker">ใส่ใจทุกขั้นตอนการดูแล</span>
             <h1>บริการทั้งหมดของเรา</h1>
             <p>เลือกบริการที่เหมาะกับน้อง ๆ แล้วเลือกรูปแบบและขนาดในขั้นตอนการจอง</p>
         </section>
@@ -55,6 +54,5 @@
             <div class="services-empty">ยังไม่มีบริการที่เปิดให้จองในขณะนี้</div>
         @endif
     </main>
-    <footer class="site-footer">© {{ date('Y') }} Puffly House Grooming · ดูแลด้วยความรักและใส่ใจ</footer>
 </body>
 </html>

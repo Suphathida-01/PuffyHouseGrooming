@@ -22,11 +22,10 @@
                 <a class="button" href="{{ route('services') }}">จองบริการเลย　›</a>
             </div>
            <div class="hero-art">
-  <img class="hero-art-image" src="{{ asset('images/Related-Content-12-2.png') }}" alt="สุนัขที่ร้านตัดขน"><div class="art-bubble">ฟูสะอาด<br>สดใส!</div></div>
+  <img class="hero-art-image" src="{{ asset('images/Related-Content-12-2.png') }}" alt="สุนัขที่ร้านตัดขน"></div>
         </section>
 
         <section class="services-section" id="services">
-            <span class="section-kicker">บริการของเรา</span>
             <h2>ดูแลด้วยหัวใจและมาตรฐานที่ใส่ใจ</h2>
             <p class="section-intro">เลือกบริการที่เหมาะกับเจ้าตัวฟูของคุณ</p>
             <div class="service-cards">
@@ -36,23 +35,17 @@
             </div>
         </section>
         <section class="contact-section" id="contact">
-            <span class="section-kicker">ติดต่อเรา</span>
             <h2>พร้อมดูแลเจ้าตัวฟูของคุณ</h2>
             <p class="section-intro">สอบถามรายละเอียดหรือจองบริการกับเราได้ที่ช่องทางติดต่อ</p>
-            <div class="contact-cards">
-                <article class="contact-card"><strong>โทรศัพท์</strong><span>เพิ่มเบอร์โทรร้าน</span></article>
-                <article class="contact-card"><strong>LINE / โซเชียล</strong><span>เพิ่มช่องทางติดต่อร้าน</span></article>
-            </div>
             <h3 class="team-heading">สมาชิกผู้จัดทำ</h3>
             <div class="team-cards">
-                <article class="team-card"><span>🐾</span><strong>นางสาว นัทจกร สิงห์ธวัช </strong><small>หน้าที่รับผิดชอบ</small></article>
-                <article class="team-card"><span>🐾</span><strong>ชื่อสมาชิก 2</strong><small>หน้าที่รับผิดชอบ</small></article>
-                <article class="team-card"><span>🐾</span><strong>ชื่อสมาชิก 3</strong><small>หน้าที่รับผิดชอบ</small></article>
-                <article class="team-card"><span>🐾</span><strong>ชื่อสมาชิก 3</strong><small>หน้าที่รับผิดชอบ</small></article>
+                <article class="team-card"><img class="team-card-photo" src="{{ asset('images/team/member-1.webp') }}" alt="สมาชิกทีมคนที่ 1"><strong>นางสาวศุภธิดา ศุภเกษ</strong></article>
+                <article class="team-card"><img class="team-card-photo" src="{{ asset('images/team/member-2.webp') }}" alt="สมาชิกทีมคนที่ 2"><strong>นายธนพัฒน์ เก้านพรัตน์</strong></article>
+                <article class="team-card"><img class="team-card-photo" src="{{ asset('images/team/member-3.webp') }}" alt="สมาชิกทีมคนที่ 3"><strong>นางสาวนัทจกร สิงห์ธวัช</strong></article>
+                <article class="team-card"><img class="team-card-photo" src="{{ asset('images/team/member-4.webp') }}" alt="สมาชิกทีมคนที่ 4"><strong>นางสาวกนกรก มุ่งมีพฤทธฺิ์</strong></article>
             </div>
             <a class="button contact-cta" href="{{ route('services') }}">ดูบริการของเรา</a>
         </section>
     </main>
-    <footer class="site-footer">© {{ date('Y') }} Puffly House Grooming · ดูแลด้วยความรักและใส่ใจ</footer>
 </body>
 </html>

@@ -1,11 +1,21 @@
-﻿* {
+@import url("/css/fonts.css");
+
+* {
     box-sizing: border-box;
 }
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
 body.admin-dashboard {
     margin: 0;
     background: #f7f6f8;
     color: #202235;
-    font-family: Arial, "Noto Sans Thai", sans-serif;
+    font-family: "Sarabun", sans-serif;
 }
 .admin-sidebar {
     position: fixed;

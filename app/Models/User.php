@@ -9,9 +9,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
-use Laravel\Fortify\Contracts\PasskeyUser;
-use Laravel\Fortify\PasskeyAuthenticatable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
 
 /**
  * @property int $id
@@ -20,24 +17,21 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string|null $user_phone
  * @property string $password
  * @property string $user_role
- * @property string|null $two_factor_secret
- * @property string|null $two_factor_recovery_codes
- * @property Carbon|null $two_factor_confirmed_at
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  */
-class User extends Authenticatable implements PasskeyUser
+class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, PasskeyAuthenticatable, SoftDeletes, TwoFactorAuthenticatable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     protected $table = 'users';
 
     protected $fillable = ['name', 'email', 'password', 'user_phone', 'user_role'];
 
-    protected $hidden = ['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'];
+    protected $hidden = ['password', 'remember_token'];
 
     public function customer()
     {
@@ -57,7 +51,6 @@ class User extends Authenticatable implements PasskeyUser
     /** @return array<string, string> */
     protected $casts = [
         'password' => 'hashed',
-        'two_factor_confirmed_at' => 'datetime',
     ];
 
     /** Get the user's initials. */

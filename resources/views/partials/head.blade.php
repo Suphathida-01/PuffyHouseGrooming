@@ -9,7 +9,19 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-@fonts
+<link rel="stylesheet" href="{{ asset('css/fonts.css') }}?v={{ filemtime(public_path('css/fonts.css')) }}">
+<style>
+    body,
+    button,
+    input,
+    select,
+    textarea {
+        font-family: "Sarabun", sans-serif;
+    }
+</style>
 
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+{{-- These starter views are optional; avoid a Vite exception when assets have not been built. --}}
+@if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@endif
 @fluxAppearance
