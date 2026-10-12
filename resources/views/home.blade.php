@@ -21,7 +21,8 @@
                 <p>สัมผัสประสบการณ์การตัดแต่งขนสุดพรีเมียม สะอาด ปลอดภัย<br class="desktop-break"> ด้วยผลิตภัณฑ์อ่อนโยนและทีมงานที่ใส่ใจ</p>
                 <a class="button" href="{{ route('services') }}">จองบริการเลย　›</a>
             </div>
-            <div class="hero-art" aria-label="ภาพประกอบสุนัขที่ร้านตัดขน"><div class="art-sparkle">✦</div><div class="art-cloud"></div><div class="art-dog">🐕</div><div class="art-bubble">ฟูสะอาด<br>สดใส!</div><div class="art-caption">Puffly House Grooming</div></div>
+           <div class="hero-art">
+  <img class="hero-art-image" src="{{ asset('images/Related-Content-12-2.png') }}" alt="สุนัขที่ร้านตัดขน"><div class="art-bubble">ฟูสะอาด<br>สดใส!</div></div>
         </section>
 
         <section class="services-section" id="services">
@@ -44,8 +45,9 @@
             </div>
             <h3 class="team-heading">สมาชิกผู้จัดทำ</h3>
             <div class="team-cards">
-                <article class="team-card"><span>🐾</span><strong>ชื่อสมาชิก 1</strong><small>หน้าที่รับผิดชอบ</small></article>
+                <article class="team-card"><span>🐾</span><strong>นางสาว นัทจกร สิงห์ธวัช </strong><small>หน้าที่รับผิดชอบ</small></article>
                 <article class="team-card"><span>🐾</span><strong>ชื่อสมาชิก 2</strong><small>หน้าที่รับผิดชอบ</small></article>
+                <article class="team-card"><span>🐾</span><strong>ชื่อสมาชิก 3</strong><small>หน้าที่รับผิดชอบ</small></article>
                 <article class="team-card"><span>🐾</span><strong>ชื่อสมาชิก 3</strong><small>หน้าที่รับผิดชอบ</small></article>
             </div>
             <a class="button contact-cta" href="{{ route('services') }}">ดูบริการของเรา</a>
