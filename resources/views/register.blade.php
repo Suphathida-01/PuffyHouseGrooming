@@ -27,12 +27,11 @@
                     <a class="tab" href="{{ route('login') }}">เข้าสู่ระบบ</a>
                     <a class="tab active" href="{{ route('register') }}">✍ สมัครสมาชิก</a>
                 </nav>
-
-                <p class="eyebrow">เริ่มต้นดูแลเจ้าตัวฟู</p>
+                
                 <h1>สร้างบัญชีใหม่</h1>
                 <p class="intro">กรอกข้อมูลสั้น ๆ เพื่อสมัครสมาชิก</p>
 
-                <form class="form" method="POST" action="{{ route('register.store') }}">
+                <form class="form" method="POST" action="{{ route('register_store') }}">
                     @csrf
 
                     <label for="name">ชื่อ-นามสกุล <span style="color: red;">*</span></label>

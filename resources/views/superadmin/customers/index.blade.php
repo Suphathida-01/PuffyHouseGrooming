@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,9 +9,9 @@
     @include('partials.admin-sidebar')
     <main class="admin-main">
         <header class="admin-topbar customer-page-heading">
-            <div><p class="admin-eyebrow">ข้อมูลสมาชิก</p><h1>จัดการลูกค้า</h1><p class="admin-subtitle">ฐานข้อมูลลูกค้าและประวัติการใช้บริการ</p></div>
+            <div><h1>จัดการลูกค้า</h1><p class="admin-subtitle">ฐานข้อมูลลูกค้าและประวัติการใช้บริการ</p></div>
             <div class="customer-tools">
-                <form class="customer-search" method="GET" action="{{ route('superadmin.customers.index') }}"><input id="customer-search" type="search" name="search" value="{{ $search }}" autocomplete="off" placeholder="พิมพ์ชื่อ อีเมล หรือเบอร์โทร" aria-label="ค้นหาตามชื่อ อีเมล หรือเบอร์โทร"><button type="submit" aria-label="ค้นหา">⌕</button></form>
+                <form class="customer-search" method="GET" action="{{ route('superadmin_customers_index') }}"><input id="customer-search" type="search" name="search" value="{{ $search }}" autocomplete="off" placeholder="พิมพ์ชื่อ อีเมล หรือเบอร์โทร" aria-label="ค้นหาตามชื่อ อีเมล หรือเบอร์โทร"><button type="submit" aria-label="ค้นหา">⌕</button></form>
             </div>
         </header>
         @if (session('success'))<div class="booking-notice success">{{ session('success') }}</div>@endif
@@ -22,7 +22,7 @@
                     @forelse ($customers as $index => $customer)
                         @php $thaiMonths = [1 => 'ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']; $registered = strtotime($customer->created_at); @endphp
                         <tr><td>{{ $index + 1 }}</td><td><strong>{{ $customer->user->name }}</strong></td><td>{{ $customer->user->email }}</td><td>{{ $customer->user->user_phone ?: '—' }}</td><td><span class="customer-pet-count">{{ $customer->pet_count }} ตัว</span></td><td>{{ date('d', $registered) }} {{ $thaiMonths[(int) date('n', $registered)] }} {{ date('Y', $registered) + 543 }}</td>
-                            <td><div class="booking-actions"><a class="booking-action" href="{{ route('superadmin.customers.show', $customer->customer_id) }}">ดู</a><a class="booking-action outline" href="{{ route('superadmin.customers.edit', $customer->customer_id) }}">แก้ไข</a><form method="POST" action="{{ route('superadmin.customers.destroy', $customer->customer_id) }}" onsubmit="return confirm('นำข้อมูลลูกค้ารายนี้ออกจากรายการหรือไม่?')">@csrf @method('DELETE')<button class="booking-action danger" type="submit">ลบ</button></form></div></td></tr>
+                            <td><div class="booking-actions"><a class="booking-action" href="{{ route('superadmin_customers_show', $customer->customer_id) }}">ดู</a><a class="booking-action outline" href="{{ route('superadmin_customers_edit', $customer->customer_id) }}">แก้ไข</a><form method="POST" action="{{ route('superadmin_customers_destroy', $customer->customer_id) }}" onsubmit="return confirm('นำข้อมูลลูกค้ารายนี้ออกจากรายการหรือไม่?')">@csrf @method('DELETE')<button class="booking-action danger" type="submit">ลบ</button></form></div></td></tr>
                     @empty
                         <tr><td class="booking-empty" colspan="7">{{ $search !== '' ? 'ไม่พบลูกค้าที่ตรงกับคำค้นหา' : 'ยังไม่มีข้อมูลลูกค้า' }}</td></tr>
                     @endforelse

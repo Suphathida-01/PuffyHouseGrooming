@@ -16,7 +16,7 @@
     input,
     select,
     textarea {
-        font-family: "Sarabun", sans-serif;
+        font-family: "Kanit", sans-serif;
     }
 </style>
 

@@ -44,7 +44,7 @@
                                         สอบถามราคา
                                     @endif
                                 </strong>
-                                <a class="button button-small" href="{{ route('services.show', $service->service_id) }}">ดูรายละเอียด</a>
+                                <a class="button button-small" href="{{ route('services_show', $service->service_id) }}">ดูรายละเอียด</a>
                             </div>
                         </div>
                     </article>

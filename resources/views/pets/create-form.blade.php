@@ -14,13 +14,13 @@
         @include('partials.account-menu')
     </header>
     <main class="pet-form-page">
-        <a class="detail-back" href="{{ route('pets.create') }}">← กลับไปเลือกประเภท</a>
+        <a class="detail-back" href="{{ route('pets_create') }}">← กลับไปเลือกประเภท</a>
         <section class="pet-form-card">
             <h1>เพิ่มสัตว์เลี้ยง</h1>
             <p class="pet-form-intro">กรอกข้อมูลของน้องให้ครบ เพื่อใช้ประกอบการจองบริการ</p>
             <div class="selected-pet-type">ประเภทสัตว์: <strong>{{ $selectedType->pet_type_name }}</strong></div>
 
-            <form class="pet-form" method="POST" action="{{ route('pets.store') }}" enctype="multipart/form-data">
+            <form class="pet-form" method="POST" action="{{ route('pets_store') }}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="pet_type_id" value="{{ $selectedType->pet_type_id }}">
 
@@ -56,7 +56,7 @@
                 <textarea id="pet_notes" name="pet_notes" rows="3">{{ old('pet_notes') }}</textarea>
                 @error('pet_notes')<p class="pet-error">{{ $message }}</p>@enderror
 
-                <div class="pet-form-actions"><a class="pet-cancel" href="{{ route('pets.index') }}">ยกเลิก</a><button class="button" type="submit">บันทึกข้อมูลสัตว์เลี้ยง</button></div>
+                <div class="pet-form-actions"><a class="pet-cancel" href="{{ route('pets_index') }}">ยกเลิก</a><button class="button" type="submit">บันทึกข้อมูลสัตว์เลี้ยง</button></div>
             </form>
         </section>
     </main>

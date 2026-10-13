@@ -53,7 +53,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    /** Get the user's initials. */
     public function initials()
     {
         $initials = Str::initials($this->name, true);

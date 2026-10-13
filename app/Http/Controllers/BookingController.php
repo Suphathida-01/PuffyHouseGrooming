@@ -71,7 +71,7 @@ class BookingController extends Controller
             ? 'ยกเลิกรายการจองแล้ว หากชำระเงินแล้ว กรุณาติดต่อร้านเพื่อดำเนินการเรื่องคืนเงิน'
             : 'ยกเลิกรายการจองแล้ว';
 
-        return redirect()->route('my-bookings.index', ['filter' => 'cancelled'])
+        return redirect()->route('my-bookings_index', ['filter' => 'cancelled'])
             ->with('success', $message);
     }
 
@@ -100,7 +100,7 @@ class BookingController extends Controller
             'price' => $this->priceFor($service, $pet),
         ]]);
 
-        return redirect()->route('booking.schedule', $serviceId);
+        return redirect()->route('booking_schedule', $serviceId);
     }
 
     public function schedule(Request $request, $serviceId)
@@ -216,7 +216,7 @@ class BookingController extends Controller
         abort_if(Carbon::parse($workDate)->isSaturday() || Carbon::parse($workDate)->gt(today()->addDays(6)) || $start->lt(now()), 409);
 
         if (empty($this->availableStaffForSlot($workDate, $start->format('H:i:s'), $end->format('H:i:s')))) {
-            return redirect()->route('booking.schedule', ['serviceId' => $serviceId, 'month' => substr($workDate, 0, 7), 'date' => $workDate])
+            return redirect()->route('booking_schedule', ['serviceId' => $serviceId, 'month' => substr($workDate, 0, 7), 'date' => $workDate])
                 ->with('booking_error', 'ช่วงเวลานี้มีผู้จองครบทุกช่างแล้ว กรุณาเลือกเวลาอื่น');
         }
 
@@ -226,7 +226,7 @@ class BookingController extends Controller
         $bookingSession['end_time'] = $end->format('H:i:s');
         session(['booking' => $bookingSession]);
 
-        return redirect()->route('booking.confirm', $serviceId);
+        return redirect()->route('booking_confirm', $serviceId);
     }
 
     public function confirm($serviceId)
@@ -239,7 +239,7 @@ class BookingController extends Controller
         abort_unless($workDate && $bookingStart && $bookingEnd, 404);
 
         if (empty($this->availableStaffForSlot($workDate, $bookingStart, $bookingEnd))) {
-            return redirect()->route('booking.schedule', ['serviceId' => $serviceId, 'month' => substr($workDate, 0, 7), 'date' => $workDate])
+            return redirect()->route('booking_schedule', ['serviceId' => $serviceId, 'month' => substr($workDate, 0, 7), 'date' => $workDate])
                 ->with('booking_error', 'ช่วงเวลานี้เพิ่งถูกจองครบแล้ว กรุณาเลือกเวลาอื่น');
         }
 
@@ -284,13 +284,13 @@ class BookingController extends Controller
         });
 
         if (! $booking) {
-            return redirect()->route('booking.schedule', ['serviceId' => $serviceId, 'month' => substr($workDate, 0, 7), 'date' => $workDate])
+            return redirect()->route('booking_schedule', ['serviceId' => $serviceId, 'month' => substr($workDate, 0, 7), 'date' => $workDate])
                 ->with('booking_error', 'ช่วงเวลานี้เพิ่งถูกจองครบแล้ว กรุณาเลือกเวลาอื่น');
         }
 
         session()->forget('booking');
 
-        return redirect()->route('payments.create', $booking->booking_id);
+        return redirect()->route('payments_create', $booking->booking_id);
     }
 
     private function customer(): Customer

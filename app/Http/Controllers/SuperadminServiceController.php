@@ -35,7 +35,7 @@ class SuperadminServiceController extends Controller
         }
         Service::create($data);
 
-        return redirect()->route('superadmin.services.index')->with('success', 'เพิ่มบริการแล้ว');
+        return redirect()->route('superadmin_services_index')->with('success', 'เพิ่มบริการแล้ว');
     }
 
     public function edit($serviceId)
@@ -63,7 +63,7 @@ class SuperadminServiceController extends Controller
             $service->update($data);
         }
 
-        return redirect()->route('superadmin.services.index')->with('success', 'บันทึกการแก้ไขบริการแล้ว');
+        return redirect()->route('superadmin_services_index')->with('success', 'บันทึกการแก้ไขบริการแล้ว');
     }
 
     public function destroy($serviceId)
@@ -71,7 +71,7 @@ class SuperadminServiceController extends Controller
         $this->checkSuperadmin();
         Service::findOrFail($serviceId)->delete();
 
-        return redirect()->route('superadmin.services.index')->with('success', 'นำบริการออกจากรายการแล้ว');
+        return redirect()->route('superadmin_services_index')->with('success', 'นำบริการออกจากรายการแล้ว');
     }
 
     private function validateService(Request $request): array

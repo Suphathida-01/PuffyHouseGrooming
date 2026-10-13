@@ -22,9 +22,9 @@ class DashboardTest extends TestCase
         $this->actingAs($user);
 
         $this->get(route('dashboard'))
-            ->assertRedirect(route('admin.dashboard'));
+            ->assertRedirect(route('admin_dashboard'));
 
-        $this->get(route('admin.dashboard'))
+        $this->get(route('admin_dashboard'))
             ->assertOk()
             ->assertSee('หน้าหลักผู้ดูแลระบบ')
             ->assertSee('บริการยอดนิยม')
@@ -37,9 +37,9 @@ class DashboardTest extends TestCase
         $this->actingAs($user);
 
         $this->get(route('dashboard'))
-            ->assertRedirect(route('superadmin.dashboard'));
+            ->assertRedirect(route('superadmin_dashboard'));
 
-        $this->get(route('superadmin.dashboard'))
+        $this->get(route('superadmin_dashboard'))
             ->assertOk()
             ->assertSee('รายงานและสรุปข้อมูล')
             ->assertSee('สรุปรายได้ประจำปี');
@@ -49,12 +49,12 @@ class DashboardTest extends TestCase
     {
         $admin = User::factory()->create(['user_role' => 'admin']);
         $this->actingAs($admin)
-            ->get(route('superadmin.dashboard'))
+            ->get(route('superadmin_dashboard'))
             ->assertForbidden();
 
         $superadmin = User::factory()->create(['user_role' => 'superadmin']);
         $this->actingAs($superadmin)
-            ->get(route('admin.dashboard'))
+            ->get(route('admin_dashboard'))
             ->assertForbidden();
     }
 }

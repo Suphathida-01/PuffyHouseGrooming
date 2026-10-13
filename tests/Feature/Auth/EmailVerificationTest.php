@@ -25,7 +25,7 @@ class EmailVerificationTest extends TestCase
     {
         $user = User::factory()->unverified()->create();
 
-        $response = $this->actingAs($user)->get(route('verification.notice'));
+        $response = $this->actingAs($user)->get(route('verification_notice'));
 
         $response->assertOk();
     }
@@ -34,9 +34,9 @@ class EmailVerificationTest extends TestCase
     {
         $user = User::factory()->unverified()->create();
 
-        $response = $this->actingAs($user)->get(route('appearance.edit'));
+        $response = $this->actingAs($user)->get(route('appearance_edit'));
 
-        $response->assertRedirect(route('verification.notice'));
+        $response->assertRedirect(route('verification_notice'));
     }
 
     public function test_email_can_be_verified(): void

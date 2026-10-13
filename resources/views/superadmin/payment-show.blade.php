@@ -5,7 +5,7 @@
     $statusClasses = ['completed' => 'status-paid', 'pending' => 'status-pending', 'failed' => 'status-refunded'];
     $methodLabels = ['qrCode' => 'PromptPay', 'creditCard' => 'บัตรเครดิต', 'bankTransfer' => 'โอนผ่านธนาคาร'];
     $bookingStatusLabels = ['pending' => 'รอดำเนินการ', 'completed' => 'เสร็จสิ้น', 'cancelled' => 'ยกเลิก'];
-    $closeUrl = route('superadmin.payments', ['date' => $selectedDate, 'status' => $selectedStatus]);
+    $closeUrl = route('superadmin_payments', ['date' => $selectedDate, 'status' => $selectedStatus]);
 @endphp
 
 <dialog class="payment-detail-dialog" aria-labelledby="payment-dialog-title" data-close-url="{{ $closeUrl }}">
@@ -44,7 +44,7 @@
         </div>
         @if ($payment->payment_status === 'pending')
             <footer class="schedule-dialog-actions">
-                <form method="POST" action="{{ route('superadmin.payments.confirm', $payment->payment_id) }}">
+                <form method="POST" action="{{ route('superadmin_payments_confirm', $payment->payment_id) }}">
                     @csrf
                     <button class="payment-confirm-button" type="submit">ยืนยันว่าชำระแล้ว</button>
                 </form>

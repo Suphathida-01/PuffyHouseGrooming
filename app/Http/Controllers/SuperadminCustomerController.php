@@ -57,7 +57,7 @@ class SuperadminCustomerController extends Controller
             Customer::create(['user_id' => $user->id]);
         });
 
-        return redirect()->route('superadmin.customers.index')->with('success', 'เพิ่มข้อมูลลูกค้าแล้ว');
+        return redirect()->route('superadmin_customers_index')->with('success', 'เพิ่มข้อมูลลูกค้าแล้ว');
     }
 
     public function show($customerId)
@@ -99,7 +99,7 @@ class SuperadminCustomerController extends Controller
             'user_phone' => $data['user_phone'] ?? null,
         ]);
 
-        return redirect()->route('superadmin.customers.index')->with('success', 'บันทึกข้อมูลลูกค้าแล้ว');
+        return redirect()->route('superadmin_customers_index')->with('success', 'บันทึกข้อมูลลูกค้าแล้ว');
     }
 
     public function destroy($customerId)
@@ -113,7 +113,7 @@ class SuperadminCustomerController extends Controller
             $customer->user->delete();
         });
 
-        return redirect()->route('superadmin.customers.index')->with('success', 'นำข้อมูลลูกค้าออกจากรายการแล้ว');
+        return redirect()->route('superadmin_customers_index')->with('success', 'นำข้อมูลลูกค้าออกจากรายการแล้ว');
     }
 
     private function validateCustomer(Request $request, bool $includePassword, $userId = null): array

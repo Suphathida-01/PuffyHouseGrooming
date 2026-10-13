@@ -186,7 +186,7 @@ class SuperadminStaffController extends Controller
             }
         });
 
-        return redirect()->route('superadmin.staff.index', [
+        return redirect()->route('superadmin_staff_index', [
             'month' => substr($data['work_date'], 0, 7),
             'date' => $data['work_date'],
         ])->with('success', 'บันทึกกะของพนักงานในวันที่เลือกแล้ว');

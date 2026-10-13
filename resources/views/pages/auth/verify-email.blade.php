@@ -11,7 +11,7 @@
         @endif
 
         <div class="flex flex-col items-center justify-between space-y-3">
-            <form method="POST" action="{{ route('verification.send') }}">
+            <form method="POST" action="{{ route('verification_send') }}">
                 @csrf
                 <flux:button type="submit" variant="primary" class="w-full">
                     {{ __('Resend verification email') }}

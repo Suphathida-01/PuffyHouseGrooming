@@ -19,7 +19,7 @@
         <h2>ข้อมูลบัญชี</h2>
         <p class="profile-card-intro">ข้อมูลนี้ใช้สำหรับติดต่อและประกอบการจองบริการ</p>
         @if (session('profile_success'))<p class="pet-success">{{ session('profile_success') }}</p>@endif
-        <form method="POST" action="{{ route('profile.update') }}" class="profile-form">
+        <form method="POST" action="{{ route('profile_update') }}" class="profile-form">
             @csrf @method('PUT')
             <div><label for="name">ชื่อ-นามสกุล</label><input id="name" name="name" type="text" value="{{ old('name', auth()->user()->name) }}" maxlength="255" required>@error('name')<p class="pet-error">{{ $message }}</p>@enderror</div>
             <div><label for="email">อีเมล</label><input id="email" name="email" type="email" value="{{ old('email', auth()->user()->email) }}" maxlength="255" required>@error('email')<p class="pet-error">{{ $message }}</p>@enderror</div>
@@ -32,7 +32,7 @@
         <h2>เปลี่ยนรหัสผ่าน</h2>
         <p class="profile-card-intro">ตั้งรหัสผ่านใหม่อย่างน้อย 8 ตัวอักษร</p>
         @if (session('password_success'))<p class="pet-success">{{ session('password_success') }}</p>@endif
-        <form method="POST" action="{{ route('profile.password.update') }}" class="profile-form">
+        <form method="POST" action="{{ route('profile_password_update') }}" class="profile-form">
             @csrf @method('PUT')
             <div><label for="current_password">รหัสผ่านปัจจุบัน</label><input id="current_password" name="current_password" type="password" autocomplete="current-password" required>@error('current_password')<p class="pet-error">{{ $message }}</p>@enderror</div>
             <div><label for="password">รหัสผ่านใหม่</label><input id="password" name="password" type="password" autocomplete="new-password" minlength="8" required>@error('password')<p class="pet-error">{{ $message }}</p>@enderror</div>

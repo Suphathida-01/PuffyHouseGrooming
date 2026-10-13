@@ -14,7 +14,7 @@
         @include('partials.account-menu')
     </header>
     <main class="pet-form-page">
-        <a class="detail-back" href="{{ route('pets.index') }}">← กลับไปสัตว์เลี้ยงของฉัน</a>
+        <a class="detail-back" href="{{ route('pets_index') }}">← กลับไปสัตว์เลี้ยงของฉัน</a>
         <section class="pet-form-card">
             <h1>{{ $isEdit ? 'แก้ไขข้อมูลสัตว์เลี้ยง' : 'เพิ่มสัตว์เลี้ยง' }}</h1>
             <p class="pet-form-intro">กรอกข้อมูลของน้องให้ครบ เพื่อใช้ประกอบการจองบริการ</p>
@@ -30,7 +30,7 @@
             </div>
             @if ($showTypeError)<p class="pet-error">กรุณาเลือกประเภทสัตว์ก่อนเลือกสายพันธุ์</p>@endif
 
-            <form class="pet-form" method="POST" action="{{ $isEdit ? route('pets.update', $pet->id) : route('pets.store') }}" enctype="multipart/form-data">
+            <form class="pet-form" method="POST" action="{{ $isEdit ? route('pets_update', $pet->id) : route('pets_store') }}" enctype="multipart/form-data">
                 @csrf @if ($isEdit) @method('PUT') @endif
                 <input id="pet_type_id_hidden" type="hidden" name="pet_type_id" value="{{ old('pet_type_id', $selectedTypeId) }}">
 
@@ -73,7 +73,7 @@
                 <textarea id="pet_notes" name="pet_notes" rows="3">{{ old('pet_notes', $pet->pet_notes) }}</textarea>
                 @error('pet_notes')<p class="pet-error">{{ $message }}</p>@enderror
 
-                <div class="pet-form-actions"><a class="pet-cancel" href="{{ route('pets.index') }}">ยกเลิก</a><button class="button" type="submit">{{ $isEdit ? 'บันทึกการแก้ไข' : 'บันทึกข้อมูลสัตว์เลี้ยง' }}</button></div>
+                <div class="pet-form-actions"><a class="pet-cancel" href="{{ route('pets_index') }}">ยกเลิก</a><button class="button" type="submit">{{ $isEdit ? 'บันทึกการแก้ไข' : 'บันทึกข้อมูลสัตว์เลี้ยง' }}</button></div>
             </form>
         </section>
     </main>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/fonts.css') }}?v={{ filemtime(public_path('css/fonts.css')) }}">
     <style>
         * { box-sizing: border-box; }
-        body { min-height: 100vh; margin: 0; display: flex; align-items: center; justify-content: center; background: #fff; color: #333; font-family: "Sarabun", sans-serif; }
+        body { min-height: 100vh; margin: 0; display: flex; align-items: center; justify-content: center; background: #fff; color: #333; font-family: "Kanit", sans-serif; }
         main { width: min(680px, calc(100% - 40px)); padding: 64px 24px; text-align: center; }
         h1 { margin: 0 0 12px; font-size: clamp(42px, 8vw, 72px); font-weight: 500; letter-spacing: -3px; }
         p { color: #777; line-height: 1.7; }

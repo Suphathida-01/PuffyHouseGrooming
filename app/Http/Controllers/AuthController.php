@@ -23,10 +23,8 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        // ค้นหาบัญชีจากอีเมลในตาราง users
         $user = User::where('email', $credentials['email'])->first();
 
-        // ตรวจรหัสผ่านที่กรอกกับรหัสผ่านแบบ hash ในฐานข้อมูล
         if (! $user || ! Hash::check($credentials['password'], $user->password)) {
             return back()
                 ->withErrors(['email' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'])
@@ -37,10 +35,10 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         if ($user->user_role === 'admin') {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin_dashboard');
         }
         if ($user->user_role === 'superadmin') {
-            return redirect()->route('superadmin.dashboard');
+            return redirect()->route('superadmin_dashboard');
         }
 
         return redirect()->route('home');
@@ -60,7 +58,6 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        // user_role ใช้ค่าเริ่มต้น customer จาก migration
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],

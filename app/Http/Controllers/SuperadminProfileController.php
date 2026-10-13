@@ -25,7 +25,7 @@ class SuperadminProfileController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('superadmin.profile.edit')->with('profile_success', 'บันทึกข้อมูลส่วนตัวแล้ว');
+        return redirect()->route('superadmin_profile_edit')->with('profile_success', 'บันทึกข้อมูลส่วนตัวแล้ว');
     }
 
     public function updatePassword(Request $request)
@@ -38,6 +38,6 @@ class SuperadminProfileController extends Controller
 
         $request->user()->update(['password' => $data['password']]);
 
-        return redirect()->route('superadmin.profile.edit')->with('password_success', 'เปลี่ยนรหัสผ่านแล้ว');
+        return redirect()->route('superadmin_profile_edit')->with('password_success', 'เปลี่ยนรหัสผ่านแล้ว');
     }
 }

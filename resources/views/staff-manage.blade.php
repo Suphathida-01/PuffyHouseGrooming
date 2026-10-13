@@ -26,9 +26,9 @@
         <div class="month-panel-heading">
             <h2 id="month-title">ตารางร้านประจำเดือน</h2>
             <nav class="month-navigation" aria-label="เปลี่ยนเดือน">
-                <a href="{{ route('admin.staff.index', ['month' => $previousMonth, 'date' => $previousMonth . '-01']) }}" aria-label="เดือนก่อน">‹</a>
+                <a href="{{ route('admin_staff_index', ['month' => $previousMonth, 'date' => $previousMonth . '-01']) }}" aria-label="เดือนก่อน">‹</a>
                 <strong>{{ \Illuminate\Support\Carbon::parse($selectedMonth . '-01')->locale('th')->translatedFormat('F Y') }}</strong>
-                <a href="{{ route('admin.staff.index', ['month' => $nextMonth, 'date' => $nextMonth . '-01']) }}" aria-label="เดือนถัดไป">›</a>
+                <a href="{{ route('admin_staff_index', ['month' => $nextMonth, 'date' => $nextMonth . '-01']) }}" aria-label="เดือนถัดไป">›</a>
             </nav>
             <div class="month-legend" aria-label="สถานะวัน">
                 <span><i class="legend-dot legend-open"></i>มีช่างเข้ากะ</span>
@@ -46,7 +46,7 @@
         <div class="month-grid">
             @foreach ($calendarDays as $day)
                 <article class="month-day {{ $day['is_current_month'] ? '' : 'is-outside-month' }} {{ $day['is_selected'] ? 'is-selected' : '' }} {{ $day['is_today'] ? 'is-today' : '' }} {{ $day['is_closed'] ? 'day-closed' : ($day['working_staff_count'] ? 'day-open' : 'day-unscheduled') }}">
-                    <a class="month-day-link" href="{{ route('admin.staff.index', ['month' => $selectedMonth, 'date' => $day['date']]) }}">
+                    <a class="month-day-link" href="{{ route('admin_staff_index', ['month' => $selectedMonth, 'date' => $day['date']]) }}">
                         <span class="month-day-number">{{ $day['day'] }}</span>
                         @if ($day['is_closed'])
                             <span class="month-day-state">ปิดร้าน</span>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,7 @@
 <body class="admin-dashboard">
     @include('partials.admin-sidebar')
     <main class="admin-main">
-        <header class="admin-topbar"><div><p class="admin-eyebrow">ข้อมูลสมาชิก</p><h1>รายละเอียดลูกค้า</h1><p class="admin-subtitle">ข้อมูลบัญชี สัตว์เลี้ยง และประวัติการจอง</p></div><div class="customer-tools"><a class="customer-add-button customer-back-button" href="{{ route('superadmin.customers.index') }}">กลับ</a><a class="customer-add-button" href="{{ route('superadmin.customers.edit', $customer->customer_id) }}">แก้ไขข้อมูล</a></div></header>
+        <header class="admin-topbar"><div><p class="admin-eyebrow">ข้อมูลสมาชิก</p><h1>รายละเอียดลูกค้า</h1><p class="admin-subtitle">ข้อมูลบัญชี สัตว์เลี้ยง และประวัติการจอง</p></div><div class="customer-tools"><a class="customer-add-button customer-back-button" href="{{ route('superadmin_customers_index') }}">กลับ</a><a class="customer-add-button" href="{{ route('superadmin_customers_edit', $customer->customer_id) }}">แก้ไขข้อมูล</a></div></header>
         <section class="admin-panel customer-details"><h2>{{ $customer->user->name }}</h2><p><strong>อีเมล</strong>{{ $customer->user->email }}</p><p><strong>เบอร์โทร</strong>{{ $customer->user->user_phone ?: '—' }}</p><h3>สัตว์เลี้ยง ({{ $customer->pets->count() }})</h3>
             @forelse ($customer->pets as $pet)<p><strong>{{ $pet->pet_name }}</strong>{{ $pet->breed->pet_breed_name ?? '' }} {{ $pet->breed->petType->pet_type_name ?? '' }}</p>@empty<p>ยังไม่มีข้อมูลสัตว์เลี้ยง</p>@endforelse
         </section>

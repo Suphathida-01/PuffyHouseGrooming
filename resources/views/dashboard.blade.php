@@ -23,7 +23,7 @@
         </section>
 
         <section class="admin-panel revenue-panel" id="revenue-chart">
-            <div class="panel-heading"><div><h2>สรุปรายได้ประจำปี {{ $selectedYear }}</h2><p>ยอดรายเดือนจากรายการชำระเงินที่ยืนยันแล้ว</p></div><form class="month-picker" method="GET" action="{{ route('superadmin.dashboard') }}"><label for="revenue-year">เลือกปี ค.ศ.</label><input id="revenue-year" type="number" name="year" min="2000" max="{{ $maxYear }}" value="{{ $selectedYear }}"><button type="submit">แสดง</button></form></div>
+            <div class="panel-heading"><div><h2>สรุปรายได้ประจำปี {{ $selectedYear }}</h2><p>ยอดรายเดือนจากรายการชำระเงินที่ยืนยันแล้ว</p></div><form class="month-picker" method="GET" action="{{ route('superadmin_dashboard') }}"><label for="revenue-year">เลือกปี ค.ศ.</label><input id="revenue-year" type="number" name="year" min="2000" max="{{ $maxYear }}" value="{{ $selectedYear }}"><button type="submit">แสดง</button></form></div>
             <div class="revenue-chart-layout">
                 <span class="chart-y-axis">รายได้ (บาท)</span>
                 <div class="revenue-chart-content">

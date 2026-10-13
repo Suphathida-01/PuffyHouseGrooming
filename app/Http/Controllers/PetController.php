@@ -38,7 +38,7 @@ class PetController extends Controller
         $typeId = $request->query('pet_type_id');
 
         if (! $typeId) {
-            return redirect()->route('pets.create')->with('type_error', 'กรุณาเลือกประเภทสัตว์ก่อน');
+            return redirect()->route('pets_create')->with('type_error', 'กรุณาเลือกประเภทสัตว์ก่อน');
         }
 
         $selectedType = PetType::findOrFail($typeId);
@@ -58,10 +58,10 @@ class PetController extends Controller
         $pet = $this->customer()->pets()->create($data);
         $serviceId = session()->pull('booking_return_service_id');
         if ($serviceId && Service::where('service_status', 'active')->where('service_id', $serviceId)->exists()) {
-            return redirect()->route('booking.show', ['serviceId' => $serviceId, 'pet_id' => $pet->id]);
+            return redirect()->route('booking_show', ['serviceId' => $serviceId, 'pet_id' => $pet->id]);
         }
 
-        return redirect()->route('pets.index')->with('success', 'เพิ่มข้อมูลสัตว์เลี้ยงแล้ว');
+        return redirect()->route('pets_index')->with('success', 'เพิ่มข้อมูลสัตว์เลี้ยงแล้ว');
     }
 
     public function edit($id, Request $request)
@@ -97,7 +97,7 @@ class PetController extends Controller
             $pet->update($data);
         }
 
-        return redirect()->route('pets.index')->with('success', 'แก้ไขข้อมูลสัตว์เลี้ยงแล้ว');
+        return redirect()->route('pets_index')->with('success', 'แก้ไขข้อมูลสัตว์เลี้ยงแล้ว');
     }
 
     public function destroy($id)
@@ -105,7 +105,7 @@ class PetController extends Controller
         $pet = $this->customer()->pets()->findOrFail($id);
         $pet->delete();
 
-        return redirect()->route('pets.index')->with('success', 'ลบข้อมูลสัตว์เลี้ยงแล้ว');
+        return redirect()->route('pets_index')->with('success', 'ลบข้อมูลสัตว์เลี้ยงแล้ว');
     }
 
     private function customer(): Customer

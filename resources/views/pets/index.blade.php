@@ -16,7 +16,7 @@
     <main class="pets-page">
         <div class="pets-heading">
             <div><h1>สัตว์เลี้ยงของฉัน</h1><p>จัดการข้อมูลและประวัติการรับบริการของน้อง ๆ</p></div>
-            <a class="button" href="{{ route('pets.create') }}">＋ เพิ่มสัตว์เลี้ยง</a>
+            <a class="button" href="{{ route('pets_create') }}">＋ เพิ่มสัตว์เลี้ยง</a>
         </div>
 
         @if (session('success'))<p class="pet-success">{{ session('success') }}</p>@endif
@@ -39,15 +39,15 @@
                             <div class="pet-facts"><span>{{ $pet->pet_birth ? 'อายุ '.$pet->pet_birth->age.' ปี' : 'ไม่ทราบวันเกิด' }}</span><span>น้ำหนัก {{ number_format((float) $pet->pet_weight, 2) }} กก.</span></div>
                             <div class="pet-last-visit"><small>รับบริการล่าสุด</small><strong>{{ $lastBooking ? $lastBooking->booking_date->format('d/m/Y') : 'ยังไม่มีประวัติการใช้บริการ' }}</strong></div>
                             <div class="pet-actions">
-                                <a class="button pet-edit" href="{{ route('pets.edit', $pet->id) }}">✎ แก้ไข</a>
-                                <form method="POST" action="{{ route('pets.destroy', $pet->id) }}">@csrf @method('DELETE')<button class="pet-delete" type="submit" aria-label="ลบ {{ $pet->pet_name }}">🗑</button></form>
+                                <a class="button pet-edit" href="{{ route('pets_edit', $pet->id) }}">✎ แก้ไข</a>
+                                <form method="POST" action="{{ route('pets_destroy', $pet->id) }}">@csrf @method('DELETE')<button class="pet-delete" type="submit" aria-label="ลบ {{ $pet->pet_name }}">🗑</button></form>
                             </div>
                         </div>
                     </article>
                 @endforeach
             </section>
         @else
-            <section class="pets-empty"><div>🐾</div><h2>ยังไม่มีข้อมูลสัตว์เลี้ยง</h2><p>เพิ่มข้อมูลน้องก่อน เพื่อใช้ในการจองบริการ</p><a class="button" href="{{ route('pets.create') }}">＋ เพิ่มสัตว์เลี้ยงตัวแรก</a></section>
+            <section class="pets-empty"><div>🐾</div><h2>ยังไม่มีข้อมูลสัตว์เลี้ยง</h2><p>เพิ่มข้อมูลน้องก่อน เพื่อใช้ในการจองบริการ</p><a class="button" href="{{ route('pets_create') }}">＋ เพิ่มสัตว์เลี้ยงตัวแรก</a></section>
         @endif
     </main>
 </body>

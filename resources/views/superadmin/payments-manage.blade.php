@@ -19,7 +19,7 @@
             $statusLabels = ['all' => 'สถานะทั้งหมด', 'completed' => 'ชำระแล้ว', 'pending' => 'รอชำระ', 'failed' => 'ไม่สำเร็จ'];
             $summaryScopeLabel = $selectedDate === '' ? 'รวมทุกวันที่มีรายการ' : 'วันที่ '.\Illuminate\Support\Carbon::parse($selectedDate)->format('d/m/Y');
         @endphp
-        <form class="payment-filter-actions report-filters" method="GET" action="{{ route('superadmin.payments') }}" aria-label="กรองรายการตามวันที่" data-date-picker-auto-submit>
+        <form class="payment-filter-actions report-filters" method="GET" action="{{ route('superadmin_payments') }}" aria-label="กรองรายการตามวันที่" data-date-picker-auto-submit>
             <input type="hidden" name="status" value="{{ $selectedStatus }}">
             <label class="filter-control date-control">
                 <input id="report-date" name="date" type="date" value="{{ $selectedDate }}" aria-label="เลือกวันที่">
@@ -49,7 +49,7 @@
         <div class="table-heading">
             <div><h2 id="payments-heading">ประวัติรายการ</h2><p>รายการชำระเงินตามตัวกรอง เรียงจากล่าสุด</p></div>
             <div class="payment-table-heading-actions">
-                <form class="payment-status-filter" method="GET" action="{{ route('superadmin.payments') }}" aria-label="กรองประวัติตามสถานะ">
+                <form class="payment-status-filter" method="GET" action="{{ route('superadmin_payments') }}" aria-label="กรองประวัติตามสถานะ">
                     <input type="hidden" name="date" value="{{ $selectedDate }}">
                     <label class="payment-status-dropdown">
                         <select name="status" aria-label="เลือกสถานะ" onchange="this.form.submit()">
@@ -89,7 +89,7 @@
                             $paymentTime = \Illuminate\Support\Carbon::parse($payment->payment_date)->format('d/m/Y · H:i');
                         @endphp
                         <tr>
-                            <td class="transaction-id">{{ $reference }}</td><td>{{ $customerName }}</td><td>{{ $serviceName }}</td><td class="amount">฿{{ number_format($payment->payment_amount) }}</td><td>{{ $methodLabel }}</td><td><span class="status-badge {{ $statusClass }}">{{ $statusLabel }}</span></td><td class="date-cell">{{ $paymentTime }}</td><td><div class="payment-table-actions"><a class="detail-button payment-open-page" href="{{ route('superadmin.payments', ['date' => $selectedDate, 'status' => $selectedStatus, 'detail' => $payment->payment_id]) }}">ดูรายละเอียด</a>@if ($payment->payment_status === 'pending')<form class="payment-confirm-form" method="POST" action="{{ route('superadmin.payments.confirm', $payment->payment_id) }}">@csrf<button class="payment-confirm-button" type="submit">ยืนยันชำระ</button></form><form class="payment-confirm-form" method="POST" action="{{ route('superadmin.payments.reject', $payment->payment_id) }}" onsubmit="return confirm('ปฏิเสธรายการชำระเงินนี้หรือไม่? สถานะจะเปลี่ยนเป็นไม่สำเร็จ')">@csrf<button class="payment-reject-button" type="submit">ปฏิเสธรายการ</button></form>@endif</div></td>
+                            <td class="transaction-id">{{ $reference }}</td><td>{{ $customerName }}</td><td>{{ $serviceName }}</td><td class="amount">฿{{ number_format($payment->payment_amount) }}</td><td>{{ $methodLabel }}</td><td><span class="status-badge {{ $statusClass }}">{{ $statusLabel }}</span></td><td class="date-cell">{{ $paymentTime }}</td><td><div class="payment-table-actions"><a class="detail-button payment-open-page" href="{{ route('superadmin_payments', ['date' => $selectedDate, 'status' => $selectedStatus, 'detail' => $payment->payment_id]) }}">ดูรายละเอียด</a>@if ($payment->payment_status === 'pending')<form class="payment-confirm-form" method="POST" action="{{ route('superadmin_payments_confirm', $payment->payment_id) }}">@csrf<button class="payment-confirm-button" type="submit">ยืนยันชำระ</button></form><form class="payment-confirm-form" method="POST" action="{{ route('superadmin_payments_reject', $payment->payment_id) }}" onsubmit="return confirm('ปฏิเสธรายการชำระเงินนี้หรือไม่? สถานะจะเปลี่ยนเป็นไม่สำเร็จ')">@csrf<button class="payment-reject-button" type="submit">ปฏิเสธรายการ</button></form>@endif</div></td>
                         </tr>
                     @empty
                         <tr><td colspan="8" class="empty-state">{{ $selectedDate === '' ? 'ไม่พบรายการชำระเงิน' : 'ไม่พบรายการชำระเงินในวันที่เลือก' }}</td></tr>

@@ -25,7 +25,7 @@ class AdminProfileController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('admin.profile.edit')->with('profile_success', 'บันทึกข้อมูลส่วนตัวแล้ว');
+        return redirect()->route('admin_profile_edit')->with('profile_success', 'บันทึกข้อมูลส่วนตัวแล้ว');
     }
 
     public function updatePassword(Request $request)
@@ -38,6 +38,6 @@ class AdminProfileController extends Controller
 
         $request->user()->update(['password' => $data['password']]);
 
-        return redirect()->route('admin.profile.edit')->with('password_success', 'เปลี่ยนรหัสผ่านแล้ว');
+        return redirect()->route('admin_profile_edit')->with('password_success', 'เปลี่ยนรหัสผ่านแล้ว');
     }
 }

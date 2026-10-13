@@ -15,7 +15,7 @@ class SuperadminPaymentController extends Controller
 
         $payment = Payment::findOrFail($paymentId);
 
-        return redirect()->route('superadmin.payments', [
+        return redirect()->route('superadmin_payments', [
             'date' => $payment->payment_date->toDateString(),
             'detail' => $payment->payment_id,
         ]);
@@ -43,8 +43,6 @@ class SuperadminPaymentController extends Controller
             $selectedStatus = 'all';
         }
 
-        // Summary cards and the table use the same selected payment date;
-        // with no date they show the full payment history.
         $completedPayments = Payment::where('payment_status', 'completed');
         $failedPayments = Payment::where('payment_status', 'failed');
         $pendingPayments = Payment::where('payment_status', 'pending');
@@ -102,7 +100,7 @@ class SuperadminPaymentController extends Controller
             return back()->with('payment_error', 'รายการนี้ไม่ได้อยู่ในสถานะรอชำระแล้ว');
         }
 
-        return redirect()->route('superadmin.payments', [
+        return redirect()->route('superadmin_payments', [
             'date' => today()->toDateString(),
             'status' => 'completed',
         ])->with('success', 'ยืนยันการชำระเงินแล้ว');
@@ -130,7 +128,7 @@ class SuperadminPaymentController extends Controller
             return back()->with('payment_error', 'รายการนี้ไม่ได้อยู่ในสถานะรอชำระแล้ว');
         }
 
-        return redirect()->route('superadmin.payments', [
+        return redirect()->route('superadmin_payments', [
             'date' => today()->toDateString(),
             'status' => 'failed',
         ])->with('success', 'ปฏิเสธรายการชำระเงินแล้ว');

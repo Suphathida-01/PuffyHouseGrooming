@@ -13,12 +13,12 @@
         @include('partials.account-menu')
     </header>
     <main class="pet-form-page">
-        <a class="detail-back" href="{{ route('pets.index') }}">← กลับไปสัตว์เลี้ยงของฉัน</a>
+        <a class="detail-back" href="{{ route('pets_index') }}">← กลับไปสัตว์เลี้ยงของฉัน</a>
         <section class="pet-form-card pet-type-step">
             <h1>เพิ่มสัตว์เลี้ยง</h1>
             <p class="pet-form-intro">เริ่มจากเลือกประเภทสัตว์เลี้ยงของคุณ</p>
             @if (session('type_error'))<p class="pet-error">{{ session('type_error') }}</p>@endif
-            <form class="pet-form" method="GET" action="{{ route('pets.create.form') }}">
+            <form class="pet-form" method="GET" action="{{ route('pets_create_form') }}">
                 <label for="pet_type_id">ประเภทสัตว์</label>
                 <select id="pet_type_id" name="pet_type_id">
                     <option value="">เลือกประเภทสัตว์</option>
@@ -27,7 +27,7 @@
                     @endforeach
                 </select>
                 <p class="pet-type-help">เลือกประเภทก่อน แล้วหน้าถัดไปจะมีสายพันธุ์ให้เลือก</p>
-                <div class="pet-form-actions"><a class="pet-cancel" href="{{ route('pets.index') }}">ยกเลิก</a><button class="button" type="submit">ไปต่อ</button></div>
+                <div class="pet-form-actions"><a class="pet-cancel" href="{{ route('pets_index') }}">ยกเลิก</a><button class="button" type="submit">ไปต่อ</button></div>
             </form>
         </section>
     </main>

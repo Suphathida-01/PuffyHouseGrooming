@@ -10,7 +10,6 @@ class Pet extends Model
     use SoftDeletes;
 
     protected $table = 'pets';
-    // The migration uses Laravel's default primary key: id.
 
     protected $fillable = [
         'pet_name', 'pet_birth', 'pet_gender', 'pet_weight',

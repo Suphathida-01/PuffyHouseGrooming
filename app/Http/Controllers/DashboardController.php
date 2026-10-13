@@ -10,10 +10,10 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         if (Auth::user()->user_role === 'admin') {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin_dashboard');
         }
         if (Auth::user()->user_role === 'superadmin') {
-            return redirect()->route('superadmin.dashboard');
+            return redirect()->route('superadmin_dashboard');
         }
 
         return redirect()->route('home');

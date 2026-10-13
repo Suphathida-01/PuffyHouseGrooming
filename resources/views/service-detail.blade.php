@@ -48,10 +48,9 @@
 
                 @guest
                     <a class="button detail-book-button" href="{{ route('login') }}">เข้าสู่ระบบเพื่อจองคิว　🐾</a>
-                    <p class="detail-note">สามารถดูบริการได้โดยไม่ต้องเข้าสู่ระบบ</p>
                 @else
                     @if (auth()->user()->user_role === 'customer')
-                        <a class="button detail-book-button" href="{{ route('booking.show', $service->service_id) }}">จองคิวเลย　🐾</a>
+                        <a class="button detail-book-button" href="{{ route('booking_show', $service->service_id) }}">จองคิวเลย　🐾</a>
                     @else
                         <a class="button detail-book-button" href="{{ route('dashboard') }}">กลับไปหลังบ้าน</a>
                     @endif

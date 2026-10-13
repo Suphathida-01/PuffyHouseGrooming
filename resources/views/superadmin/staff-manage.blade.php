@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,9 +26,9 @@
         <div class="month-panel-heading">
             <h2 id="month-title">ตารางร้านประจำเดือน</h2>
             <nav class="month-navigation" aria-label="เปลี่ยนเดือน">
-                <a href="{{ route('superadmin.staff.index', ['month' => $previousMonth, 'date' => $previousMonth . '-01']) }}" aria-label="เดือนก่อน">‹</a>
+                <a href="{{ route('superadmin_staff_index', ['month' => $previousMonth, 'date' => $previousMonth . '-01']) }}" aria-label="เดือนก่อน">‹</a>
                 <strong>{{ \Illuminate\Support\Carbon::parse($selectedMonth . '-01')->locale('th')->translatedFormat('F Y') }}</strong>
-                <a href="{{ route('superadmin.staff.index', ['month' => $nextMonth, 'date' => $nextMonth . '-01']) }}" aria-label="เดือนถัดไป">›</a>
+                <a href="{{ route('superadmin_staff_index', ['month' => $nextMonth, 'date' => $nextMonth . '-01']) }}" aria-label="เดือนถัดไป">›</a>
             </nav>
             <div class="month-legend" aria-label="สถานะวัน">
                 <span><i class="legend-dot legend-open"></i>มีช่างเข้ากะ</span>
@@ -46,7 +46,7 @@
         <div class="month-grid">
             @foreach ($calendarDays as $day)
                 <article class="month-day {{ $day['is_current_month'] ? '' : 'is-outside-month' }} {{ $day['is_selected'] ? 'is-selected' : '' }} {{ $day['is_today'] ? 'is-today' : '' }} {{ $day['is_closed'] ? 'day-closed' : ($day['working_staff_count'] ? 'day-open' : 'day-unscheduled') }}">
-                    <a class="month-day-link" href="{{ route('superadmin.staff.index', ['month' => $selectedMonth, 'date' => $day['date']]) }}">
+                    <a class="month-day-link" href="{{ route('superadmin_staff_index', ['month' => $selectedMonth, 'date' => $day['date']]) }}">
                         <span class="month-day-number">{{ $day['day'] }}</span>
                         @if ($day['is_closed'])
                             <span class="month-day-state">ปิดร้าน</span>
@@ -60,7 +60,7 @@
                         @endif
                     </a>
                     @if ($day['is_current_month'] && auth()->user()->user_role === 'superadmin')
-                        <form method="POST" action="{{ route('superadmin.staff.closed-days.toggle') }}" class="month-day-toggle">
+                        <form method="POST" action="{{ route('superadmin_staff_closed-days_toggle') }}" class="month-day-toggle">
                             @csrf
                             <input type="hidden" name="work_date" value="{{ $day['date'] }}">
                             <input type="hidden" name="closed" value="{{ $day['is_closed'] ? '0' : '1' }}">
@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 @if (auth()->user()->user_role === 'superadmin')
-                    <form method="POST" action="{{ route('superadmin.staff.attendance.update') }}" class="attendance-form">
+                    <form method="POST" action="{{ route('superadmin_staff_attendance_update') }}" class="attendance-form">
                         @csrf
                         <input type="hidden" name="work_date" value="{{ $selectedDate }}">
                 @endif
@@ -185,7 +185,7 @@
 
 @if (auth()->user()->user_role === 'superadmin')
 <dialog class="schedule-dialog" id="staff-dialog" aria-labelledby="staff-dialog-title">
-    <form method="POST" action="{{ route('superadmin.staff.store') }}">
+    <form method="POST" action="{{ route('superadmin_staff_store') }}">
         @csrf
         <div class="schedule-dialog-heading">
             <div><h2 id="staff-dialog-title">เพิ่มช่าง</h2><p>สร้างบัญชีผู้ใช้และเพิ่มในรายชื่อช่าง</p></div>

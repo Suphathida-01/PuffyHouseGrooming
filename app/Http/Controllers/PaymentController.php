@@ -27,7 +27,7 @@ class PaymentController extends Controller
         ]);
 
         if ($booking->payments()->where('payment_status', 'completed')->exists()) {
-            return redirect()->route('my-bookings.index')->with('success', 'รายการนี้ชำระเงินแล้ว');
+            return redirect()->route('my-bookings_index')->with('success', 'รายการนี้ชำระเงินแล้ว');
         }
 
         $paymentStatus = $data['payment_method'] === 'qrCode' ? 'pending' : 'completed';
@@ -52,7 +52,7 @@ class PaymentController extends Controller
             ? 'บันทึกคำขอจองแล้ว สถานะการชำระเงินกำลังรอตรวจสอบ'
             : 'บันทึกสถานะการชำระเงินเป็นชำระแล้ว';
 
-        return redirect()->route('my-bookings.index')->with('success', $message);
+        return redirect()->route('my-bookings_index')->with('success', $message);
     }
 
     private function customer(): Customer

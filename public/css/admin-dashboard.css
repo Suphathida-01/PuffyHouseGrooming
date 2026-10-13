@@ -15,7 +15,7 @@ body.admin-dashboard {
     margin: 0;
     background: #f7f6f8;
     color: #202235;
-    font-family: "Sarabun", sans-serif;
+    font-family: "Kanit", sans-serif;
 }
 .admin-sidebar {
     position: fixed;
@@ -76,6 +76,11 @@ body.admin-dashboard {
 .admin-menu a span {
     display: inline-block;
     width: 22px;
+}
+.admin-menu a span svg {
+    width: 16px;
+    height: 16px;
+    vertical-align: -3px;
 }
 .admin-menu a:hover,
 .admin-menu a.active {
@@ -307,9 +312,10 @@ body.admin-dashboard {
 }
 .chart-value {
     padding: 3px 6px;
+    border: 1px solid #d9c6ff;
     border-radius: 5px;
-    background: #7958e8;
-    color: #fff;
+    background: #efe7ff;
+    color: #4d3d88;
     font-size: 9px;
 }
 .chart-track {
